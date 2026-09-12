@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,19 +6,11 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content= "width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>StudyBuddy AI</title>
 
-
     <style>
-
-        /* =========================
-           RESET
-        ========================= */
 
         * {
             margin: 0;
@@ -26,48 +19,33 @@
             font-family: Arial, sans-serif;
         }
 
-
         html {
             scroll-behavior: smooth;
         }
-
 
         body {
             background: #f5f7ff;
             color: #222;
         }
 
-
-        /* =========================
-           NAVBAR
-        ========================= */
-
         nav {
             position: sticky;
             top: 0;
             z-index: 1000;
-
             width: 100%;
-
             padding: 18px 8%;
-
             background: white;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            box-shadow:
-                0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-
 
         .logo {
             font-size: 24px;
             font-weight: bold;
             color: #5b4bdb;
         }
-
 
         nav a {
             text-decoration: none;
@@ -76,561 +54,328 @@
             font-weight: 500;
         }
 
-
         nav a:hover {
             color: #5b4bdb;
         }
 
-
-        /* =========================
-           HERO
-        ========================= */
-
         .hero {
             min-height: 85vh;
-
             display: flex;
             flex-direction: column;
-
             justify-content: center;
             align-items: center;
-
             text-align: center;
-
             padding: 40px 20px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #eeeaff,
-                    #ffffff
-                );
+            background: linear-gradient(135deg, #eeeaff, #ffffff);
         }
-
 
         .hero h1 {
             font-size: 55px;
-
             color: #4d3ccf;
-
             margin-bottom: 15px;
         }
 
-
         .hero p {
             font-size: 20px;
-
             max-width: 650px;
-
             line-height: 1.6;
-
             color: #555;
-
             margin-bottom: 30px;
         }
 
-
-        /* =========================
-           BUTTONS
-        ========================= */
-
         .main-btn {
             background: #5b4bdb;
-
             color: white;
-
             border: none;
-
             padding: 15px 30px;
-
             border-radius: 12px;
-
             font-size: 18px;
-
             cursor: pointer;
-
             transition: 0.3s;
         }
 
-
         .main-btn:hover {
             transform: translateY(-3px);
-
             background: #4938c5;
         }
 
-
         .secondary-btn {
             background: #eeeaff;
-
             color: #4d3ccf;
-
             border: none;
-
             padding: 12px 22px;
-
             border-radius: 10px;
-
             cursor: pointer;
-
             font-size: 15px;
         }
-
 
         .secondary-btn:hover {
             background: #ddd6ff;
         }
 
-
-        /* =========================
-           DASHBOARD
-        ========================= */
-
         #dashboard {
             min-height: 100vh;
-
             padding: 70px 8%;
-
             text-align: center;
         }
-
 
         #dashboard h2 {
             font-size: 36px;
-
             color: #4d3ccf;
-
             margin-bottom: 10px;
         }
 
-
         .subtitle {
             color: #666;
-
             margin-bottom: 35px;
-
             font-size: 18px;
         }
 
-
-        /* =========================
-           SUBJECTS
-        ========================= */
-
         .subjects {
             display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(180px, 1fr)
-                );
-
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 20px;
-
             max-width: 1000px;
-
             margin: auto;
         }
 
-
         .subject-card {
             background: white;
-
             padding: 30px 20px;
-
             border-radius: 18px;
-
-            box-shadow:
-                0 5px 20px
-                rgba(0,0,0,0.08);
-
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             cursor: pointer;
-
             transition: 0.3s;
-
             border: 2px solid transparent;
         }
 
-
         .subject-card:hover {
             transform: translateY(-7px);
-
             border-color: #6b5ce7;
         }
 
-
         .subject-card .icon {
             font-size: 45px;
-
             margin-bottom: 15px;
         }
-
 
         .subject-card h3 {
             color: #333;
-
             font-size: 20px;
         }
-
-
-        /* =========================
-           SELECTED SUBJECT
-        ========================= */
 
         #selectedSubject {
             margin: 40px auto 25px;
-
             padding: 18px;
-
             background: #eeeaff;
-
             color: #4d3ccf;
-
             border-radius: 12px;
-
             max-width: 600px;
-
             font-size: 20px;
-
             font-weight: bold;
         }
 
-
-        /* =========================
-           STUDY MODES
-        ========================= */
-
         .modes {
             display: flex;
-
             justify-content: center;
-
             flex-wrap: wrap;
-
             gap: 18px;
-
             margin-top: 20px;
         }
 
-
         .mode-btn {
             padding: 16px 25px;
-
             border: none;
-
             border-radius: 12px;
-
             background: white;
-
-            box-shadow:
-                0 4px 15px
-                rgba(0,0,0,0.08);
-
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             cursor: pointer;
-
             font-size: 17px;
-
             transition: 0.3s;
         }
 
-
         .mode-btn:hover {
             transform: translateY(-4px);
-
             background: #eeeaff;
         }
-
-
-        /* =========================
-           STUDY AREA
-        ========================= */
 
         #studyArea {
             display: none;
-
             padding: 70px 8%;
-
             text-align: center;
-
             background: #f5f7ff;
-
             min-height: 70vh;
         }
 
-
         #studyTitle {
             font-size: 36px;
-
             color: #4d3ccf;
-
             margin-bottom: 25px;
         }
 
-
         #studyContent {
             max-width: 850px;
-
             margin: 30px auto;
-
             background: white;
-
             padding: 35px;
-
             border-radius: 18px;
-
-            box-shadow:
-                0 5px 20px
-                rgba(0,0,0,0.08);
-
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             line-height: 1.7;
         }
 
-
-        /* =========================
-           AI HEADER
-        ========================= */
-
-        .ai-header {
-            text-align: left;
-
-            padding-bottom: 20px;
-
-            border-bottom: 1px solid #eee;
-
-            margin-bottom: 20px;
-        }
-
-
-        .ai-header h3 {
-            color: #4d3ccf;
-
-            font-size: 24px;
-        }
-
-
-        .ai-header p {
-            color: #666;
-
-            margin-top: 5px;
-        }
-
-
-        /* =========================
-           CHAT BOX
-        ========================= */
-
-        #chatBox {
-            height: 350px;
-
-            overflow-y: auto;
-
+        .topic-input {
+            width: 100%;
             padding: 15px;
-
-            background: #f8f8ff;
-
-            border-radius: 15px;
-
-            margin-bottom: 20px;
-
-            text-align: left;
-        }
-
-
-        .welcome-message {
-            background: #eeeaff;
-
-            padding: 15px;
-
-            border-radius: 12px;
-
-            margin-bottom: 15px;
-
-            max-width: 80%;
-        }
-
-
-        .user-message {
-            background: #5b4bdb;
-
-            color: white;
-
-            padding: 15px;
-
-            border-radius: 15px;
-
-            margin: 10px 0 10px auto;
-
-            max-width: 80%;
-        }
-
-
-        .ai-message {
-            background: #eeeaff;
-
-            color: #222;
-
-            padding: 15px;
-
-            border-radius: 15px;
-
-            margin: 10px 0;
-
-            max-width: 80%;
-        }
-
-
-        .typing {
-            color: #666;
-
-            font-style: italic;
-
-            padding: 10px;
-        }
-
-
-        /* =========================
-           CHAT INPUT
-        ========================= */
-
-        .chat-input-area {
-            display: flex;
-
-            gap: 10px;
-
-            align-items: center;
-        }
-
-
-        #questionInput {
-            flex: 1;
-
-            padding: 15px;
-
-            border-radius: 12px;
-
             border: 1px solid #ccc;
-
+            border-radius: 12px;
             font-size: 16px;
-
+            margin: 15px 0;
             outline: none;
         }
 
+        .topic-input:focus {
+            border-color: #5b4bdb;
+        }
+
+        .ai-header {
+            text-align: left;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .ai-header h3 {
+            color: #4d3ccf;
+            font-size: 24px;
+        }
+
+        .ai-header p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        #chatBox {
+            height: 350px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f8f8ff;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .welcome-message {
+            background: #eeeaff;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background: #5b4bdb;
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0 10px auto;
+            max-width: 80%;
+        }
+
+        .ai-message {
+            background: #eeeaff;
+            color: #222;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 10px 0;
+            max-width: 100%;
+        }
+
+        .typing {
+            color: #666;
+            font-style: italic;
+            padding: 10px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        #questionInput {
+            flex: 1;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+        }
 
         #questionInput:focus {
             border-color: #5b4bdb;
         }
 
-
         .ask-btn {
             background: #5b4bdb;
-
             color: white;
-
             border: none;
-
             padding: 15px 22px;
-
             border-radius: 12px;
-
             cursor: pointer;
-
             font-size: 16px;
         }
-
 
         .ask-btn:hover {
             background: #4938c5;
         }
 
-
         .chat-controls {
             display: flex;
-
             justify-content: space-between;
-
             margin-top: 15px;
         }
 
-
-        /* =========================
-           FEATURES
-        ========================= */
-
         .features {
             padding: 70px 8%;
-
             background: white;
-
             text-align: center;
         }
 
-
         .features h2 {
             font-size: 34px;
-
             color: #4d3ccf;
-
             margin-bottom: 35px;
         }
 
-
         .feature-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(
-                    auto-fit,
-                    minmax(200px, 1fr)
-                );
-
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-
             max-width: 1000px;
-
             margin: auto;
         }
 
-
         .feature {
             padding: 25px;
-
             background: #f5f7ff;
-
             border-radius: 15px;
         }
-
 
         .feature h3 {
             margin-bottom: 10px;
         }
 
-
         .feature p {
             color: #666;
-
             line-height: 1.5;
         }
 
-
-        /* =========================
-           FOOTER
-        ========================= */
-
         footer {
             background: #29234f;
-
             color: white;
-
             text-align: center;
-
             padding: 25px;
         }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 600px) {
 
@@ -638,48 +383,38 @@
                 padding: 15px 5%;
             }
 
-
             nav a {
                 margin-left: 8px;
-
                 font-size: 14px;
             }
-
 
             .logo {
                 font-size: 19px;
             }
 
-
             .hero h1 {
                 font-size: 40px;
             }
-
 
             .hero p {
                 font-size: 17px;
             }
 
-
             #dashboard h2 {
                 font-size: 30px;
             }
-
 
             #studyTitle {
                 font-size: 30px;
             }
 
-
             .chat-input-area {
                 flex-direction: column;
             }
 
-
             #questionInput {
                 width: 100%;
             }
-
 
             .ask-btn {
                 width: 100%;
@@ -695,9 +430,7 @@
 <body>
 
 
-    <!-- =========================
-         NAVBAR
-    ========================= -->
+    <!-- NAVBAR -->
 
     <nav>
 
@@ -705,18 +438,15 @@
             📚 StudyBuddy AI
         </div>
 
-
         <div>
 
             <a href="#home">
                 Home
             </a>
 
-
             <a href="#dashboard">
                 Study
             </a>
-
 
             <a href="#features">
                 Features
@@ -727,10 +457,7 @@
     </nav>
 
 
-
-    <!-- =========================
-         HERO
-    ========================= -->
+    <!-- HERO -->
 
     <section
         class="hero"
@@ -741,35 +468,26 @@
             Study Smarter 🚀
         </h1>
 
-
         <p>
-
             Your personal AI study buddy
             for O Levels.
 
             Choose a subject,
-            select your study mode,
+            select a study mode,
             and start learning!
-
         </p>
-
 
         <button
             class="main-btn"
             onclick="startStudying()"
         >
-
             🚀 Start Studying
-
         </button>
 
     </section>
 
 
-
-    <!-- =========================
-         DASHBOARD
-    ========================= -->
+    <!-- DASHBOARD -->
 
     <section id="dashboard">
 
@@ -777,11 +495,8 @@
             Choose Your Subject 📚
         </h2>
 
-
         <p class="subtitle">
-
             Select the subject you want to study.
-
         </p>
 
 
@@ -887,18 +602,12 @@
         </div>
 
 
-
-        <!-- SELECTED SUBJECT -->
-
         <div id="selectedSubject">
 
             You haven't selected a subject yet.
 
         </div>
 
-
-
-        <!-- STUDY MODES -->
 
         <h2>
             Choose Study Mode 🎯
@@ -907,85 +616,59 @@
 
         <div class="modes">
 
-
             <button
                 class="mode-btn"
                 onclick="studyMode('Study')"
             >
-
                 📚 Study
-
             </button>
-
 
             <button
                 class="mode-btn"
                 onclick="studyMode('Practice')"
             >
-
                 📝 Practice
-
             </button>
-
 
             <button
                 class="mode-btn"
                 onclick="studyMode('Quiz')"
             >
-
                 🎯 Quiz
-
             </button>
-
 
             <button
                 class="mode-btn"
                 onclick="studyMode('AI Tutor')"
             >
-
                 🤖 AI Tutor
-
             </button>
-
 
         </div>
 
     </section>
 
 
-
-    <!-- =========================
-         STUDY AREA
-    ========================= -->
+    <!-- STUDY AREA -->
 
     <section id="studyArea">
 
-
         <h2 id="studyTitle">
-
             📚 Study Area
-
         </h2>
-
 
         <div id="studyContent">
 
             <p>
-
                 Choose a study mode to begin!
-
             </p>
 
         </div>
 
-
     </section>
 
 
-
-    <!-- =========================
-         FEATURES
-    ========================= -->
+    <!-- FEATURES -->
 
     <section
         class="features"
@@ -1007,10 +690,8 @@
                 </h3>
 
                 <p>
-
                     Learn your O-Level
                     subjects step by step.
-
                 </p>
 
             </div>
@@ -1023,10 +704,8 @@
                 </h3>
 
                 <p>
-
                     Practice questions
                     and improve your skills.
-
                 </p>
 
             </div>
@@ -1039,10 +718,8 @@
                 </h3>
 
                 <p>
-
                     Test your knowledge
                     with quick quizzes.
-
                 </p>
 
             </div>
@@ -1055,10 +732,8 @@
                 </h3>
 
                 <p>
-
                     Get help understanding
                     difficult concepts.
-
                 </p>
 
             </div>
@@ -1069,37 +744,26 @@
     </section>
 
 
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
+    <!-- FOOTER -->
 
     <footer>
 
         <p>
-
             © 2026 StudyBuddy AI
             | Made for O Level Students 💜
-
         </p>
 
     </footer>
 
 
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
     <script>
 
 
         /* =========================
-           CURRENT SUBJECT
+           GLOBAL VARIABLES
         ========================= */
 
         let currentSubject = "";
-
 
 
         /* =========================
@@ -1117,7 +781,6 @@
         }
 
 
-
         /* =========================
            CHOOSE SUBJECT
         ========================= */
@@ -1126,13 +789,10 @@
 
             currentSubject = subject;
 
-
             document
                 .getElementById("selectedSubject")
                 .textContent =
-                "📚 You are studying: "
-                + subject;
-
+                "📚 You are studying: " + subject;
 
             document
                 .getElementById("studyArea")
@@ -1141,13 +801,11 @@
         }
 
 
-
         /* =========================
-           STUDY MODE
+           STUDY MODES
         ========================= */
 
         function studyMode(mode) {
-
 
             if (currentSubject === "") {
 
@@ -1177,83 +835,90 @@
                 .style.display = "block";
 
 
-
-            /* STUDY */
+            /* =========================
+               REAL AI STUDY MODE
+            ========================= */
 
             if (mode === "Study") {
 
                 title.textContent =
-                    "📚 Studying "
-                    + currentSubject;
+                    "📚 Study " +
+                    currentSubject;
 
 
                 content.innerHTML = `
 
                     <h3>
-                        Let's learn
-                        ${currentSubject}! 🚀
+                        📚 What do you want to study?
                     </h3>
 
-                    <br>
-
-                    <p>
-                        Your ${currentSubject}
-                        lessons will appear here.
+                    <p
+                        style="
+                            color:#666;
+                            margin:15px 0 25px;
+                        "
+                    >
+                        Enter any O-Level topic
+                        and StudyBuddy AI will
+                        teach it to you step by step.
                     </p>
 
-                    <br>
 
-                    <p>
-                        📖 Learn the concept
-                        <br><br>
-                        💡 Understand the explanation
-                        <br><br>
-                        ✏️ Study examples
-                        <br><br>
-                        🧠 Test yourself
-                    </p>
+                    <input
+                        type="text"
+                        id="studyTopicInput"
+                        class="topic-input"
+                        placeholder="Example: Newton's Laws"
+                        onkeydown="handleStudyEnter(event)"
+                    >
+
+
+                    <button
+                        class="main-btn"
+                        onclick="startAILesson()"
+                    >
+                        🚀 Start Learning
+                    </button>
+
+
+                    <div id="lessonResult"></div>
 
                 `;
 
             }
 
 
-
-            /* PRACTICE */
+            /* =========================
+               PRACTICE
+            ========================= */
 
             else if (mode === "Practice") {
 
                 title.textContent =
-                    "📝 Practice "
-                    + currentSubject;
+                    "📝 Practice " +
+                    currentSubject;
 
 
                 content.innerHTML = `
 
                     <h3>
-                        Practice Time! 💪
+                        📝 Practice Time!
                     </h3>
 
                     <br>
 
                     <p>
-                        Practice questions
-                        for
-                        <b>
-                            ${currentSubject}
-                        </b>
-                        will appear here.
+                        AI-powered practice
+                        questions are coming next! 🚀
                     </p>
 
                     <br>
 
                     <button
                         class="main-btn"
-                        onclick="startPractice()"
+                        onclick="studyMode('Study')"
                     >
-
-                        Start Questions →
-
+                        📚 Study Instead
                     </button>
 
                 `;
@@ -1261,42 +926,38 @@
             }
 
 
-
-            /* QUIZ */
+            /* =========================
+               QUIZ
+            ========================= */
 
             else if (mode === "Quiz") {
 
                 title.textContent =
-                    "🎯 "
-                    + currentSubject
-                    + " Quiz";
+                    "🎯 " +
+                    currentSubject +
+                    " Quiz";
 
 
                 content.innerHTML = `
 
                     <h3>
-                        Quiz Time! 🧠
+                        🎯 Quiz Mode
                     </h3>
 
                     <br>
 
                     <p>
-                        Test your knowledge
-                        of
-                        <b>
-                            ${currentSubject}
-                        </b>.
+                        AI-powered quizzes
+                        are coming next! 🧠
                     </p>
 
                     <br>
 
                     <button
                         class="main-btn"
-                        onclick="startQuiz()"
+                        onclick="studyMode('Study')"
                     >
-
-                        Start Quiz →
-
+                        📚 Study Instead
                     </button>
 
                 `;
@@ -1304,8 +965,9 @@
             }
 
 
-
-            /* AI TUTOR */
+            /* =========================
+               AI TUTOR
+            ========================= */
 
             else if (mode === "AI Tutor") {
 
@@ -1324,7 +986,7 @@
                         <p>
                             Subject:
                             <b>
-                                ${currentSubject}
+                                ${escapeHTML(currentSubject)}
                             </b>
                         </p>
 
@@ -1344,7 +1006,7 @@
 
                             Ask me anything about
                             <b>
-                                ${currentSubject}
+                                ${escapeHTML(currentSubject)}
                             </b>.
 
                             <br><br>
@@ -1374,9 +1036,7 @@
                             class="ask-btn"
                             onclick="askTutor()"
                         >
-
                             🤖 Ask AI
-
                         </button>
 
                     </div>
@@ -1388,9 +1048,7 @@
                             class="secondary-btn"
                             onclick="clearChat()"
                         >
-
                             🗑️ Clear Chat
-
                         </button>
 
                     </div>
@@ -1409,13 +1067,214 @@
         }
 
 
+        /* =========================
+           AI STUDY LESSON
+        ========================= */
+
+        async function startAILesson() {
+
+            let topicInput =
+                document.getElementById(
+                    "studyTopicInput"
+                );
+
+
+            if (!topicInput) {
+                return;
+            }
+
+
+            let topic =
+                topicInput.value.trim();
+
+
+            if (topic === "") {
+
+                alert(
+                    "📚 Please enter a topic first!"
+                );
+
+                return;
+
+            }
+
+
+            let result =
+                document.getElementById(
+                    "lessonResult"
+                );
+
+
+            result.innerHTML = `
+
+                <div
+                    class="typing"
+                    style="margin-top:25px;"
+                >
+
+                    🤖 StudyBuddy is
+                    preparing your lesson...
+
+                </div>
+
+            `;
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "https://studybuddy-backend-kappa.vercel.app/api/chat",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                question: `
+
+Teach me the O-Level topic:
+"${topic}"
+
+Subject:
+${currentSubject}
+
+Create a beginner-friendly lesson.
+
+Use this structure:
+
+1. What is it?
+2. Key ideas
+3. How it works
+4. Worked example
+5. Important points to remember
+6. Three quick questions to test myself
+
+Explain everything clearly and simply.
+
+Do not assume advanced knowledge.
+
+`,
+
+                                subject:
+                                    currentSubject
+
+                            })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.error ||
+                        "AI request failed."
+                    );
+
+                }
+
+
+                const answer =
+                    data.answer ||
+                    "Sorry, I couldn't create the lesson.";
+
+
+                result.innerHTML = `
+
+                    <div
+                        class="ai-message"
+                        style="
+                            margin-top:25px;
+                            text-align:left;
+                        "
+                    >
+
+                        🤖
+                        <b>
+                            StudyBuddy Lesson
+                        </b>
+
+                        <br><br>
+
+                        ${escapeHTML(answer)
+                            .replace(
+                                /\n/g,
+                                "<br>"
+                            )}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            catch (error) {
+
+                console.error(
+                    "Study Mode Error:",
+                    error
+                );
+
+
+                result.innerHTML = `
+
+                    <div
+                        class="ai-message"
+                        style="
+                            margin-top:25px;
+                        "
+                    >
+
+                        ❌
+                        <b>
+                            Couldn't create
+                            the lesson.
+                        </b>
+
+                        <br><br>
+
+                        Please try again.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+
+
+        /* =========================
+           ENTER FOR STUDY TOPIC
+        ========================= */
+
+        function handleStudyEnter(event) {
+
+            if (event.key === "Enter") {
+
+                startAILesson();
+
+            }
+
+        }
+
 
         /* =========================
            REAL AI TUTOR
         ========================= */
 
         async function askTutor() {
-
 
             let input =
                 document.getElementById(
@@ -1449,8 +1308,6 @@
                 );
 
 
-            /* USER MESSAGE */
-
             chatBox.innerHTML += `
 
                 <div class="user-message">
@@ -1465,8 +1322,6 @@
 
             input.value = "";
 
-
-            /* LOADING */
 
             let loadingID =
                 "loading-" + Date.now();
@@ -1492,23 +1347,16 @@
 
             try {
 
-
-                /* CONNECT TO VERCEL */
-
                 const response =
                     await fetch(
-
                         "https://studybuddy-backend-kappa.vercel.app/api/chat",
-
                         {
 
                             method: "POST",
 
                             headers: {
-
                                 "Content-Type":
                                     "application/json"
-
                             },
 
                             body: JSON.stringify({
@@ -1517,24 +1365,18 @@
                                     question,
 
                                 subject:
-                                    currentSubject
-                                    ||
+                                    currentSubject ||
                                     "O Levels"
 
                             })
 
                         }
-
                     );
 
-
-                /* READ RESPONSE */
 
                 const data =
                     await response.json();
 
-
-                /* REMOVE LOADING */
 
                 let loading =
                     document.getElementById(
@@ -1543,13 +1385,9 @@
 
 
                 if (loading) {
-
                     loading.remove();
-
                 }
 
-
-                /* CHECK ERROR */
 
                 if (!response.ok) {
 
@@ -1561,14 +1399,10 @@
                 }
 
 
-                /* AI ANSWER */
-
                 const answer =
                     data.answer ||
                     "Sorry, I couldn't generate an answer.";
 
-
-                /* SHOW ANSWER */
 
                 chatBox.innerHTML += `
 
@@ -1581,32 +1415,26 @@
 
                         <br><br>
 
-                        ${
-                            escapeHTML(answer)
+                        ${escapeHTML(answer)
                             .replace(
                                 /\n/g,
                                 "<br>"
-                            )
-                        }
+                            )}
 
                     </div>
 
                 `;
-
 
             }
 
 
             catch (error) {
 
-
                 console.error(
                     "AI Tutor Error:",
                     error
                 );
 
-
-                /* REMOVE LOADING */
 
                 let loading =
                     document.getElementById(
@@ -1615,13 +1443,9 @@
 
 
                 if (loading) {
-
                     loading.remove();
-
                 }
 
-
-                /* ERROR MESSAGE */
 
                 chatBox.innerHTML += `
 
@@ -1634,8 +1458,9 @@
 
                         <br><br>
 
-                        Sorry! I couldn't connect
-                        to the AI right now. 😭
+                        Sorry! I couldn't
+                        connect to the AI
+                        right now. 😭
 
                         <br><br>
 
@@ -1654,9 +1479,8 @@
         }
 
 
-
         /* =========================
-           ENTER KEY
+           ENTER FOR AI TUTOR
         ========================= */
 
         function handleEnter(event) {
@@ -1670,13 +1494,11 @@
         }
 
 
-
         /* =========================
            CLEAR CHAT
         ========================= */
 
         function clearChat() {
-
 
             let chatBox =
                 document.getElementById(
@@ -1702,7 +1524,7 @@
 
                     Ask me anything about
                     <b>
-                        ${currentSubject}
+                        ${escapeHTML(currentSubject)}
                     </b>.
 
                 </div>
@@ -1712,9 +1534,8 @@
         }
 
 
-
         /* =========================
-           SECURITY
+           SECURITY / HTML ESCAPING
         ========================= */
 
         function escapeHTML(text) {
@@ -1733,224 +1554,10 @@
         }
 
 
-
-        /* =========================
-           PRACTICE
-        ========================= */
-
-        function startPractice() {
-
-            document
-                .getElementById(
-                    "studyContent"
-                )
-                .innerHTML = `
-
-                    <h3>
-                        📝 Practice Questions
-                    </h3>
-
-                    <br>
-
-                    <p>
-
-                        Practice questions
-                        for
-                        ${currentSubject}
-                        will be added here.
-
-                    </p>
-
-                    <br>
-
-                    <button
-                        class="main-btn"
-                        onclick="
-                            studyMode('Practice')
-                        "
-                    >
-
-                        ← Back
-
-                    </button>
-
-                `;
-
-        }
-
-
-
-        /* =========================
-           QUIZ
-        ========================= */
-
-        function startQuiz() {
-
-            document
-                .getElementById(
-                    "studyContent"
-                )
-                .innerHTML = `
-
-                    <h3>
-                        🎯
-                        ${currentSubject}
-                        Quiz
-                    </h3>
-
-                    <br>
-
-                    <p>
-                        Your quiz will start here!
-                    </p>
-
-                    <br>
-
-                    <button
-                        class="main-btn"
-                        onclick="showQuizQuestion()"
-                    >
-
-                        Start Question 1 →
-
-                    </button>
-
-                `;
-
-        }
-
-
-
-        /* =========================
-           QUIZ QUESTION
-        ========================= */
-
-        function showQuizQuestion() {
-
-            document
-                .getElementById(
-                    "studyContent"
-                )
-                .innerHTML = `
-
-                    <h3>
-                        🧠 Question 1
-                    </h3>
-
-                    <br>
-
-                    <p>
-
-                        What would you like
-                        to practice in
-                        ${currentSubject}?
-
-                    </p>
-
-                    <br>
-
-                    <button
-                        class="mode-btn"
-                        onclick="
-                            quizAnswer('A')
-                        "
-                    >
-                        A
-                    </button>
-
-
-                    <button
-                        class="mode-btn"
-                        onclick="
-                            quizAnswer('B')
-                        "
-                    >
-                        B
-                    </button>
-
-
-                    <button
-                        class="mode-btn"
-                        onclick="
-                            quizAnswer('C')
-                        "
-                    >
-                        C
-                    </button>
-
-
-                    <button
-                        class="mode-btn"
-                        onclick="
-                            quizAnswer('D')
-                        "
-                    >
-                        D
-                    </button>
-
-                `;
-
-        }
-
-
-
-        /* =========================
-           QUIZ ANSWER
-        ========================= */
-
-        function quizAnswer(answer) {
-
-            document
-                .getElementById(
-                    "studyContent"
-                )
-                .innerHTML = `
-
-                    <h3>
-                        🎉 Answer Selected!
-                    </h3>
-
-                    <br>
-
-                    <p>
-
-                        You selected:
-                        <b>
-                            ${answer}
-                        </b>
-
-                    </p>
-
-                    <br>
-
-                    <p>
-
-                        Real
-                        ${currentSubject}
-                        questions and scoring
-                        will be added next!
-
-                    </p>
-
-                    <br>
-
-                    <button
-                        class="main-btn"
-                        onclick="startQuiz()"
-                    >
-
-                        Try Again
-
-                    </button>
-
-                `;
-
-        }
-
-
     </script>
 
-<!-- StudyBuddy AI updated -->
+
 </body>
 
 </html>
+```
