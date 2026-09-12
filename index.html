@@ -1,1788 +1,719 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>StudyBuddy AI</title>
-
-<style>
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #f7f0ff, #ffffff);
-  color: #222;
-}
-
-/* NAVBAR */
-
-nav {
-  background: white;
-  padding: 18px 8%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo {
-  font-size: 25px;
-  font-weight: bold;
-  color: #7b2cbf;
-}
-
-nav a {
-  margin-left: 25px;
-  text-decoration: none;
-  color: #444;
-  font-weight: bold;
-}
-
-nav a:hover {
-  color: #7b2cbf;
-}
-
-/* HERO */
-
-.hero {
-  text-align: center;
-  padding: 90px 20px;
-}
-
-.hero h1 {
-  font-size: 55px;
-  color: #7b2cbf;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 20px;
-  color: #666;
-  max-width: 700px;
-  margin: auto;
-  line-height: 1.6;
-}
-
-.main-btn {
-  margin-top: 25px;
-  padding: 14px 28px;
-  border: none;
-  border-radius: 30px;
-  background: #7b2cbf;
-  color: white;
-  font-size: 17px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.main-btn:hover {
-  background: #5a189a;
-  transform: translateY(-2px);
-}
-
-/* DASHBOARD */
-
-#dashboard {
-  padding: 70px 8%;
-  text-align: center;
-}
-
-#dashboard h2 {
-  font-size: 35px;
-  color: #7b2cbf;
-  margin-bottom: 10px;
-}
-
-#selectedSubject {
-  margin: 15px 0 30px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #555;
-}
-
-.subject-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.subject-card {
-  background: white;
-  padding: 30px 20px;
-  border-radius: 18px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-  cursor: pointer;
-  transition: 0.25s;
-  border: 2px solid transparent;
-}
-
-.subject-card:hover {
-  transform: translateY(-6px);
-  border-color: #7b2cbf;
-}
-
-.subject-card h3 {
-  margin-bottom: 10px;
-  color: #7b2cbf;
-}
-
-/* STUDY AREA */
-
-#studyArea {
-  display: none;
-  padding: 60px 8%;
-  text-align: center;
-}
-
-.study-box {
-  max-width: 900px;
-  margin: auto;
-  background: white;
-  padding: 35px;
-  border-radius: 22px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-}
-
-.study-box h2 {
-  color: #7b2cbf;
-  margin-bottom: 25px;
-}
-
-.mode-buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 30px;
-}
-
-.mode-btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  background: #eee;
-  font-weight: bold;
-}
-
-.mode-btn:hover {
-  background: #e0c3fc;
-}
-
-#studyContent {
-  margin-top: 20px;
-}
-
-#studyContent h3 {
-  color: #7b2cbf;
-  font-size: 25px;
-}
-
-#studyContent p {
-  line-height: 1.7;
-}
-
-/* INPUTS */
-
-.topic-input,
-.answer-input,
-.question-input {
-  width: 90%;
-  max-width: 650px;
-  padding: 14px;
-  margin: 15px auto;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  font-size: 16px;
-  display: block;
-}
-
-.topic-input:focus,
-.answer-input:focus,
-.question-input:focus {
-  outline: none;
-  border-color: #7b2cbf;
-}
-
-/* AI MESSAGE */
-
-.ai-message {
-  background: #f3e8ff;
-  padding: 22px;
-  border-radius: 15px;
-  margin-top: 20px;
-  line-height: 1.7;
-  text-align: left;
-}
-
-/* PRACTICE */
-
-.practice-question {
-  background: #faf7ff;
-  border: 2px solid #eadcff;
-  padding: 20px;
-  border-radius: 15px;
-  margin: 18px 0;
-  text-align: left;
-}
-
-.practice-question h4 {
-  color: #7b2cbf;
-  margin-bottom: 10px;
-}
-
-.answer-input {
-  width: 100%;
-}
-
-/* QUIZ */
-
-.quiz-question {
-  background: #faf7ff;
-  border: 2px solid #eadcff;
-  padding: 22px;
-  border-radius: 15px;
-  margin: 20px 0;
-  text-align: left;
-}
-
-.quiz-question h4 {
-  color: #7b2cbf;
-  margin-bottom: 15px;
-}
-
-.option {
-  display: block;
-  padding: 12px;
-  margin: 8px 0;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-/* CHAT */
-
-.chatBox {
-  max-width: 750px;
-  height: 400px;
-  overflow-y: auto;
-  margin: 20px auto;
-  padding: 15px;
-  background: #fafafa;
-  border-radius: 15px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-.user-message {
-  background: #e0c3fc;
-  padding: 12px;
-  border-radius: 12px;
-  margin: 10px 0;
-  text-align: right;
-}
-
-.typing {
-  background: #eee;
-  padding: 12px;
-  border-radius: 12px;
-  margin: 10px 0;
-}
-
-/* FEATURES */
-
-#features {
-  padding: 70px 8%;
-  text-align: center;
-}
-
-.feature-grid {
-  max-width: 1000px;
-  margin: 30px auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-}
-
-.feature-card {
-  background: white;
-  padding: 25px;
-  border-radius: 18px;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.07);
-}
-
-.feature-card h3 {
-  color: #7b2cbf;
-  margin-bottom: 10px;
-}
-
-/* FOOTER */
-
-footer {
-  text-align: center;
-  padding: 30px;
-  background: #7b2cbf;
-  color: white;
-  margin-top: 50px;
-}
-
-/* MOBILE */
-
-@media(max-width:600px) {
-
-  .hero h1 {
-    font-size: 40px;
-  }
-
-  nav {
-    padding: 15px;
-  }
-
-  nav a {
-    margin-left: 10px;
-  }
-
-  .study-box {
-    padding: 20px;
-  }
-
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>PochoJii AI</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f3ff;
+      color: #222;
+      min-height: 100vh;
+      transition: 0.3s;
+    }
+
+    /* NAVBAR */
+
+    nav {
+      width: 100%;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      border-bottom: 1px solid #e8e2ff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+      color: #6c4cff;
+    }
+
+    .logo span {
+      color: #222;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-btn {
+      border: none;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #eee9ff;
+      color: #5b3fd3;
+      font-weight: bold;
+    }
+
+    .nav-btn:hover {
+      background: #ddd4ff;
+    }
+
+    /* HERO */
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px 35px;
+    }
+
+    .robot {
+      font-size: 65px;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      color: #5d3fd3;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #666;
+    }
+
+    /* CHAT */
+
+    .chat-container {
+      width: 90%;
+      max-width: 900px;
+      margin: 30px auto 70px;
+      background: white;
+      border-radius: 22px;
+      box-shadow: 0 10px 35px rgba(80, 50, 150, 0.12);
+      overflow: hidden;
+      border: 1px solid #e8e0ff;
+    }
+
+    .chat-header {
+      padding: 20px 25px;
+      background: linear-gradient(135deg, #7657ff, #9b7cff);
+      color: white;
+    }
+
+    .chat-header h2 {
+      margin-bottom: 5px;
+    }
+
+    .chat-header p {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    /* MESSAGES */
+
+    .messages {
+      height: 500px;
+      overflow-y: auto;
+      padding: 25px;
+      background: #faf9ff;
+    }
+
+    .message {
+      display: flex;
+      margin-bottom: 18px;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .bubble {
+      max-width: 75%;
+      padding: 13px 17px;
+      border-radius: 17px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .message.ai .bubble {
+      background: #eeeaff;
+      color: #292344;
+      border-bottom-left-radius: 5px;
+    }
+
+    .message.user .bubble {
+      background: #6c4cff;
+      color: white;
+      border-bottom-right-radius: 5px;
+    }
+
+    .copy-btn {
+      margin-left: 8px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+      align-self: center;
+      opacity: 0.6;
+    }
+
+    .copy-btn:hover {
+      opacity: 1;
+    }
+
+    /* INPUT AREA */
+
+    .input-area {
+      padding: 18px;
+      background: white;
+      border-top: 1px solid #eee;
+      display: flex;
+      gap: 10px;
+    }
+
+    #questionInput {
+      flex: 1;
+      border: 2px solid #e4ddff;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 16px;
+      outline: none;
+      resize: none;
+      min-height: 50px;
+      max-height: 130px;
+    }
+
+    #questionInput:focus {
+      border-color: #7657ff;
+    }
+
+    #sendBtn {
+      border: none;
+      background: #6c4cff;
+      color: white;
+      padding: 0 22px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #sendBtn:hover {
+      background: #5738d0;
+    }
+
+    #sendBtn:disabled {
+      background: #aaa;
+      cursor: not-allowed;
+    }
+
+    /* TYPING */
+
+    .typing {
+      font-style: italic;
+      color: #777;
+      padding: 5px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* DARK MODE */
+
+    body.dark {
+      background: #15131d;
+      color: white;
+    }
+
+    body.dark nav {
+      background: #201d2a;
+      border-color: #332e40;
+    }
+
+    body.dark .logo span {
+      color: white;
+    }
+
+    body.dark .nav-btn {
+      background: #302b3d;
+      color: #d5caff;
+    }
+
+    body.dark .hero p {
+      color: #bbb;
+    }
+
+    body.dark .chat-container {
+      background: #201d2a;
+      border-color: #332e40;
+    }
+
+    body.dark .messages {
+      background: #181620;
+    }
+
+    body.dark .message.ai .bubble {
+      background: #302b3d;
+      color: #eee;
+    }
+
+    body.dark .input-area {
+      background: #201d2a;
+      border-color: #332e40;
+    }
+
+    body.dark #questionInput {
+      background: #181620;
+      color: white;
+      border-color: #40394f;
+    }
+
+    body.dark footer {
+      color: #999;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 600px) {
+
+      nav {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .nav-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 17px;
+      }
+
+      .chat-container {
+        width: 95%;
+      }
+
+      .messages {
+        height: 450px;
+        padding: 15px;
+      }
+
+      .bubble {
+        max-width: 85%;
+      }
+
+      .input-area {
+        padding: 10px;
+      }
+
+      #questionInput {
+        font-size: 14px;
+      }
+
+      #sendBtn {
+        padding: 0 15px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+  <!-- NAVBAR -->
 
-<nav>
-
-  <div class="logo">
-    StudyBuddy AI 🤖
-  </div>
-
-  <div>
-    <a href="#">Home</a>
-    <a href="#dashboard">Study</a>
-    <a href="#features">Features</a>
-  </div>
-
-</nav>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-  <h1>Study Smarter 🚀</h1>
-
-  <p>
-    Your AI-powered O-Level study buddy.
-    Learn topics, practice questions, take quizzes
-    and ask your AI tutor anything.
-  </p>
-
-  <button class="main-btn" onclick="startStudying()">
-    🚀 Start Studying
-  </button>
-
-</section>
-
-
-<!-- DASHBOARD -->
-
-<section id="dashboard">
-
-  <h2>📚 Choose Your Subject</h2>
-
-  <p id="selectedSubject">
-    Please choose a subject to start.
-  </p>
-
-  <div class="subject-grid">
-
-    <div class="subject-card" onclick="chooseSubject('English')">
-      <h3>📖 English</h3>
-      <p>English Language</p>
+  <nav>
+    <div class="logo">
+      🤖 PochoJii <span>AI</span>
     </div>
 
-    <div class="subject-card" onclick="chooseSubject('Urdu')">
-      <h3>📝 Urdu</h3>
-      <p>Urdu Language</p>
-    </div>
-
-    <div class="subject-card" onclick="chooseSubject('Mathematics')">
-      <h3>📐 Mathematics</h3>
-      <p>O-Level Mathematics</p>
-    </div>
-
-    <div class="subject-card" onclick="chooseSubject('Physics')">
-      <h3>⚡ Physics</h3>
-      <p>O-Level Physics</p>
-    </div>
-
-    <div class="subject-card" onclick="chooseSubject('Computer Science')">
-      <h3>💻 Computer Science</h3>
-      <p>O-Level Computer Science</p>
-    </div>
-
-    <div class="subject-card" onclick="chooseSubject('Accounting')">
-      <h3>💰 Accounting</h3>
-      <p>O-Level Accounting</p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- STUDY AREA -->
-
-<section id="studyArea">
-
-  <div class="study-box">
-
-    <h2 id="studyTitle">
-      StudyBuddy Workspace
-    </h2>
-
-    <div class="mode-buttons">
-
-      <button class="mode-btn" onclick="studyMode('Study')">
-        📚 Study
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="newChat()">
+        🆕 New Chat
       </button>
 
-      <button class="mode-btn" onclick="studyMode('Practice')">
-        📝 Practice
+      <button class="nav-btn" onclick="toggleDarkMode()">
+        🌙
       </button>
+    </div>
+  </nav>
 
-      <button class="mode-btn" onclick="studyMode('Quiz')">
-        🎯 Quiz
-      </button>
 
-      <button class="mode-btn" onclick="studyMode('AI Tutor')">
-        🤖 AI Tutor
-      </button>
+  <!-- HERO -->
 
+  <section class="hero">
+
+    <div class="robot">
+      🤖
     </div>
 
-    <div id="studyContent">
+    <h1>PochoJii AI</h1>
+
+    <p>
+      Poch jo poochna hai. 💜
+    </p>
+
+  </section>
+
+
+  <!-- CHAT -->
+
+  <div class="chat-container">
+
+    <div class="chat-header">
+
+      <h2>💬 Chat with PochoJii</h2>
 
       <p>
-        Choose a mode above to begin.
+        Ask anything and let's figure it out together!
       </p>
 
     </div>
 
-  </div>
 
-</section>
+    <div id="messages" class="messages">
 
+      <div class="message ai">
 
-<!-- FEATURES -->
-
-<section id="features">
-
-  <h2 style="color:#7b2cbf;font-size:35px;">
-    ✨ StudyBuddy Features
-  </h2>
-
-  <div class="feature-grid">
-
-    <div class="feature-card">
-      <h3>📚 Study</h3>
-      <p>
-        Learn O-Level topics step by step with AI.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <h3>📝 Practice</h3>
-      <p>
-        Generate practice questions and check your answers.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🎯 Quiz</h3>
-      <p>
-        Test yourself with AI-generated MCQs.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <h3>🤖 AI Tutor</h3>
-      <p>
-        Ask questions and get instant explanations.
-      </p>
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- FOOTER -->
-
-<footer>
-
-  <p>
-    © 2026 StudyBuddy AI 🚀
-  </p>
-
-</footer>
-
-
-<script>
-
-let currentSubject = "";
-
-const API_URL =
-  "https://studybuddy-backend-kappa.vercel.app/api/chat";
-
-
-/* START STUDYING */
-
-function startStudying() {
-
-  document
-    .getElementById("dashboard")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
-}
-
-
-/* CHOOSE SUBJECT */
-
-function chooseSubject(subject) {
-
-  currentSubject = subject;
-
-  document.getElementById("selectedSubject").textContent =
-    "📚 You are studying: " + subject;
-
-  document.getElementById("studyArea").style.display =
-    "block";
-
-  document.getElementById("studyArea")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
-}
-
-
-/* STUDY MODE */
-
-function studyMode(mode) {
-
-  if (currentSubject === "") {
-
-    alert("📚 Please choose a subject first!");
-
-    return;
-
-  }
-
-  let title =
-    document.getElementById("studyTitle");
-
-  let content =
-    document.getElementById("studyContent");
-
-  document.getElementById("studyArea").style.display =
-    "block";
-
-
-  /* STUDY */
-
-  if (mode === "Study") {
-
-    title.textContent =
-      "📚 Study " + currentSubject;
-
-    content.innerHTML = `
-
-      <h3>📚 What do you want to study?</h3>
-
-      <p style="color:#666;margin:15px 0 25px;">
-
-        Enter any O-Level topic and
-        StudyBuddy AI will teach it to you
-        step by step.
-
-      </p>
-
-      <input
-        type="text"
-        id="studyTopicInput"
-        class="topic-input"
-        placeholder="Example: Newton's Laws"
-        onkeydown="handleStudyEnter(event)"
-      >
-
-      <button
-        class="main-btn"
-        onclick="startAILesson()">
-
-        🚀 Start Learning
-
-      </button>
-
-      <div id="lessonResult"></div>
-
-    `;
-
-  }
-
-
-  /* PRACTICE */
-
-  else if (mode === "Practice") {
-
-    title.textContent =
-      "📝 Practice " + currentSubject;
-
-    content.innerHTML = `
-
-      <h3>📝 Practice Time!</h3>
-
-      <p style="color:#666;margin:15px 0 25px;">
-
-        Enter a topic and StudyBuddy AI will
-        generate practice questions for you.
-
-      </p>
-
-      <input
-        type="text"
-        id="practiceTopicInput"
-        class="topic-input"
-        placeholder="Example: Newton's Laws"
-        onkeydown="handlePracticeEnter(event)"
-      >
-
-      <button
-        class="main-btn"
-        onclick="startPractice()">
-
-        📝 Generate Practice
-
-      </button>
-
-      <div id="practiceResult"></div>
-
-    `;
-
-  }
-
-
-  /* QUIZ */
-
-  else if (mode === "Quiz") {
-
-    title.textContent =
-      "🎯 " + currentSubject + " Quiz";
-
-    content.innerHTML = `
-
-      <h3>🎯 AI Quiz</h3>
-
-      <p style="color:#666;margin:15px 0 25px;">
-
-        Enter a topic and StudyBuddy AI will
-        create a multiple-choice quiz.
-
-      </p>
-
-      <input
-        type="text"
-        id="quizTopicInput"
-        class="topic-input"
-        placeholder="Example: Newton's Laws"
-        onkeydown="handleQuizEnter(event)"
-      >
-
-      <button
-        class="main-btn"
-        onclick="startQuiz()">
-
-        🎯 Start Quiz
-
-      </button>
-
-      <div id="quizResult"></div>
-
-    `;
-
-  }
-
-
-  /* AI TUTOR */
-
-  else if (mode === "AI Tutor") {
-
-    title.textContent =
-      "🤖 AI Tutor";
-
-    content.innerHTML = `
-
-      <h3>🤖 Ask StudyBuddy AI</h3>
-
-      <p style="color:#666;margin:15px 0;">
-
-        Ask anything about ${currentSubject}.
-
-      </p>
-
-      <div id="chatBox" class="chatBox">
-
-        <div class="ai-message">
-
-          🤖 <b>StudyBuddy AI:</b>
+        <div class="bubble">
+          👋 Hey! I'm <strong>PochoJii AI</strong>.
 
           <br><br>
 
-          Hi! 👋
-          I'm ready to help you with
-          ${currentSubject}.
+          Poch jo poochna hai! 😎
 
+          <br><br>
+
+          You can ask me questions, learn something new,
+          get ideas, solve problems, or just chat.
         </div>
 
       </div>
 
-      <input
-        type="text"
+    </div>
+
+
+    <!-- INPUT -->
+
+    <div class="input-area">
+
+      <textarea
         id="questionInput"
-        class="question-input"
-        placeholder="Ask your question..."
-        onkeydown="handleEnter(event)"
-      >
+        placeholder="Poch jo poochna hai..."
+        rows="1"
+      ></textarea>
 
-      <button
-        class="main-btn"
-        onclick="askTutor()">
-
-        🚀 Ask AI
-
+      <button id="sendBtn" onclick="askAI()">
+        ➤ Send
       </button>
 
-      <button
-        class="mode-btn"
-        onclick="clearChat()"
-        style="margin-top:15px;">
-
-        🗑️ Clear Chat
-
-      </button>
-
-    `;
-
-  }
-
-  document
-    .getElementById("studyArea")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
-}
-
-
-/* REAL STUDY */
-
-async function startAILesson() {
-
-  let topicInput =
-    document.getElementById("studyTopicInput");
-
-  if (!topicInput) return;
-
-  let topic =
-    topicInput.value.trim();
-
-  if (topic === "") {
-
-    alert("📚 Please enter a topic first!");
-
-    return;
-
-  }
-
-  let result =
-    document.getElementById("lessonResult");
-
-  result.innerHTML = `
-
-    <div class="typing" style="margin-top:25px;">
-
-      🤖 StudyBuddy is preparing your lesson...
-
     </div>
 
-  `;
+  </div>
 
-  try {
 
-    const response =
-      await fetch(API_URL, {
+  <footer>
+    © 2026 PochoJii AI · Poch jo poochna hai. 💜
+  </footer>
 
-        method: "POST",
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+  <script>
 
-        body: JSON.stringify({
+    /* YOUR BACKEND */
 
-          question: `
+    const API_URL =
+      "https://studybuddy-backend-kappa.vercel.app/api/chat";
 
-Teach me the O-Level topic:
 
-"${topic}"
+    /* GET ELEMENTS */
 
-Subject:
-${currentSubject}
+    const input =
+      document.getElementById("questionInput");
 
-Create a beginner-friendly lesson.
+    const messages =
+      document.getElementById("messages");
 
-Use this structure:
+    const sendBtn =
+      document.getElementById("sendBtn");
 
-1. What is it?
-2. Key ideas
-3. How it works
-4. Worked example
-5. Important points to remember
-6. Three quick questions to test myself
 
-Explain everything clearly and simply.
+    /* ASK AI */
 
-Do not assume advanced knowledge.
+    async function askAI() {
 
-`,
+      const question = input.value.trim();
 
-          subject: currentSubject
+      if (!question) {
+        return;
+      }
 
-        })
 
-      });
+      /* SHOW USER MESSAGE */
 
-    const data =
-      await response.json();
+      addMessage(question, "user");
 
-    if (!response.ok) {
+      input.value = "";
 
-      throw new Error(
-        data.error ||
-        "AI request failed."
-      );
+      sendBtn.disabled = true;
+
+      sendBtn.textContent = "⏳";
+
+
+      /* TYPING MESSAGE */
+
+      const typing = document.createElement("div");
+
+      typing.className = "message ai";
+
+      typing.id = "typingMessage";
+
+      typing.innerHTML = `
+        <div class="bubble typing">
+          PochoJii is thinking... 🤔
+        </div>
+      `;
+
+      messages.appendChild(typing);
+
+      scrollToBottom();
+
+
+      try {
+
+        const response = await fetch(API_URL, {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            question: question
+          })
+
+        });
+
+
+        const data = await response.json();
+
+
+        /* REMOVE TYPING */
+
+        const typingMessage =
+          document.getElementById("typingMessage");
+
+        if (typingMessage) {
+          typingMessage.remove();
+        }
+
+
+        /* ERROR */
+
+        if (!response.ok) {
+
+          addMessage(
+            "Oops 😭 Something went wrong: " +
+            (data.error || "Unknown error."),
+            "ai"
+          );
+
+          return;
+        }
+
+
+        /* AI ANSWER */
+
+        addMessage(
+          data.answer || "I couldn't find an answer.",
+          "ai"
+        );
+
+      }
+
+      catch (error) {
+
+        const typingMessage =
+          document.getElementById("typingMessage");
+
+        if (typingMessage) {
+          typingMessage.remove();
+        }
+
+        addMessage(
+          "Oops 😭 I couldn't connect to PochoJii right now. Please try again.",
+          "ai"
+        );
+
+        console.error(error);
+
+      }
+
+      finally {
+
+        sendBtn.disabled = false;
+
+        sendBtn.textContent = "➤ Send";
+
+        input.focus();
+
+      }
 
     }
 
-    const answer =
-      data.answer ||
-      "Sorry, I couldn't create the lesson.";
 
-    result.innerHTML = `
+    /* ADD MESSAGE */
 
-      <div class="ai-message">
+    function addMessage(text, type) {
 
-        🤖 <b>StudyBuddy Lesson</b>
+      const message =
+        document.createElement("div");
 
-        <br><br>
-
-        ${escapeHTML(answer).replace(/\n/g,"<br>")}
-
-      </div>
-
-    `;
-
-  } catch(error) {
-
-    console.error(error);
-
-    result.innerHTML = `
-
-      <div class="ai-message">
-
-        ❌ <b>Couldn't create the lesson.</b>
-
-        <br><br>
-
-        Please try again.
-
-      </div>
-
-    `;
-
-  }
-
-}
+      message.className =
+        "message " + type;
 
 
-/* REAL PRACTICE */
+      const bubble =
+        document.createElement("div");
 
-async function startPractice() {
+      bubble.className = "bubble";
 
-  let topicInput =
-    document.getElementById("practiceTopicInput");
+      bubble.textContent = text;
 
-  if (!topicInput) return;
 
-  let topic =
-    topicInput.value.trim();
+      message.appendChild(bubble);
 
-  if (topic === "") {
 
-    alert("📝 Please enter a topic first!");
+      /* COPY BUTTON FOR AI */
 
-    return;
+      if (type === "ai") {
 
-  }
+        const copy =
+          document.createElement("button");
 
-  let result =
-    document.getElementById("practiceResult");
+        copy.className = "copy-btn";
 
-  result.innerHTML = `
+        copy.textContent = "📋";
 
-    <div class="typing" style="margin-top:25px;">
+        copy.title = "Copy answer";
 
-      🤖 Creating your practice questions...
+        copy.onclick = function() {
 
-    </div>
+          navigator.clipboard.writeText(text);
 
-  `;
+          copy.textContent = "✅";
 
-  try {
+          setTimeout(() => {
+            copy.textContent = "📋";
+          }, 1500);
 
-    const response =
-      await fetch(API_URL, {
+        };
 
-        method: "POST",
+        message.appendChild(copy);
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+      }
 
-        body: JSON.stringify({
 
-          question: `
+      messages.appendChild(message);
 
-Create an O-Level practice worksheet.
-
-Subject:
-${currentSubject}
-
-Topic:
-${topic}
-
-Create exactly 5 practice questions.
-
-Mix them between easy, medium and challenging.
-
-Give ONLY the questions.
-
-Do not give answers yet.
-
-Number them 1 to 5.
-
-Make them suitable for an O-Level student.
-
-`,
-
-          subject: currentSubject
-
-        })
-
-      });
-
-    const data =
-      await response.json();
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Practice request failed."
-      );
+      scrollToBottom();
 
     }
 
-    let questions =
-      data.answer ||
-      "Sorry, I couldn't create questions.";
 
-    result.innerHTML = `
+    /* SCROLL */
 
-      <div class="ai-message">
+    function scrollToBottom() {
 
-        🤖 <b>Your Practice Questions</b>
-
-        <br><br>
-
-        ${escapeHTML(questions).replace(/\n/g,"<br>")}
-
-      </div>
-
-      <div class="practice-question">
-
-        <h4>✍️ Write your answers</h4>
-
-        <p>
-          Number your answers from 1 to 5.
-        </p>
-
-        <textarea
-          id="practiceAnswers"
-          class="answer-input"
-          rows="8"
-          placeholder="1. My answer...
-2. My answer...
-3. My answer...
-4. My answer...
-5. My answer..."
-          style="resize:vertical;">
-        </textarea>
-
-        <button
-          class="main-btn"
-          onclick="checkPracticeAnswers()">
-
-          ✅ Check My Answers
-
-        </button>
-
-      </div>
-
-      <div id="practiceFeedback"></div>
-
-    `;
-
-  } catch(error) {
-
-    console.error(error);
-
-    result.innerHTML = `
-
-      <div class="ai-message">
-
-        ❌ <b>
-          Couldn't create practice questions.
-        </b>
-
-        <br><br>
-
-        Please try again.
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* CHECK PRACTICE */
-
-async function checkPracticeAnswers() {
-
-  let answersBox =
-    document.getElementById("practiceAnswers");
-
-  if (!answersBox) return;
-
-  let answers =
-    answersBox.value.trim();
-
-  if (answers === "") {
-
-    alert("✍️ Please write your answers first!");
-
-    return;
-
-  }
-
-  let feedback =
-    document.getElementById("practiceFeedback");
-
-  feedback.innerHTML = `
-
-    <div class="typing">
-
-      🤖 Checking your answers...
-
-    </div>
-
-  `;
-
-  try {
-
-    const response =
-      await fetch(API_URL, {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          question: `
-
-Check this O-Level student's practice answers.
-
-Subject:
-${currentSubject}
-
-The student's answers are:
-
-${answers}
-
-For each answer:
-
-1. Say Correct, Partially Correct, or Incorrect.
-2. Explain why.
-3. Give the correct answer if needed.
-4. Give a short improvement tip.
-
-At the end give:
-
-SCORE: __ / 5
-
-Then give encouraging overall feedback.
-
-`,
-
-          subject: currentSubject
-
-        })
-
-      });
-
-    const data =
-      await response.json();
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Checking failed."
-      );
+      messages.scrollTop =
+        messages.scrollHeight;
 
     }
 
-    const answer =
-      data.answer ||
-      "Sorry, I couldn't check your answers.";
 
-    feedback.innerHTML = `
+    /* ENTER TO SEND */
 
-      <div class="ai-message">
+    input.addEventListener(
+      "keydown",
+      function(event) {
 
-        🤖 <b>Practice Results</b>
+        if (
+          event.key === "Enter" &&
+          !event.shiftKey
+        ) {
 
-        <br><br>
+          event.preventDefault();
 
-        ${escapeHTML(answer).replace(/\n/g,"<br>")}
+          askAI();
 
-      </div>
+        }
 
-    `;
-
-  } catch(error) {
-
-    console.error(error);
-
-    feedback.innerHTML = `
-
-      <div class="ai-message">
-
-        ❌ Couldn't check your answers.
-
-        <br><br>
-
-        Please try again.
-
-      </div>
-
-    `;
-
-  }
-
-}
+      }
+    );
 
 
-/* REAL QUIZ */
+    /* NEW CHAT */
 
-async function startQuiz() {
+    function newChat() {
 
-  let topicInput =
-    document.getElementById("quizTopicInput");
+      messages.innerHTML = `
 
-  if (!topicInput) return;
+        <div class="message ai">
 
-  let topic =
-    topicInput.value.trim();
+          <div class="bubble">
 
-  if (topic === "") {
+            👋 New chat started!
 
-    alert("🎯 Please enter a topic first!");
+            <br><br>
 
-    return;
+            I'm <strong>PochoJii AI</strong>.
+            Poch jo poochna hai! 😎
 
-  }
+          </div>
 
-  let result =
-    document.getElementById("quizResult");
+        </div>
 
-  result.innerHTML = `
+      `;
 
-    <div class="typing" style="margin-top:25px;">
-
-      🤖 Creating your quiz...
-
-    </div>
-
-  `;
-
-  try {
-
-    const response =
-      await fetch(API_URL, {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          question: `
-
-Create an O-Level multiple-choice quiz.
-
-Subject:
-${currentSubject}
-
-Topic:
-${topic}
-
-Create exactly 5 MCQs.
-
-Each question must have exactly 4 options:
-
-A
-B
-C
-D
-
-Do NOT reveal the correct answers.
-
-Use this format:
-
-QUESTION 1:
-question
-
-A) option
-B) option
-C) option
-D) option
-
-QUESTION 2:
-question
-
-A) option
-B) option
-C) option
-D) option
-
-Continue until QUESTION 5.
-
-Mix easy, medium and challenging questions.
-
-`,
-
-          subject: currentSubject
-
-        })
-
-      });
-
-    const data =
-      await response.json();
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Quiz request failed."
-      );
+      input.focus();
 
     }
 
-    let quiz =
-      data.answer ||
-      "Sorry, I couldn't create the quiz.";
 
-    result.innerHTML = `
+    /* DARK MODE */
 
-      <div class="ai-message">
+    function toggleDarkMode() {
 
-        🤖 <b>Your Quiz</b>
-
-        <br><br>
-
-        ${escapeHTML(quiz).replace(/\n/g,"<br>")}
-
-      </div>
-
-      <div class="practice-question">
-
-        <h4>🎯 Enter your answers</h4>
-
-        <p>
-          Write your answers like:
-          <b>1A, 2C, 3B, 4D, 5A</b>
-        </p>
-
-        <input
-          type="text"
-          id="quizAnswers"
-          class="answer-input"
-          placeholder="Example: 1A, 2C, 3B, 4D, 5A"
-        >
-
-        <button
-          class="main-btn"
-          onclick="checkQuizAnswers()">
-
-          ✅ Submit Quiz
-
-        </button>
-
-      </div>
-
-      <div id="quizFeedback"></div>
-
-    `;
-
-  } catch(error) {
-
-    console.error(error);
-
-    result.innerHTML = `
-
-      <div class="ai-message">
-
-        ❌ <b>Couldn't create the quiz.</b>
-
-        <br><br>
-
-        Please try again.
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* CHECK QUIZ */
-
-async function checkQuizAnswers() {
-
-  let answersBox =
-    document.getElementById("quizAnswers");
-
-  if (!answersBox) return;
-
-  let answers =
-    answersBox.value.trim();
-
-  if (answers === "") {
-
-    alert("🎯 Please enter your answers first!");
-
-    return;
-
-  }
-
-  let feedback =
-    document.getElementById("quizFeedback");
-
-  feedback.innerHTML = `
-
-    <div class="typing">
-
-      🤖 Checking your quiz...
-
-    </div>
-
-  `;
-
-  try {
-
-    const response =
-      await fetch(API_URL, {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          question: `
-
-Grade this O-Level multiple-choice quiz.
-
-Subject:
-${currentSubject}
-
-The student's submitted answers are:
-
-${answers}
-
-There were exactly 5 questions.
-
-Grade all five.
-
-For each question:
-
-- Say Correct or Incorrect.
-- Give the correct answer.
-- Give a short explanation.
-
-At the end give:
-
-FINAL SCORE: __ / 5
-
-PERCENTAGE: __%
-
-Then give short encouraging feedback.
-
-`,
-
-          subject: currentSubject
-
-        })
-
-      });
-
-    const data =
-      await response.json();
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "Quiz checking failed."
-      );
+      document.body.classList.toggle("dark");
 
     }
 
-    const answer =
-      data.answer ||
-      "Sorry, I couldn't check your quiz.";
-
-    feedback.innerHTML = `
-
-      <div class="ai-message">
-
-        🎯 <b>Quiz Results</b>
-
-        <br><br>
-
-        ${escapeHTML(answer).replace(/\n/g,"<br>")}
-
-      </div>
-
-      <button
-        class="main-btn"
-        onclick="studyMode('Quiz')">
-
-        🔄 Try Another Quiz
-
-      </button>
-
-    `;
-
-  } catch(error) {
-
-    console.error(error);
-
-    feedback.innerHTML = `
-
-      <div class="ai-message">
-
-        ❌ Couldn't check your quiz.
-
-        <br><br>
-
-        Please try again.
-
-      </div>
-
-    `;
-
-  }
-
-}
-
-
-/* AI TUTOR */
-
-async function askTutor() {
-
-  let input =
-    document.getElementById("questionInput");
-
-  if (!input) return;
-
-  let question =
-    input.value.trim();
-
-  if (question === "") {
-
-    alert("💬 Please type a question first!");
-
-    return;
-
-  }
-
-  let chatBox =
-    document.getElementById("chatBox");
-
-  chatBox.innerHTML += `
-
-    <div class="user-message">
-
-      👤 ${escapeHTML(question)}
-
-    </div>
-
-  `;
-
-  input.value = "";
-
-  let loadingID =
-    "loading-" + Date.now();
-
-  chatBox.innerHTML += `
-
-    <div
-      class="typing"
-      id="${loadingID}">
-
-      🤖 Thinking...
-
-    </div>
-
-  `;
-
-  chatBox.scrollTop =
-    chatBox.scrollHeight;
-
-  try {
-
-    const response =
-      await fetch(API_URL, {
-
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          question: question,
-
-          subject:
-            currentSubject ||
-            "O Levels"
-
-        })
-
-      });
-
-    const data =
-      await response.json();
-
-    let loading =
-      document.getElementById(loadingID);
-
-    if (loading) {
-      loading.remove();
-    }
-
-    if (!response.ok) {
-
-      throw new Error(
-        data.error ||
-        "AI request failed."
-      );
-
-    }
-
-    const answer =
-      data.answer ||
-      "Sorry, I couldn't generate an answer.";
-
-    chatBox.innerHTML += `
-
-      <div class="ai-message">
-
-        🤖 <b>StudyBuddy AI:</b>
-
-        <br><br>
-
-        ${escapeHTML(answer).replace(/\n/g,"<br>")}
-
-      </div>
-
-    `;
-
-  } catch(error) {
-
-    console.error(error);
-
-    let loading =
-      document.getElementById(loadingID);
-
-    if (loading) {
-      loading.remove();
-    }
-
-    chatBox.innerHTML += `
-
-      <div class="ai-message">
-
-        🤖 <b>StudyBuddy AI:</b>
-
-        <br><br>
-
-        Sorry! I couldn't connect
-        to the AI right now. 😭
-
-        <br><br>
-
-        Please try again.
-
-      </div>
-
-    `;
-
-  }
-
-  chatBox.scrollTop =
-    chatBox.scrollHeight;
-
-}
-
-
-/* ENTER KEYS */
-
-function handleStudyEnter(event) {
-
-  if (event.key === "Enter") {
-    startAILesson();
-  }
-
-}
-
-function handlePracticeEnter(event) {
-
-  if (event.key === "Enter") {
-    startPractice();
-  }
-
-}
-
-function handleQuizEnter(event) {
-
-  if (event.key === "Enter") {
-    startQuiz();
-  }
-
-}
-
-function handleEnter(event) {
-
-  if (event.key === "Enter") {
-    askTutor();
-  }
-
-}
-
-
-/* CLEAR CHAT */
-
-function clearChat() {
-
-  let chatBox =
-    document.getElementById("chatBox");
-
-  if (!chatBox) return;
-
-  chatBox.innerHTML = `
-
-    <div class="ai-message">
-
-      🤖 <b>StudyBuddy AI:</b>
-
-      <br><br>
-
-      Chat cleared! 👋
-
-      <br><br>
-
-      Ask me anything about
-      ${currentSubject}.
-
-    </div>
-
-  `;
-
-}
-
-
-/* ESCAPE HTML */
-
-function escapeHTML(text) {
-
-  const div =
-    document.createElement("div");
-
-  div.textContent = text;
-
-  return div.innerHTML;
-
-}
-
-</script>
+  </script>
 
 </body>
 </html>
-```
