@@ -13,331 +13,565 @@
       padding: 0;
     }
 
+    :root {
+      --bg: #f7f5ff;
+      --sidebar: #ffffff;
+      --card: #ffffff;
+      --text: #22202b;
+      --muted: #777382;
+      --border: #e8e3f5;
+      --primary: #7357ff;
+      --primary-dark: #5b40df;
+      --bubble-ai: #eeeaff;
+      --input: #ffffff;
+    }
+
+    body.dark {
+      --bg: #111019;
+      --sidebar: #181620;
+      --card: #1d1a27;
+      --text: #f4f1ff;
+      --muted: #aaa5b8;
+      --border: #302b3c;
+      --primary: #8a70ff;
+      --primary-dark: #7357ff;
+      --bubble-ai: #292535;
+      --input: #1d1a27;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f6f3ff;
-      color: #222;
-      min-height: 100vh;
-      transition: 0.3s;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      overflow: hidden;
+      transition: background 0.25s, color 0.25s;
     }
 
-    /* NAVBAR */
-
-    nav {
-      width: 100%;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: white;
-      border-bottom: 1px solid #e8e2ff;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    button,
+    textarea,
+    input {
+      font-family: inherit;
     }
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-      color: #6c4cff;
-    }
-
-    .logo span {
-      color: #222;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
-    .nav-btn {
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
+    button {
       cursor: pointer;
-      background: #eee9ff;
-      color: #5b3fd3;
+    }
+
+    /* APP */
+
+    .app {
+      display: flex;
+      height: 100vh;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar {
+      width: 270px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      transition: 0.25s;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 23px;
+    }
+
+    .brand-name {
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .brand-name span {
+      color: var(--primary);
+    }
+
+    .new-chat {
+      width: 100%;
+      border: none;
+      border-radius: 13px;
+      padding: 13px;
+      background: var(--primary);
+      color: white;
       font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 18px;
     }
 
-    .nav-btn:hover {
-      background: #ddd4ff;
+    .new-chat:hover {
+      background: var(--primary-dark);
     }
 
-    /* HERO */
-
-    .hero {
-      text-align: center;
-      padding: 70px 20px 35px;
-    }
-
-    .robot {
-      font-size: 65px;
+    .search-box {
       margin-bottom: 15px;
     }
 
-    .hero h1 {
-      font-size: 48px;
-      color: #5d3fd3;
-      margin-bottom: 10px;
+    .search-box input {
+      width: 100%;
+      padding: 11px 13px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
     }
 
-    .hero p {
-      font-size: 20px;
-      color: #666;
+    .history-title {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 5px 4px 10px;
+    }
+
+    .history {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      padding: 11px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .history-item:hover {
+      background: var(--bubble-ai);
+    }
+
+    .sidebar-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sidebar-btn {
+      border: none;
+      background: transparent;
+      color: var(--text);
+      text-align: left;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .sidebar-btn:hover {
+      background: var(--bubble-ai);
+    }
+
+    /* MAIN */
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      height: 70px;
+      padding: 0 25px;
+      border-bottom: 1px solid var(--border);
+      background: var(--card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-menu {
+      display: none;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 22px;
+    }
+
+    .top-title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .top-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .theme-btn {
+      border: none;
+      background: var(--bubble-ai);
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
     }
 
     /* CHAT */
 
-    .chat-container {
-      width: 90%;
-      max-width: 900px;
-      margin: 30px auto 70px;
-      background: white;
-      border-radius: 22px;
-      box-shadow: 0 10px 35px rgba(80, 50, 150, 0.12);
-      overflow: hidden;
-      border: 1px solid #e8e0ff;
+    .chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 35px 20px 30px;
     }
 
-    .chat-header {
-      padding: 20px 25px;
-      background: linear-gradient(135deg, #7657ff, #9b7cff);
-      color: white;
+    .chat-content {
+      width: 100%;
+      max-width: 850px;
+      margin: auto;
     }
 
-    .chat-header h2 {
-      margin-bottom: 5px;
+    /* WELCOME */
+
+    .welcome {
+      text-align: center;
+      padding: 60px 15px 35px;
     }
 
-    .chat-header p {
-      opacity: 0.9;
+    .welcome-logo {
+      width: 82px;
+      height: 82px;
+      margin: auto auto 20px;
+      border-radius: 26px;
+      background: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 45px;
+      box-shadow: 0 12px 30px rgba(115, 87, 255, 0.25);
+    }
+
+    .welcome h1 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .welcome h1 span {
+      color: var(--primary);
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+
+    .suggestions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .suggestion {
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      padding: 14px;
+      border-radius: 13px;
+      text-align: left;
+      transition: 0.2s;
+    }
+
+    .suggestion:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .suggestion-title {
+      font-weight: bold;
       font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .suggestion-text {
+      color: var(--muted);
+      font-size: 12px;
     }
 
     /* MESSAGES */
 
-    .messages {
-      height: 500px;
-      overflow-y: auto;
-      padding: 25px;
-      background: #faf9ff;
-    }
-
     .message {
       display: flex;
-      margin-bottom: 18px;
+      margin-bottom: 25px;
+      gap: 12px;
+      align-items: flex-start;
     }
 
     .message.user {
       justify-content: flex-end;
     }
 
-    .bubble {
-      max-width: 75%;
-      padding: 13px 17px;
-      border-radius: 17px;
-      line-height: 1.5;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+    .avatar {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
     }
 
-    .message.ai .bubble {
-      background: #eeeaff;
-      color: #292344;
+    .ai-avatar {
+      background: var(--bubble-ai);
+    }
+
+    .user-avatar {
+      background: var(--primary);
+      color: white;
+    }
+
+    .message-content {
+      max-width: 78%;
+    }
+
+    .message-name {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .bubble {
+      padding: 13px 16px;
+      border-radius: 17px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-size: 15px;
+    }
+
+    .ai-bubble {
+      background: var(--bubble-ai);
       border-bottom-left-radius: 5px;
     }
 
-    .message.user .bubble {
-      background: #6c4cff;
+    .user-bubble {
+      background: var(--primary);
       color: white;
       border-bottom-right-radius: 5px;
     }
 
+    .message-actions {
+      margin-top: 5px;
+      display: flex;
+      gap: 5px;
+    }
+
     .copy-btn {
-      margin-left: 8px;
       border: none;
       background: transparent;
-      cursor: pointer;
-      font-size: 16px;
-      align-self: center;
-      opacity: 0.6;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 4px;
     }
 
     .copy-btn:hover {
-      opacity: 1;
-    }
-
-    /* INPUT AREA */
-
-    .input-area {
-      padding: 18px;
-      background: white;
-      border-top: 1px solid #eee;
-      display: flex;
-      gap: 10px;
-    }
-
-    #questionInput {
-      flex: 1;
-      border: 2px solid #e4ddff;
-      border-radius: 14px;
-      padding: 14px 16px;
-      font-size: 16px;
-      outline: none;
-      resize: none;
-      min-height: 50px;
-      max-height: 130px;
-    }
-
-    #questionInput:focus {
-      border-color: #7657ff;
-    }
-
-    #sendBtn {
-      border: none;
-      background: #6c4cff;
-      color: white;
-      padding: 0 22px;
-      border-radius: 14px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    #sendBtn:hover {
-      background: #5738d0;
-    }
-
-    #sendBtn:disabled {
-      background: #aaa;
-      cursor: not-allowed;
+      color: var(--primary);
     }
 
     /* TYPING */
 
-    .typing {
-      font-style: italic;
-      color: #777;
-      padding: 5px;
+    .typing-dots {
+      display: flex;
+      gap: 5px;
+      padding: 4px 0;
     }
 
-    /* FOOTER */
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: bounce 1.2s infinite;
+    }
 
-    footer {
+    .dot:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .dot:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes bounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      30% {
+        transform: translateY(-5px);
+        opacity: 1;
+      }
+    }
+
+    /* INPUT */
+
+    .input-wrapper {
+      padding: 15px 20px 20px;
+      background: var(--bg);
+    }
+
+    .input-container {
+      max-width: 850px;
+      margin: auto;
+      background: var(--input);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 8px;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: 0 5px 25px rgba(50, 30, 100, 0.08);
+    }
+
+    #questionInput {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--text);
+      resize: none;
+      padding: 11px 12px;
+      min-height: 45px;
+      max-height: 150px;
+      font-size: 15px;
+    }
+
+    #questionInput::placeholder {
+      color: var(--muted);
+    }
+
+    #sendBtn {
+      width: 45px;
+      height: 45px;
+      border: none;
+      border-radius: 13px;
+      background: var(--primary);
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #sendBtn:hover {
+      background: var(--primary-dark);
+    }
+
+    #sendBtn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .input-note {
+      max-width: 850px;
+      margin: 8px auto 0;
       text-align: center;
-      padding: 25px;
-      color: #777;
-      font-size: 14px;
-    }
-
-    /* DARK MODE */
-
-    body.dark {
-      background: #15131d;
-      color: white;
-    }
-
-    body.dark nav {
-      background: #201d2a;
-      border-color: #332e40;
-    }
-
-    body.dark .logo span {
-      color: white;
-    }
-
-    body.dark .nav-btn {
-      background: #302b3d;
-      color: #d5caff;
-    }
-
-    body.dark .hero p {
-      color: #bbb;
-    }
-
-    body.dark .chat-container {
-      background: #201d2a;
-      border-color: #332e40;
-    }
-
-    body.dark .messages {
-      background: #181620;
-    }
-
-    body.dark .message.ai .bubble {
-      background: #302b3d;
-      color: #eee;
-    }
-
-    body.dark .input-area {
-      background: #201d2a;
-      border-color: #332e40;
-    }
-
-    body.dark #questionInput {
-      background: #181620;
-      color: white;
-      border-color: #40394f;
-    }
-
-    body.dark footer {
-      color: #999;
+      color: var(--muted);
+      font-size: 10px;
     }
 
     /* MOBILE */
 
-    @media (max-width: 600px) {
+    @media (max-width: 750px) {
 
-      nav {
-        padding: 15px;
+      .sidebar {
+        position: fixed;
+        left: -280px;
+        top: 0;
+        bottom: 0;
+        z-index: 1000;
+        box-shadow: 5px 0 30px rgba(0, 0, 0, 0.15);
       }
 
-      .logo {
-        font-size: 20px;
+      .sidebar.open {
+        left: 0;
       }
 
-      .nav-btn {
-        padding: 8px 10px;
-        font-size: 12px;
+      .mobile-menu {
+        display: block;
+        margin-right: 12px;
       }
 
-      .hero {
-        padding-top: 45px;
+      .topbar {
+        padding: 0 15px;
       }
 
-      .hero h1 {
+      .top-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .welcome {
+        padding-top: 35px;
+      }
+
+      .welcome h1 {
+        font-size: 31px;
+      }
+
+      .suggestions {
+        grid-template-columns: 1fr;
+      }
+
+      .message-content {
+        max-width: 86%;
+      }
+
+      .chat-area {
+        padding: 20px 12px;
+      }
+
+      .input-wrapper {
+        padding: 10px 10px 13px;
+      }
+    }
+
+    @media (max-width: 420px) {
+
+      .welcome-logo {
+        width: 68px;
+        height: 68px;
         font-size: 36px;
       }
 
-      .hero p {
-        font-size: 17px;
+      .welcome h1 {
+        font-size: 28px;
       }
 
-      .chat-container {
-        width: 95%;
-      }
-
-      .messages {
-        height: 450px;
-        padding: 15px;
+      .tagline {
+        font-size: 16px;
       }
 
       .bubble {
-        max-width: 85%;
-      }
-
-      .input-area {
-        padding: 10px;
-      }
-
-      #questionInput {
         font-size: 14px;
-      }
-
-      #sendBtn {
-        padding: 0 15px;
       }
     }
   </style>
@@ -345,167 +579,665 @@
 
 <body>
 
-  <!-- NAVBAR -->
+<div class="app">
 
-  <nav>
-    <div class="logo">
-      🤖 PochoJii <span>AI</span>
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <div class="brand-logo">🤖</div>
+
+      <div class="brand-name">
+        PochoJii <span>AI</span>
+      </div>
     </div>
 
-    <div class="nav-buttons">
-      <button class="nav-btn" onclick="newChat()">
-        🆕 New Chat
+    <button class="new-chat" onclick="newChat()">
+      ＋ New Chat
+    </button>
+
+    <div class="search-box">
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="🔍 Search chats..."
+        oninput="searchChats()"
+      >
+    </div>
+
+    <div class="history-title">
+      Recent Chats
+    </div>
+
+    <div class="history" id="history"></div>
+
+    <div class="sidebar-bottom">
+
+      <button class="sidebar-btn" onclick="toggleDarkMode()">
+        🌙 Dark Mode
       </button>
 
-      <button class="nav-btn" onclick="toggleDarkMode()">
-        🌙
+      <button class="sidebar-btn" onclick="clearAllChats()">
+        🗑️ Clear Chat History
       </button>
-    </div>
-  </nav>
-
-
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="robot">
-      🤖
-    </div>
-
-    <h1>PochoJii AI</h1>
-
-    <p>
-      Poch jo poochna hai. 💜
-    </p>
-
-  </section>
-
-
-  <!-- CHAT -->
-
-  <div class="chat-container">
-
-    <div class="chat-header">
-
-      <h2>💬 Chat with PochoJii</h2>
-
-      <p>
-        Ask anything and let's figure it out together!
-      </p>
 
     </div>
 
+  </aside>
 
-    <div id="messages" class="messages">
 
-      <div class="message ai">
+  <!-- MAIN -->
 
-        <div class="bubble">
-          👋 Hey! I'm <strong>PochoJii AI</strong>.
+  <main class="main">
 
-          <br><br>
+    <!-- TOPBAR -->
 
-          Poch jo poochna hai! 😎
+    <header class="topbar">
 
-          <br><br>
+      <div class="top-left">
 
-          You can ask me questions, learn something new,
-          get ideas, solve problems, or just chat.
+        <button
+          class="mobile-menu"
+          onclick="toggleSidebar()"
+        >
+          ☰
+        </button>
+
+        <div>
+          <div class="top-title">
+            PochoJii AI
+          </div>
+
+          <div class="top-subtitle">
+            Poch jo poochna hai. 💜
+          </div>
         </div>
 
       </div>
 
-    </div>
+
+      <button
+        class="theme-btn"
+        onclick="toggleDarkMode()"
+        id="themeBtn"
+      >
+        🌙
+      </button>
+
+    </header>
+
+
+    <!-- CHAT AREA -->
+
+    <section class="chat-area" id="chatArea">
+
+      <div class="chat-content" id="chatContent">
+
+        <!-- WELCOME -->
+
+        <div class="welcome" id="welcome">
+
+          <div class="welcome-logo">
+            🤖
+          </div>
+
+          <h1>
+            Hey, I'm <span>PochoJii</span>!
+          </h1>
+
+          <p class="tagline">
+            Poch jo poochna hai. 😎
+          </p>
+
+
+          <div class="suggestions">
+
+            <button
+              class="suggestion"
+              onclick="useSuggestion('Explain something interesting to me')"
+            >
+              <div class="suggestion-title">
+                🧠 Teach me something
+              </div>
+
+              <div class="suggestion-text">
+                Explain something interesting
+              </div>
+            </button>
+
+
+            <button
+              class="suggestion"
+              onclick="useSuggestion('Give me a cool Python project idea')"
+            >
+              <div class="suggestion-title">
+                💻 Help me code
+              </div>
+
+              <div class="suggestion-text">
+                Get programming help
+              </div>
+            </button>
+
+
+            <button
+              class="suggestion"
+              onclick="useSuggestion('Give me 5 creative ideas for a project')"
+            >
+              <div class="suggestion-title">
+                💡 Give me ideas
+              </div>
+
+              <div class="suggestion-text">
+                Brainstorm something cool
+              </div>
+            </button>
+
+
+            <button
+              class="suggestion"
+              onclick="useSuggestion('Tell me a surprising fact')"
+            >
+              <div class="suggestion-title">
+                🌎 Surprise me
+              </div>
+
+              <div class="suggestion-text">
+                Tell me something interesting
+              </div>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
 
 
     <!-- INPUT -->
 
-    <div class="input-area">
+    <div class="input-wrapper">
 
-      <textarea
-        id="questionInput"
-        placeholder="Poch jo poochna hai..."
-        rows="1"
-      ></textarea>
+      <div class="input-container">
 
-      <button id="sendBtn" onclick="askAI()">
-        ➤ Send
-      </button>
+        <textarea
+          id="questionInput"
+          rows="1"
+          placeholder="Poch jo poochna hai..."
+        ></textarea>
+
+        <button
+          id="sendBtn"
+          onclick="askAI()"
+          title="Send"
+        >
+          ➤
+        </button>
+
+      </div>
+
+      <div class="input-note">
+        PochoJii AI can make mistakes. Check important information.
+      </div>
 
     </div>
 
-  </div>
+  </main>
+
+</div>
 
 
-  <footer>
-    © 2026 PochoJii AI · Poch jo poochna hai. 💜
-  </footer>
+<script>
+
+  /* =========================================
+     CONFIGURATION
+  ========================================= */
+
+  const API_URL =
+    "https://studybuddy-backend-kappa.vercel.app/api/chat";
 
 
-  <script>
+  /* =========================================
+     ELEMENTS
+  ========================================= */
 
-    /* YOUR BACKEND */
+  const input =
+    document.getElementById("questionInput");
 
-    const API_URL =
-      "https://studybuddy-backend-kappa.vercel.app/api/chat";
+  const sendBtn =
+    document.getElementById("sendBtn");
 
+  const chatContent =
+    document.getElementById("chatContent");
 
-    /* GET ELEMENTS */
+  const chatArea =
+    document.getElementById("chatArea");
 
-    const input =
-      document.getElementById("questionInput");
+  const welcome =
+    document.getElementById("welcome");
 
-    const messages =
-      document.getElementById("messages");
+  const history =
+    document.getElementById("history");
 
-    const sendBtn =
-      document.getElementById("sendBtn");
-
-
-    /* ASK AI */
-
-    async function askAI() {
-
-      const question = input.value.trim();
-
-      if (!question) {
-        return;
-      }
+  const searchInput =
+    document.getElementById("searchInput");
 
 
-      /* SHOW USER MESSAGE */
+  /* =========================================
+     CHAT DATA
+  ========================================= */
 
-      addMessage(question, "user");
+  let chats =
+    JSON.parse(
+      localStorage.getItem("pochojii_chats") || "[]"
+    );
 
-      input.value = "";
-
-      sendBtn.disabled = true;
-
-      sendBtn.textContent = "⏳";
+  let currentChat = null;
 
 
-      /* TYPING MESSAGE */
+  /* =========================================
+     START NEW CHAT
+  ========================================= */
 
-      const typing = document.createElement("div");
+  function newChat() {
 
-      typing.className = "message ai";
+    currentChat = {
+      id: Date.now(),
+      title: "New Chat",
+      messages: []
+    };
 
-      typing.id = "typingMessage";
+    renderChat();
 
-      typing.innerHTML = `
-        <div class="bubble typing">
-          PochoJii is thinking... 🤔
+    input.focus();
+
+    closeSidebar();
+
+  }
+
+
+  /* =========================================
+     RENDER CHAT
+  ========================================= */
+
+  function renderChat() {
+
+    chatContent.innerHTML = "";
+
+    if (
+      !currentChat ||
+      currentChat.messages.length === 0
+    ) {
+
+      showWelcome();
+
+      return;
+
+    }
+
+
+    currentChat.messages.forEach(message => {
+
+      addMessageToScreen(
+        message.text,
+        message.type,
+        false
+      );
+
+    });
+
+    scrollToBottom();
+
+  }
+
+
+  /* =========================================
+     WELCOME SCREEN
+  ========================================= */
+
+  function showWelcome() {
+
+    chatContent.innerHTML = `
+
+      <div class="welcome" id="welcome">
+
+        <div class="welcome-logo">
+          🤖
         </div>
-      `;
 
-      messages.appendChild(typing);
+        <h1>
+          Hey, I'm <span>PochoJii</span>!
+        </h1>
 
-      scrollToBottom();
+        <p class="tagline">
+          Poch jo poochna hai. 😎
+        </p>
+
+        <div class="suggestions">
+
+          <button
+            class="suggestion"
+            onclick="useSuggestion('Explain something interesting to me')"
+          >
+            <div class="suggestion-title">
+              🧠 Teach me something
+            </div>
+
+            <div class="suggestion-text">
+              Explain something interesting
+            </div>
+          </button>
+
+          <button
+            class="suggestion"
+            onclick="useSuggestion('Give me a cool Python project idea')"
+          >
+            <div class="suggestion-title">
+              💻 Help me code
+            </div>
+
+            <div class="suggestion-text">
+              Get programming help
+            </div>
+          </button>
+
+          <button
+            class="suggestion"
+            onclick="useSuggestion('Give me 5 creative ideas for a project')"
+          >
+            <div class="suggestion-title">
+              💡 Give me ideas
+            </div>
+
+            <div class="suggestion-text">
+              Brainstorm something cool
+            </div>
+          </button>
+
+          <button
+            class="suggestion"
+            onclick="useSuggestion('Tell me a surprising fact')"
+          >
+            <div class="suggestion-title">
+              🌎 Surprise me
+            </div>
+
+            <div class="suggestion-text">
+              Tell me something interesting
+            </div>
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
 
 
-      try {
+  /* =========================================
+     ADD MESSAGE
+  ========================================= */
 
-        const response = await fetch(API_URL, {
+  function addMessageToScreen(
+    text,
+    type,
+    save = true
+  ) {
+
+    const message =
+      document.createElement("div");
+
+    message.className =
+      "message " + type;
+
+
+    const avatar =
+      document.createElement("div");
+
+    avatar.className =
+      "avatar " +
+      (type === "ai"
+        ? "ai-avatar"
+        : "user-avatar");
+
+    avatar.textContent =
+      type === "ai"
+        ? "🤖"
+        : "👤";
+
+
+    const content =
+      document.createElement("div");
+
+    content.className =
+      "message-content";
+
+
+    const name =
+      document.createElement("div");
+
+    name.className =
+      "message-name";
+
+    name.textContent =
+      type === "ai"
+        ? "PochoJii AI"
+        : "You";
+
+
+    const bubble =
+      document.createElement("div");
+
+    bubble.className =
+      "bubble " +
+      (type === "ai"
+        ? "ai-bubble"
+        : "user-bubble");
+
+    bubble.textContent = text;
+
+
+    content.appendChild(name);
+
+    content.appendChild(bubble);
+
+
+    /* COPY BUTTON */
+
+    if (type === "ai") {
+
+      const actions =
+        document.createElement("div");
+
+      actions.className =
+        "message-actions";
+
+
+      const copy =
+        document.createElement("button");
+
+      copy.className =
+        "copy-btn";
+
+      copy.textContent =
+        "📋 Copy";
+
+      copy.onclick = function() {
+
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+
+            copy.textContent =
+              "✅ Copied!";
+
+            setTimeout(() => {
+
+              copy.textContent =
+                "📋 Copy";
+
+            }, 1500);
+
+          });
+
+      };
+
+
+      actions.appendChild(copy);
+
+      content.appendChild(actions);
+
+    }
+
+
+    if (type === "user") {
+
+      message.appendChild(content);
+
+      message.appendChild(avatar);
+
+    } else {
+
+      message.appendChild(avatar);
+
+      message.appendChild(content);
+
+    }
+
+
+    chatContent.appendChild(message);
+
+
+    if (save && currentChat) {
+
+      currentChat.messages.push({
+        text: text,
+        type: type
+      });
+
+      saveCurrentChat();
+
+    }
+
+
+    scrollToBottom();
+
+  }
+
+
+  /* =========================================
+     ASK AI
+  ========================================= */
+
+  async function askAI() {
+
+    const question =
+      input.value.trim();
+
+
+    if (!question) {
+      return;
+    }
+
+
+    /* Create chat if needed */
+
+    if (!currentChat) {
+
+      currentChat = {
+        id: Date.now(),
+        title: question.substring(0, 35),
+        messages: []
+      };
+
+    }
+
+
+    /* Set title */
+
+    if (
+      currentChat.messages.length === 0
+    ) {
+
+      currentChat.title =
+        question.substring(0, 35);
+
+    }
+
+
+    /* Show user message */
+
+    addMessageToScreen(
+      question,
+      "user"
+    );
+
+
+    input.value = "";
+
+    autoResize();
+
+
+    sendBtn.disabled = true;
+
+    sendBtn.textContent = "⏳";
+
+
+    /* Typing */
+
+    const typing =
+      document.createElement("div");
+
+    typing.className =
+      "message ai";
+
+    typing.id =
+      "typing";
+
+
+    typing.innerHTML = `
+
+      <div class="avatar ai-avatar">
+        🤖
+      </div>
+
+      <div class="message-content">
+
+        <div class="message-name">
+          PochoJii AI
+        </div>
+
+        <div class="bubble ai-bubble">
+
+          <div class="typing-dots">
+
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    chatContent.appendChild(typing);
+
+    scrollToBottom();
+
+
+    try {
+
+      const response =
+        await fetch(API_URL, {
 
           method: "POST",
 
@@ -520,200 +1252,439 @@
         });
 
 
-        const data = await response.json();
+      const data =
+        await response.json();
 
 
-        /* REMOVE TYPING */
+      const typingElement =
+        document.getElementById("typing");
 
-        const typingMessage =
-          document.getElementById("typingMessage");
-
-        if (typingMessage) {
-          typingMessage.remove();
-        }
+      if (typingElement) {
+        typingElement.remove();
+      }
 
 
-        /* ERROR */
+      if (!response.ok) {
 
-        if (!response.ok) {
-
-          addMessage(
-            "Oops 😭 Something went wrong: " +
-            (data.error || "Unknown error."),
-            "ai"
-          );
-
-          return;
-        }
-
-
-        /* AI ANSWER */
-
-        addMessage(
-          data.answer || "I couldn't find an answer.",
+        addMessageToScreen(
+          "Oops 😭 " +
+          (data.error ||
+            "Something went wrong."),
           "ai"
         );
 
-      }
-
-      catch (error) {
-
-        const typingMessage =
-          document.getElementById("typingMessage");
-
-        if (typingMessage) {
-          typingMessage.remove();
-        }
-
-        addMessage(
-          "Oops 😭 I couldn't connect to PochoJii right now. Please try again.",
-          "ai"
-        );
-
-        console.error(error);
+        return;
 
       }
 
-      finally {
 
-        sendBtn.disabled = false;
+      const answer =
+        data.answer ||
+        "I couldn't generate an answer.";
 
-        sendBtn.textContent = "➤ Send";
 
-        input.focus();
+      addMessageToScreen(
+        answer,
+        "ai"
+      );
 
+
+    } catch (error) {
+
+      const typingElement =
+        document.getElementById("typing");
+
+      if (typingElement) {
+        typingElement.remove();
       }
+
+
+      addMessageToScreen(
+        "Oops 😭 I couldn't connect to PochoJii right now. Please try again.",
+        "ai"
+      );
+
+
+      console.error(error);
+
+    } finally {
+
+      sendBtn.disabled = false;
+
+      sendBtn.textContent = "➤";
+
+      input.focus();
+
+      saveCurrentChat();
+
+      renderHistory();
+
+    }
+
+  }
+
+
+  /* =========================================
+     SAVE CHAT
+  ========================================= */
+
+  function saveCurrentChat() {
+
+    if (!currentChat) {
+      return;
+    }
+
+
+    const index =
+      chats.findIndex(
+        chat => chat.id === currentChat.id
+      );
+
+
+    if (index === -1) {
+
+      chats.unshift(currentChat);
+
+    } else {
+
+      chats[index] =
+        currentChat;
 
     }
 
 
-    /* ADD MESSAGE */
-
-    function addMessage(text, type) {
-
-      const message =
-        document.createElement("div");
-
-      message.className =
-        "message " + type;
-
-
-      const bubble =
-        document.createElement("div");
-
-      bubble.className = "bubble";
-
-      bubble.textContent = text;
-
-
-      message.appendChild(bubble);
-
-
-      /* COPY BUTTON FOR AI */
-
-      if (type === "ai") {
-
-        const copy =
-          document.createElement("button");
-
-        copy.className = "copy-btn";
-
-        copy.textContent = "📋";
-
-        copy.title = "Copy answer";
-
-        copy.onclick = function() {
-
-          navigator.clipboard.writeText(text);
-
-          copy.textContent = "✅";
-
-          setTimeout(() => {
-            copy.textContent = "📋";
-          }, 1500);
-
-        };
-
-        message.appendChild(copy);
-
-      }
-
-
-      messages.appendChild(message);
-
-      scrollToBottom();
-
-    }
-
-
-    /* SCROLL */
-
-    function scrollToBottom() {
-
-      messages.scrollTop =
-        messages.scrollHeight;
-
-    }
-
-
-    /* ENTER TO SEND */
-
-    input.addEventListener(
-      "keydown",
-      function(event) {
-
-        if (
-          event.key === "Enter" &&
-          !event.shiftKey
-        ) {
-
-          event.preventDefault();
-
-          askAI();
-
-        }
-
-      }
+    localStorage.setItem(
+      "pochojii_chats",
+      JSON.stringify(chats)
     );
 
 
-    /* NEW CHAT */
+    renderHistory();
 
-    function newChat() {
+  }
 
-      messages.innerHTML = `
 
-        <div class="message ai">
+  /* =========================================
+     HISTORY
+  ========================================= */
 
-          <div class="bubble">
+  function renderHistory(
+    filtered = chats
+  ) {
 
-            👋 New chat started!
+    history.innerHTML = "";
 
-            <br><br>
 
-            I'm <strong>PochoJii AI</strong>.
-            Poch jo poochna hai! 😎
+    if (filtered.length === 0) {
 
-          </div>
+      history.innerHTML = `
 
+        <div style="
+          color: var(--muted);
+          font-size: 12px;
+          padding: 10px;
+        ">
+          No chats yet.
         </div>
 
       `;
 
-      input.focus();
+      return;
 
     }
 
 
-    /* DARK MODE */
+    filtered.forEach(chat => {
 
-    function toggleDarkMode() {
+      const item =
+        document.createElement("div");
 
-      document.body.classList.toggle("dark");
+      item.className =
+        "history-item";
+
+      item.textContent =
+        "💬 " +
+        (chat.title || "New Chat");
+
+
+      item.onclick = function() {
+
+        loadChat(chat.id);
+
+      };
+
+
+      history.appendChild(item);
+
+    });
+
+  }
+
+
+  /* =========================================
+     LOAD CHAT
+  ========================================= */
+
+  function loadChat(id) {
+
+    const chat =
+      chats.find(
+        item => item.id === id
+      );
+
+
+    if (!chat) {
+      return;
+    }
+
+
+    currentChat = chat;
+
+    renderChat();
+
+    closeSidebar();
+
+  }
+
+
+  /* =========================================
+     SEARCH CHATS
+  ========================================= */
+
+  function searchChats() {
+
+    const query =
+      searchInput.value
+        .toLowerCase()
+        .trim();
+
+
+    if (!query) {
+
+      renderHistory(chats);
+
+      return;
 
     }
 
-  </script>
+
+    const filtered =
+      chats.filter(chat =>
+        (chat.title || "")
+          .toLowerCase()
+          .includes(query)
+      );
+
+
+    renderHistory(filtered);
+
+  }
+
+
+  /* =========================================
+     CLEAR ALL CHATS
+  ========================================= */
+
+  function clearAllChats() {
+
+    if (chats.length === 0) {
+      return;
+    }
+
+
+    const confirmed =
+      confirm(
+        "Delete all saved chats?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    chats = [];
+
+    currentChat = null;
+
+
+    localStorage.removeItem(
+      "pochojii_chats"
+    );
+
+
+    renderHistory();
+
+    renderChat();
+
+  }
+
+
+  /* =========================================
+     SUGGESTION
+  ========================================= */
+
+  function useSuggestion(text) {
+
+    input.value = text;
+
+    autoResize();
+
+    input.focus();
+
+    askAI();
+
+  }
+
+
+  /* =========================================
+     DARK MODE
+  ========================================= */
+
+  function toggleDarkMode() {
+
+    document.body.classList.toggle("dark");
+
+
+    const dark =
+      document.body.classList.contains("dark");
+
+
+    localStorage.setItem(
+      "pochojii_dark",
+      dark
+    );
+
+
+    updateThemeIcon();
+
+  }
+
+
+  function updateThemeIcon() {
+
+    const dark =
+      document.body.classList.contains("dark");
+
+
+    document.getElementById(
+      "themeBtn"
+    ).textContent =
+      dark ? "☀️" : "🌙";
+
+  }
+
+
+  /* =========================================
+     MOBILE SIDEBAR
+  ========================================= */
+
+  function toggleSidebar() {
+
+    document
+      .getElementById("sidebar")
+      .classList.toggle("open");
+
+  }
+
+
+  function closeSidebar() {
+
+    document
+      .getElementById("sidebar")
+      .classList.remove("open");
+
+  }
+
+
+  /* =========================================
+     AUTO RESIZE INPUT
+  ========================================= */
+
+  function autoResize() {
+
+    input.style.height = "auto";
+
+    input.style.height =
+      Math.min(
+        input.scrollHeight,
+        150
+      ) + "px";
+
+  }
+
+
+  /* =========================================
+     ENTER TO SEND
+  ========================================= */
+
+  input.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Enter" &&
+        !event.shiftKey
+      ) {
+
+        event.preventDefault();
+
+        askAI();
+
+      }
+
+    }
+  );
+
+
+  input.addEventListener(
+    "input",
+    autoResize
+  );
+
+
+  /* =========================================
+     SCROLL
+  ========================================= */
+
+  function scrollToBottom() {
+
+    setTimeout(() => {
+
+      chatArea.scrollTop =
+        chatArea.scrollHeight;
+
+    }, 50);
+
+  }
+
+
+  /* =========================================
+     LOAD SAVED SETTINGS
+  ========================================= */
+
+  if (
+    localStorage.getItem(
+      "pochojii_dark"
+    ) === "true"
+  ) {
+
+    document.body.classList.add("dark");
+
+  }
+
+
+  /* =========================================
+     START
+  ========================================= */
+
+  updateThemeIcon();
+
+  renderHistory();
+
+  newChat();
+
+</script>
 
 </body>
 </html>
