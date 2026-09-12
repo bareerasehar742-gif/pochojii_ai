@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>StudyBuddy AI</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f5f7ff;
+            color: #222;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            width: 100%;
+            padding: 18px 8%;
+            background: white;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5b4bdb;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin-left: 25px;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #5b4bdb;
+        }
+
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 85vh;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 40px 20px;
+
+            background: linear-gradient(
+                135deg,
+                #eeeaff,
+                #ffffff
+            );
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            color: #4d3ccf;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 650px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .main-btn {
+            background: #5b4bdb;
+            color: white;
+
+            border: none;
+
+            padding: 15px 30px;
+
+            border-radius: 12px;
+
+            font-size: 18px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .main-btn:hover {
+            transform: translateY(-3px);
+            background: #4938c5;
+        }
+
+        .secondary-btn {
+            background: #eeeaff;
+            color: #4d3ccf;
+
+            border: none;
+
+            padding: 12px 22px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+        .secondary-btn:hover {
+            background: #ddd6ff;
+        }
+
+
+        /* ================= DASHBOARD ================= */
+
+        #dashboard {
+            min-height: 100vh;
+
+            padding: 70px 8%;
+
+            text-align: center;
+        }
+
+        #dashboard h2 {
+            font-size: 36px;
+            color: #4d3ccf;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 35px;
+            font-size: 18px;
+        }
+
+
+        /* ================= SUBJECTS ================= */
+
+        .subjects {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(180px, 1fr)
+                );
+
+            gap: 20px;
+
+            max-width: 1000px;
+
+            margin: auto;
+        }
+
+        .subject-card {
+            background: white;
+
+            padding: 30px 20px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.08);
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            border: 2px solid transparent;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-7px);
+            border-color: #6b5ce7;
+        }
+
+        .subject-card .icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .subject-card h3 {
+            color: #333;
+            font-size: 20px;
+        }
+
+
+        /* ================= SELECTED SUBJECT ================= */
+
+        #selectedSubject {
+            margin: 40px auto 25px;
+
+            padding: 18px;
+
+            background: #eeeaff;
+
+            color: #4d3ccf;
+
+            border-radius: 12px;
+
+            max-width: 600px;
+
+            font-size: 20px;
+        }
+
+
+        /* ================= STUDY MODES ================= */
+
+        .modes {
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 18px;
+
+            margin-top: 20px;
+        }
+
+        .mode-btn {
+            padding: 16px 25px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: white;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0,0,0,0.08);
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+            transition: 0.3s;
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-4px);
+            background: #eeeaff;
+        }
+
+
+        /* ================= STUDY AREA ================= */
+
+        #studyArea {
+            display: none;
+
+            padding: 70px 8%;
+
+            text-align: center;
+
+            background: #f5f7ff;
+
+            min-height: 70vh;
+        }
+
+        #studyTitle {
+            font-size: 36px;
+            color: #4d3ccf;
+            margin-bottom: 25px;
+        }
+
+        #studyContent {
+            max-width: 850px;
+
+            margin: 30px auto;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.08);
+
+            line-height: 1.7;
+        }
+
+
+        /* ================= AI CHAT ================= */
+
+        .ai-header {
+            text-align: left;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid #eee;
+
+            margin-bottom: 20px;
+        }
+
+        .ai-header h3 {
+            color: #4d3ccf;
+            font-size: 24px;
+        }
+
+        .ai-header p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+
+        #chatBox {
+            height: 350px;
+
+            overflow-y: auto;
+
+            padding: 15px;
+
+            background: #f8f8ff;
+
+            border-radius: 15px;
+
+            margin-bottom: 20px;
+
+            text-align: left;
+        }
+
+
+        .welcome-message {
+            background: #eeeaff;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            margin-bottom: 15px;
+
+            max-width: 80%;
+        }
+
+
+        .user-message {
+            background: #5b4bdb;
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+            margin: 10px 0 10px auto;
+
+            max-width: 80%;
+        }
+
+
+        .ai-message {
+            background: #eeeaff;
+
+            color: #222;
+
+            padding: 15px;
+
+            border-radius: 15px;
+
+            margin: 10px 0;
+
+            max-width: 80%;
+        }
+
+
+        .chat-input-area {
+            display: flex;
+
+            gap: 10px;
+
+            align-items: center;
+        }
+
+
+        #questionInput {
+            flex: 1;
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            border: 1px solid #ccc;
+
+            font-size: 16px;
+
+            outline: none;
+        }
+
+        #questionInput:focus {
+            border-color: #5b4bdb;
+        }
+
+
+        .ask-btn {
+            background: #5b4bdb;
+
+            color: white;
+
+            border: none;
+
+            padding: 15px 22px;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        .ask-btn:hover {
+            background: #4938c5;
+        }
+
+
+        .chat-controls {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 15px;
+        }
+
+
+        /* ================= LOADING ================= */
+
+        .typing {
+            color: #666;
+
+            font-style: italic;
+
+            padding: 10px;
+        }
+
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            padding: 70px 8%;
+
+            background: white;
+
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 34px;
+
+            color: #4d3ccf;
+
+            margin-bottom: 35px;
+        }
+
+        .feature-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(200px, 1fr)
+                );
+
+            gap: 20px;
+
+            max-width: 1000px;
+
+            margin: auto;
+        }
+
+        .feature {
+            padding: 25px;
+
+            background: #f5f7ff;
+
+            border-radius: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #666;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #29234f;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            nav a {
+                margin-left: 8px;
+                font-size: 14px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            #dashboard h2 {
+                font-size: 30px;
+            }
+
+            #studyTitle {
+                font-size: 30px;
+            }
+
+            .chat-input-area {
+                flex-direction: column;
+            }
+
+            #questionInput {
+                width: 100%;
+            }
+
+            .ask-btn {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav>
+
+        <div class="logo">
+            📚 StudyBuddy AI
+        </div>
+
+        <div>
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#dashboard">
+                Study
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ================= HERO ================= -->
+
+    <section
+        class="hero"
+        id="home"
+    >
+
+        <h1>
+            Study Smarter 🚀
+        </h1>
+
+        <p>
+
+            Your personal AI study buddy
+            for O Levels.
+
+            Choose a subject,
+            select your study mode,
+            and start learning!
+
+        </p>
+
+        <button
+            class="main-btn"
+            onclick="startStudying()"
+        >
+
+            🚀 Start Studying
+
+        </button>
+
+    </section>
+
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <section id="dashboard">
+
+        <h2>
+            Choose Your Subject 📚
+        </h2>
+
+        <p class="subtitle">
+
+            Select the subject you want to study.
+
+        </p>
+
+
+        <div class="subjects">
+
+
+            <div
+                class="subject-card"
+                onclick="chooseSubject('English')"
+            >
+
+                <div class="icon">
+                    📖
+                </div>
+
+                <h3>
+                    English
+                </h3>
+
+            </div>
+
+
+
+            <div
+                class="subject-card"
+                onclick="chooseSubject('Urdu')"
+            >
+
+                <div class="icon">
+                    📕
+                </div>
+
+                <h3>
+                    Urdu
+                </h3>
+
+            </div>
+
+
+
+            <div
+                class="subject-card"
+                onclick="chooseSubject('Mathematics')"
+            >
+
+                <div class="icon">
+                    ➗
+                </div>
+
+                <h3>
+                    Mathematics
+                </h3>
+
+            </div>
+
+
+
+            <div
+                class="subject-card"
+                onclick="chooseSubject('Physics')"
+            >
+
+                <div class="icon">
+                    ⚡
+                </div>
+
+                <h3>
+                    Physics
+                </h3>
+
+            </div>
+
+
+
+            <div
+                class="subject-card"
+                onclick="chooseSubject('Computer Science')"
+            >
+
+                <div class="icon">
+                    💻
+                </div>
+
+                <h3>
+                    Computer Science
+                </h3>
+
+            </div>
+
+
+
+            <div
+                class="subject-card"
+                onclick="chooseSubject('Accounting')"
+            >
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <h3>
+                    Accounting
+                </h3>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- SELECTED SUBJECT -->
+
+        <div id="selectedSubject">
+
+            You haven't selected a subject yet.
+
+        </div>
+
+
+
+        <!-- MODES -->
+
+        <h2>
+            Choose Study Mode 🎯
+        </h2>
+
+
+        <div class="modes">
+
+
+            <button
+                class="mode-btn"
+                onclick="studyMode('Study')"
+            >
+
+                📚 Study
+
+            </button>
+
+
+
+            <button
+                class="mode-btn"
+                onclick="studyMode('Practice')"
+            >
+
+                📝 Practice
+
+            </button>
+
+
+
+            <button
+                class="mode-btn"
+                onclick="studyMode('Quiz')"
+            >
+
+                🎯 Quiz
+
+            </button>
+
+
+
+            <button
+                class="mode-btn"
+                onclick="studyMode('AI Tutor')"
+            >
+
+                🤖 AI Tutor
+
+            </button>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= STUDY AREA ================= -->
+
+    <section id="studyArea">
+
+
+        <h2 id="studyTitle">
+
+            📚 Study Area
+
+        </h2>
+
+
+        <div id="studyContent">
+
+            <p>
+
+                Choose a study mode to begin!
+
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section
+        class="features"
+        id="features"
+    >
+
+        <h2>
+            What You Can Do ✨
+        </h2>
+
+
+        <div class="feature-grid">
+
+
+            <div class="feature">
+
+                <h3>
+                    📚 Study
+                </h3>
+
+                <p>
+
+                    Learn your O Level
+                    subjects step by step.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <h3>
+                    📝 Practice
+                </h3>
+
+                <p>
+
+                    Practice questions
+                    and improve your skills.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <h3>
+                    🎯 Quizzes
+                </h3>
+
+                <p>
+
+                    Test your knowledge
+                    with quick quizzes.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="feature">
+
+                <h3>
+                    🤖 AI Tutor
+                </h3>
+
+                <p>
+
+                    Get help understanding
+                    difficult concepts.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+
+            © 2026 StudyBuddy AI
+            | Made for O Level Students 💜
+
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+
+        let currentSubject = "";
+
+
+
+        /* ================= START STUDYING ================= */
+
+        function startStudying() {
+
+            document
+                .getElementById("dashboard")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+
+        /* ================= CHOOSE SUBJECT ================= */
+
+        function chooseSubject(subject) {
+
+            currentSubject = subject;
+
+            document
+                .getElementById("selectedSubject")
+                .textContent =
+                "📚 You are studying: " + subject;
+
+
+            document
+                .getElementById("studyArea")
+                .style.display = "block";
+
+
+        }
+
+
+
+        /* ================= STUDY MODE ================= */
+
+        function studyMode(mode) {
+
+
+            if (currentSubject === "") {
+
+                alert(
+                    "📚 Please choose a subject first!"
+                );
+
+                return;
+
+            }
+
+
+            let title =
+                document.getElementById(
+                    "studyTitle"
+                );
+
+
+            let content =
+                document.getElementById(
+                    "studyContent"
+                );
+
+
+            document
+                .getElementById("studyArea")
+                .style.display = "block";
+
+
+
+            /* ================= STUDY ================= */
+
+            if (mode === "Study") {
+
+                title.textContent =
+                    "📚 Studying " +
+                    currentSubject;
+
+
+                content.innerHTML = `
+
+                    <h3>
+                        Let's learn ${currentSubject}! 🚀
+                    </h3>
+
+                    <p>
+                        Your ${currentSubject}
+                        lessons will appear here.
+                    </p>
+
+                    <br>
+
+                    <p>
+                        📖 Learn the concept
+                        <br><br>
+                        💡 Understand the explanation
+                        <br><br>
+                        ✏️ Study examples
+                        <br><br>
+                        🧠 Test yourself
+                    </p>
+
+                `;
+
+            }
+
+
+
+            /* ================= PRACTICE ================= */
+
+            else if (mode === "Practice") {
+
+                title.textContent =
+                    "📝 Practice " +
+                    currentSubject;
+
+
+                content.innerHTML = `
+
+                    <h3>
+                        Practice Time! 💪
+                    </h3>
+
+                    <p>
+                        Practice questions
+                        for <b>${currentSubject}</b>
+                        will appear here.
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="main-btn"
+                        onclick="startPractice()"
+                    >
+
+                        Start Questions →
+
+                    </button>
+
+                `;
+
+            }
+
+
+
+            /* ================= QUIZ ================= */
+
+            else if (mode === "Quiz") {
+
+                title.textContent =
+                    "🎯 " +
+                    currentSubject +
+                    " Quiz";
+
+
+                content.innerHTML = `
+
+                    <h3>
+                        Quiz Time! 🧠
+                    </h3>
+
+                    <p>
+                        Test your knowledge
+                        of <b>${currentSubject}</b>.
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="main-btn"
+                        onclick="startQuiz()"
+                    >
+
+                        Start Quiz →
+
+                    </button>
+
+                `;
+
+            }
+
+
+
+            /* ================= AI TUTOR ================= */
+
+            else if (mode === "AI Tutor") {
+
+                title.textContent =
+                    "🤖 AI Tutor";
+
+
+                content.innerHTML = `
+
+                    <div class="ai-header">
+
+                        <h3>
+                            🤖 StudyBuddy AI Tutor
+                        </h3>
+
+                        <p>
+                            Subject:
+                            <b>${currentSubject}</b>
+                        </p>
+
+                    </div>
+
+
+                    <div id="chatBox">
+
+                        <div class="welcome-message">
+
+                            👋 Hi! I'm your AI Tutor.
+
+                            <br><br>
+
+                            Ask me anything about
+                            <b>${currentSubject}</b>.
+
+                            <br><br>
+
+                            I can explain concepts,
+                            give examples, and help
+                            you practise.
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chat-input-area">
+
+                        <input
+                            type="text"
+                            id="questionInput"
+                            placeholder="Ask your question..."
+                            onkeydown="handleEnter(event)"
+                        >
+
+                        <button
+                            class="ask-btn"
+                            onclick="askTutor()"
+                        >
+
+                            🤖 Ask AI
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="chat-controls">
+
+                        <button
+                            class="secondary-btn"
+                            onclick="clearChat()"
+                        >
+
+                            🗑️ Clear Chat
+
+                        </button>
+
+                    </div>
+
+                `;
+
+            }
+
+
+
+            document
+                .getElementById("studyArea")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+
+        /* ================= ASK TUTOR ================= */
+
+        function askTutor() {
+
+
+            let input =
+                document.getElementById(
+                    "questionInput"
+                );
+
+
+            if (!input) {
+                return;
+            }
+
+
+            let question =
+                input.value.trim();
+
+
+            if (question === "") {
+
+                alert(
+                    "💬 Please type a question first!"
+                );
+
+                return;
+
+            }
+
+
+            let chatBox =
+                document.getElementById(
+                    "chatBox"
+                );
+
+
+            /* USER MESSAGE */
+
+            chatBox.innerHTML += `
+
+                <div class="user-message">
+
+                    👤 ${escapeHTML(question)}
+
+                </div>
+
+            `;
+
+
+            input.value = "";
+
+
+            /* LOADING */
+
+            let loadingID =
+                "loading-" + Date.now();
+
+
+            chatBox.innerHTML += `
+
+                <div
+                    class="typing"
+                    id="${loadingID}"
+                >
+
+                    🤖 Thinking...
+
+                </div>
+
+            `;
+
+
+            chatBox.scrollTop =
+                chatBox.scrollHeight;
+
+
+            /*
+                TEMPORARY DEMO RESPONSE
+
+                Real AI connection
+                will be added next.
+            */
+
+            setTimeout(function() {
+
+                let loading =
+                    document.getElementById(
+                        loadingID
+                    );
+
+
+                if (loading) {
+
+                    loading.remove();
+
+                }
+
+
+                chatBox.innerHTML += `
+
+                    <div class="ai-message">
+
+                        🤖 <b>AI Tutor:</b>
+
+                        <br><br>
+
+                        I received your question
+                        about <b>${currentSubject}</b>!
+
+                        <br><br>
+
+                        ✨ The real AI connection
+                        will be added next.
+
+                    </div>
+
+                `;
+
+
+                chatBox.scrollTop =
+                    chatBox.scrollHeight;
+
+
+            }, 1000);
+
+        }
+
+
+
+        /* ================= ENTER KEY ================= */
+
+        function handleEnter(event) {
+
+            if (event.key === "Enter") {
+
+                askTutor();
+
+            }
+
+        }
+
+
+
+        /* ================= CLEAR CHAT ================= */
+
+        function clearChat() {
+
+
+            let chatBox =
+                document.getElementById(
+                    "chatBox"
+                );
+
+
+            if (!chatBox) {
+                return;
+            }
+
+
+            chatBox.innerHTML = `
+
+                <div class="welcome-message">
+
+                    👋 Hi! I'm your AI Tutor.
+
+                    <br><br>
+
+                    Ask me anything about
+                    <b>${currentSubject}</b>.
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        /* ================= SECURITY ================= */
+
+        function escapeHTML(text) {
+
+            let div =
+                document.createElement("div");
+
+            div.textContent = text;
+
+            return div.innerHTML;
+
+        }
+
+
+
+        /* ================= PRACTICE ================= */
+
+        function startPractice() {
+
+
+            document
+                .getElementById("studyContent")
+                .innerHTML = `
+
+                    <h3>
+                        📝 Practice Questions
+                    </h3>
+
+                    <p>
+
+                        Here you will get
+                        ${currentSubject}
+                        practice questions.
+
+                    </p>
+
+                    <br>
+
+                    <p>
+                        Question 1 will appear here.
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="main-btn"
+                        onclick="studyMode('Practice')"
+                    >
+
+                        ← Back
+
+                    </button>
+
+                `;
+
+        }
+
+
+
+        /* ================= QUIZ ================= */
+
+        function startQuiz() {
+
+
+            document
+                .getElementById("studyContent")
+                .innerHTML = `
+
+                    <h3>
+                        🎯 ${currentSubject} Quiz
+                    </h3>
+
+                    <p>
+
+                        Your quiz will start here!
+
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="main-btn"
+                        onclick="showQuizQuestion()"
+                    >
+
+                        Start Question 1 →
+
+                    </button>
+
+                `;
+
+        }
+
+
+
+        /* ================= QUIZ QUESTION ================= */
+
+        function showQuizQuestion() {
+
+
+            document
+                .getElementById("studyContent")
+                .innerHTML = `
+
+                    <h3>
+                        🧠 Question 1
+                    </h3>
+
+                    <p>
+
+                        What would you like
+                        to practice in
+                        ${currentSubject}?
+
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="mode-btn"
+                        onclick="quizAnswer('A')"
+                    >
+                        A
+                    </button>
+
+                    <button
+                        class="mode-btn"
+                        onclick="quizAnswer('B')"
+                    >
+                        B
+                    </button>
+
+                    <button
+                        class="mode-btn"
+                        onclick="quizAnswer('C')"
+                    >
+                        C
+                    </button>
+
+                    <button
+                        class="mode-btn"
+                        onclick="quizAnswer('D')"
+                    >
+                        D
+                    </button>
+
+                `;
+
+        }
+
+
+
+        /* ================= QUIZ ANSWER ================= */
+
+        function quizAnswer(answer) {
+
+
+            document
+                .getElementById("studyContent")
+                .innerHTML = `
+
+                    <h3>
+                        🎉 Answer Selected!
+                    </h3>
+
+                    <p>
+
+                        You selected:
+                        <b>${answer}</b>
+
+                    </p>
+
+                    <br>
+
+                    <p>
+
+                        Real ${currentSubject}
+                        questions and scoring
+                        will be added next!
+
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="main-btn"
+                        onclick="startQuiz()"
+                    >
+
+                        Try Again
+
+                    </button>
+
+                `;
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
