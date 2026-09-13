@@ -25,6 +25,7 @@
   --muted: #788077;
   --white: #ffffff;
   --border: #d9decf;
+  --soft: #eef3e7;
   --shadow: 0 10px 30px rgba(80,90,65,.10);
 }
 
@@ -55,117 +56,194 @@ body {
   min-height: 100vh;
 }
 
-/* =========================
+
+/* =========================================
    APP
-========================= */
+========================================= */
 
 .app {
   min-height: 100vh;
   display: flex;
 }
 
-/* =========================
+
+/* =========================================
    SIDEBAR
-========================= */
+========================================= */
 
 .sidebar {
   width: 270px;
-  background: rgba(255,255,255,.78);
-  backdrop-filter: blur(15px);
-  border-right: 1px solid var(--border);
+
+  background:
+    rgba(255,255,255,.82);
+
+  backdrop-filter:
+    blur(15px);
+
+  border-right:
+    1px solid var(--border);
+
   padding: 20px;
+
   position: fixed;
+
   left: 0;
   top: 0;
   bottom: 0;
+
   overflow-y: auto;
-  z-index: 20;
+
+  z-index: 30;
+
+  transition:
+    transform .25s ease;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 800;
   margin-bottom: 20px;
 }
 
 .new-chat {
   width: 100%;
+
   padding: 13px;
+
   border: none;
+
   border-radius: 14px;
-  background: var(--pistachio);
-  color: #263326;
+
+  background:
+    var(--pistachio);
+
+  color:
+    #263326;
+
   font-weight: 700;
+
   cursor: pointer;
+
   margin-bottom: 14px;
 }
 
 .new-chat:hover {
-  filter: brightness(.97);
+  filter: brightness(.96);
 }
 
 .search {
   width: 100%;
+
   padding: 11px 13px;
+
   border-radius: 12px;
-  border: 1px solid var(--border);
+
+  border:
+    1px solid var(--border);
+
   outline: none;
-  background: var(--cream2);
+
+  background:
+    var(--cream2);
+
+  color:
+    var(--text);
+
   margin-bottom: 15px;
 }
 
 .history-title {
   font-size: 12px;
-  color: var(--muted);
+
+  color:
+    var(--muted);
+
   margin-bottom: 8px;
+
+  letter-spacing:
+    .08em;
 }
 
 .history-item {
   padding: 11px;
+
   border-radius: 11px;
+
   cursor: pointer;
+
   margin-bottom: 5px;
+
   font-size: 14px;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
 .history-item:hover {
-  background: #eef3e8;
+  background:
+    #eef3e8;
 }
 
 .history-item.active {
-  background: var(--yellow);
+  background:
+    var(--yellow);
 }
 
-/* =========================
+
+/* =========================================
    MAIN
-========================= */
+========================================= */
 
 .main {
   margin-left: 270px;
-  width: calc(100% - 270px);
+
+  width:
+    calc(100% - 270px);
+
   min-height: 100vh;
+
   display: flex;
-  flex-direction: column;
+
+  flex-direction:
+    column;
 }
 
-/* =========================
+
+/* =========================================
    TOPBAR
-========================= */
+========================================= */
 
 .topbar {
   height: 70px;
-  padding: 15px 25px;
+
+  padding:
+    15px 25px;
+
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+  justify-content:
+    space-between;
+
+  align-items:
+    center;
+
   position: sticky;
+
   top: 0;
-  z-index: 10;
 
-  background: rgba(248,242,231,.82);
-  backdrop-filter: blur(15px);
+  z-index: 20;
 
-  border-bottom: 1px solid var(--border);
+  background:
+    rgba(248,242,231,.84);
+
+  backdrop-filter:
+    blur(15px);
+
+  border-bottom:
+    1px solid var(--border);
 }
 
 .mobile-menu {
@@ -180,332 +258,739 @@ body {
 .icon-btn {
   width: 40px;
   height: 40px;
+
   border: none;
+
   border-radius: 12px;
+
   cursor: pointer;
-  background: var(--white);
-  box-shadow: var(--shadow);
-  font-size: 17px;
-}
 
-/* =========================
-   CHAT
-========================= */
+  background:
+    var(--white);
 
-.chat {
-  width: min(950px, 94%);
-  margin: auto;
-  padding: 35px 0 160px;
-}
+  color:
+    var(--text);
 
-.welcome {
-  text-align: center;
-  padding: 50px 10px 30px;
-}
+  box-shadow:
+    var(--shadow);
 
-.welcome h1 {
-  font-size: clamp(30px, 5vw, 48px);
-  margin-bottom: 10px;
-}
+  font-size: 15px;
 
-.welcome p {
-  color: var(--muted);
-}
-
-/* =========================
-   MESSAGE
-========================= */
-
-.message {
-  display: flex;
-  margin: 18px 0;
-}
-
-.message.user {
-  justify-content: flex-end;
-}
-
-.message.assistant {
-  justify-content: flex-start;
-}
-
-.bubble {
-  max-width: 82%;
-  padding: 15px 17px;
-  border-radius: 18px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  box-shadow: var(--shadow);
-}
-
-.user .bubble {
-  background: var(--pistachio);
-  border-bottom-right-radius: 5px;
-}
-
-.assistant .bubble {
-  background: rgba(255,255,255,.92);
-  border-bottom-left-radius: 5px;
-}
-
-/* =========================
-   IMAGE
-========================= */
-
-.generated-image {
-  max-width: 100%;
-  border-radius: 18px;
-  margin-top: 10px;
-  box-shadow: var(--shadow);
-}
-
-.image-download {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 9px 13px;
-  border-radius: 10px;
-  background: var(--pistachio);
-  color: var(--text);
-  text-decoration: none;
   font-weight: 700;
 }
 
-/* =========================
+
+/* =========================================
+   CHAT
+========================================= */
+
+.chat {
+  width:
+    min(950px, 94%);
+
+  margin:
+    auto;
+
+  padding:
+    35px 0 180px;
+}
+
+.welcome {
+  text-align:
+    center;
+
+  padding:
+    70px 10px 30px;
+}
+
+.welcome h1 {
+  font-size:
+    clamp(30px, 5vw, 48px);
+
+  margin:
+    0 0 12px;
+}
+
+.welcome p {
+  color:
+    var(--muted);
+
+  max-width:
+    600px;
+
+  margin:
+    auto;
+
+  line-height:
+    1.6;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.message {
+  display:
+    flex;
+
+  margin:
+    18px 0;
+}
+
+.message.user {
+  justify-content:
+    flex-end;
+}
+
+.message.assistant {
+  justify-content:
+    flex-start;
+}
+
+.bubble {
+  max-width:
+    82%;
+
+  padding:
+    15px 17px;
+
+  border-radius:
+    18px;
+
+  line-height:
+    1.6;
+
+  white-space:
+    pre-wrap;
+
+  word-break:
+    break-word;
+
+  box-shadow:
+    var(--shadow);
+}
+
+.user .bubble {
+  background:
+    var(--pistachio);
+
+  border-bottom-right-radius:
+    5px;
+}
+
+.assistant .bubble {
+  background:
+    rgba(255,255,255,.94);
+
+  border-bottom-left-radius:
+    5px;
+}
+
+
+/* =========================================
+   GENERATED IMAGE
+========================================= */
+
+.generated-image {
+  display:
+    block;
+
+  max-width:
+    100%;
+
+  width:
+    auto;
+
+  border-radius:
+    18px;
+
+  margin-top:
+    5px;
+
+  box-shadow:
+    var(--shadow);
+}
+
+.image-download {
+  display:
+    inline-block;
+
+  margin-top:
+    10px;
+
+  padding:
+    9px 13px;
+
+  border-radius:
+    10px;
+
+  background:
+    var(--pistachio);
+
+  color:
+    var(--text);
+
+  text-decoration:
+    none;
+
+  font-weight:
+    700;
+}
+
+
+/* =========================================
    UPLOAD PREVIEW
-========================= */
+========================================= */
 
 .upload-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 10px;
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    8px;
+
+  margin-bottom:
+    8px;
 }
 
 .file-chip {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #edf3e7;
-  border: 1px solid var(--border);
-  padding: 7px 10px;
-  border-radius: 11px;
-  font-size: 13px;
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    8px;
+
+  background:
+    var(--soft);
+
+  border:
+    1px solid var(--border);
+
+  padding:
+    7px 10px;
+
+  border-radius:
+    11px;
+
+  font-size:
+    13px;
+
+  max-width:
+    100%;
+}
+
+.file-name {
+  max-width:
+    180px;
+
+  overflow:
+    hidden;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
 }
 
 .file-chip button {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-weight: bold;
-  color: #65705f;
+  border:
+    none;
+
+  background:
+    transparent;
+
+  cursor:
+    pointer;
+
+  font-weight:
+    700;
+
+  color:
+    #65705f;
 }
 
 .preview {
-  max-width: 120px;
-  max-height: 100px;
-  border-radius: 10px;
-  display: block;
-  margin-top: 6px;
+  max-width:
+    70px;
+
+  max-height:
+    60px;
+
+  border-radius:
+    8px;
+
+  display:
+    block;
 }
 
-/* =========================
+
+/* =========================================
    COMPOSER
-========================= */
+========================================= */
 
 .composer-wrap {
-  position: fixed;
-  bottom: 0;
-  left: 270px;
-  right: 0;
-  padding: 15px 20px 20px;
+  position:
+    fixed;
+
+  bottom:
+    0;
+
+  left:
+    270px;
+
+  right:
+    0;
+
+  padding:
+    15px 20px 20px;
 
   background:
     linear-gradient(
       transparent,
       rgba(248,242,231,.97) 35%
     );
+
+  z-index:
+    18;
 }
 
 .composer {
-  max-width: 950px;
-  margin: auto;
+  max-width:
+    950px;
 
-  background: var(--white);
-  border: 1px solid var(--border);
+  margin:
+    auto;
 
-  border-radius: 20px;
+  background:
+    var(--white);
 
-  box-shadow: var(--shadow);
+  border:
+    1px solid var(--border);
 
-  padding: 10px;
+  border-radius:
+    20px;
+
+  box-shadow:
+    var(--shadow);
+
+  padding:
+    10px;
 }
 
 textarea {
-  width: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-  min-height: 52px;
-  max-height: 180px;
-  padding: 12px;
-  font: inherit;
-  background: transparent;
-  color: var(--text);
+  width:
+    100%;
+
+  border:
+    none;
+
+  outline:
+    none;
+
+  resize:
+    none;
+
+  min-height:
+    52px;
+
+  max-height:
+    180px;
+
+  padding:
+    12px;
+
+  font:
+    inherit;
+
+  background:
+    transparent;
+
+  color:
+    var(--text);
 }
 
 .composer-actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 7px;
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    7px;
 }
 
 .left-actions,
 .right-actions {
-  display: flex;
-  gap: 7px;
-  flex-wrap: wrap;
+  display:
+    flex;
+
+  gap:
+    7px;
+
+  flex-wrap:
+    wrap;
 }
 
 .action-btn {
-  border: none;
-  background: #eef2e9;
-  color: var(--text);
-  border-radius: 11px;
-  padding: 9px 11px;
-  cursor: pointer;
-  font-weight: 600;
+  border:
+    none;
+
+  background:
+    #eef2e9;
+
+  color:
+    var(--text);
+
+  border-radius:
+    11px;
+
+  padding:
+    9px 11px;
+
+  cursor:
+    pointer;
+
+  font-weight:
+    600;
+
+  transition:
+    .15s;
 }
 
 .action-btn:hover {
-  background: var(--yellow);
+  background:
+    var(--yellow);
 }
 
 .send-btn {
-  background: var(--pistachio-dark);
-  color: white;
-}
+  background:
+    var(--pistachio-dark);
 
-/* Hidden file inputs */
+  color:
+    white;
+}
 
 .hidden-file {
-  display: none;
+  display:
+    none;
 }
 
-/* =========================
+
+/* =========================================
    SCROLL BUTTONS
-========================= */
+========================================= */
 
 .scroll-controls {
-  position: fixed;
-  right: 20px;
-  bottom: 115px;
+  position:
+    fixed;
 
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
+  right:
+    20px;
 
-  z-index: 15;
+  bottom:
+    125px;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    7px;
+
+  z-index:
+    19;
 }
 
 .scroll-btn {
-  width: 38px;
-  height: 38px;
-  border: none;
-  border-radius: 50%;
-  background: white;
-  box-shadow: var(--shadow);
-  cursor: pointer;
+  width:
+    38px;
+
+  height:
+    38px;
+
+  border:
+    none;
+
+  border-radius:
+    50%;
+
+  background:
+    white;
+
+  color:
+    var(--text);
+
+  box-shadow:
+    var(--shadow);
+
+  cursor:
+    pointer;
+
+  font-weight:
+    800;
+
+  font-size:
+    18px;
 }
 
-/* =========================
+
+/* =========================================
    LOADING
-========================= */
+========================================= */
 
 .loading {
-  display: inline-flex;
-  gap: 5px;
+  display:
+    inline-flex;
+
+  gap:
+    5px;
 }
 
 .dot {
-  width: 7px;
-  height: 7px;
-  background: var(--pistachio-dark);
-  border-radius: 50%;
-  animation: bounce 1s infinite;
+  width:
+    7px;
+
+  height:
+    7px;
+
+  background:
+    var(--pistachio-dark);
+
+  border-radius:
+    50%;
+
+  animation:
+    bounce 1s infinite;
 }
 
 .dot:nth-child(2) {
-  animation-delay: .15s;
+  animation-delay:
+    .15s;
 }
 
 .dot:nth-child(3) {
-  animation-delay: .3s;
+  animation-delay:
+    .3s;
 }
 
 @keyframes bounce {
+
   0%, 100% {
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
 
   50% {
-    transform: translateY(-5px);
+    transform:
+      translateY(-5px);
   }
+
 }
 
-/* =========================
-   MOBILE
-========================= */
 
-@media(max-width: 750px) {
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:750px) {
 
   .sidebar {
-    transform: translateX(-100%);
-    transition: .25s;
+    transform:
+      translateX(-100%);
   }
 
   .sidebar.open {
-    transform: translateX(0);
+    transform:
+      translateX(0);
   }
 
   .main {
-    margin-left: 0;
-    width: 100%;
+    margin-left:
+      0;
+
+    width:
+      100%;
   }
 
   .mobile-menu {
-    display: block;
+    display:
+      block;
   }
 
   .composer-wrap {
-    left: 0;
+    left:
+      0;
+
+    padding:
+      10px;
   }
 
   .bubble {
-    max-width: 90%;
+    max-width:
+      90%;
   }
 
   .chat {
-    padding-top: 15px;
+    padding:
+      20px 0 190px;
   }
+
+  .composer-actions {
+    align-items:
+      flex-end;
+  }
+
+  .scroll-controls {
+    right:
+      10px;
+
+    bottom:
+      145px;
+  }
+
+  .action-btn {
+    padding:
+      8px 9px;
+
+    font-size:
+      12px;
+  }
+
+}
+
+
+/* =========================================
+   DARK THEME
+========================================= */
+
+body.dark {
+  --cream:
+    #1e251e;
+
+  --cream2:
+    #252d25;
+
+  --text:
+    #edf3e7;
+
+  --muted:
+    #adb7aa;
+
+  --white:
+    #293129;
+
+  --border:
+    #424d40;
+
+  --soft:
+    #303a30;
+
+  background:
+    linear-gradient(
+      135deg,
+      #1e251e,
+      #273027,
+      #303021
+    );
+}
+
+body.dark .sidebar {
+  background:
+    rgba(31,38,31,.92);
+}
+
+body.dark .topbar {
+  background:
+    rgba(30,37,30,.88);
+}
+
+body.dark .assistant .bubble {
+  background:
+    #293129;
+}
+
+body.dark .user .bubble {
+  background:
+    #52684b;
+
+  color:
+    white;
+}
+
+body.dark .composer-wrap {
+  background:
+    linear-gradient(
+      transparent,
+      rgba(30,37,30,.98) 35%
+    );
+}
+
+body.dark .action-btn {
+  background:
+    #303a30;
+
+  color:
+    #edf3e7;
+}
+
+body.dark .icon-btn,
+body.dark .scroll-btn {
+  background:
+    #293129;
+
+  color:
+    #edf3e7;
+}
+
+body.dark .search {
+  background:
+    #293129;
+
+  color:
+    #edf3e7;
+}
+
+body.dark .history-item:hover {
+  background:
+    #303a30;
 }
 
 </style>
 </head>
 
+
 <body>
 
 <div class="app">
 
-<!-- =========================
-     SIDEBAR
-========================= -->
 
-<aside class="sidebar" id="sidebar">
+<!-- =========================================
+     SIDEBAR
+========================================= -->
+
+<aside
+  class="sidebar"
+  id="sidebar"
+>
 
   <div class="logo">
     PochoJii AI
   </div>
+
 
   <button
     class="new-chat"
@@ -514,6 +999,7 @@ textarea {
     New chat
   </button>
 
+
   <input
     class="search"
     id="historySearch"
@@ -521,94 +1007,105 @@ textarea {
     oninput="renderHistory()"
   >
 
+
   <div class="history-title">
     CHAT HISTORY
   </div>
+
 
   <div id="history"></div>
 
 </aside>
 
 
-<!-- =========================
+
+<!-- =========================================
      MAIN
-========================= -->
+========================================= -->
 
 <main class="main">
 
-  <header class="topbar">
+
+<header class="topbar">
+
+  <button
+    class="icon-btn mobile-menu"
+    onclick="toggleSidebar()"
+  >
+    Menu
+  </button>
+
+
+  <strong>
+    PochoJii AI
+  </strong>
+
+
+  <div class="top-actions">
 
     <button
-      class="icon-btn mobile-menu"
-      onclick="toggleSidebar()"
+      class="icon-btn"
+      onclick="toggleTheme()"
+      title="Change theme"
     >
-      ☰
+      Theme
     </button>
 
-    <strong id="pageTitle">
-      PochoJii AI
-    </strong>
+  </div>
 
-    <div class="top-actions">
-
-      <button
-        class="icon-btn"
-        onclick="toggleTheme()"
-        title="Theme"
-      >
-        ◐
-      </button>
-
-    </div>
-
-  </header>
+</header>
 
 
-  <section
-    class="chat"
-    id="chat"
+
+<section
+  class="chat"
+  id="chat"
+>
+
+  <div
+    class="welcome"
+    id="welcome"
   >
 
-    <div
-      class="welcome"
-      id="welcome"
-    >
+    <h1>
+      What are you studying today?
+    </h1>
 
-      <h1>
-        What are you studying today?
-      </h1>
+    <p>
+      Ask questions, upload files,
+      create images, make PDFs,
+      or continue an old conversation.
+    </p>
 
-      <p>
-        Ask questions, upload files, create images,
-        or study with PochoJii AI.
-      </p>
+  </div>
 
-    </div>
-
-  </section>
-
+</section>
 
 </main>
 
 </div>
 
 
-<!-- =========================
-     SCROLL
-========================= -->
+
+<!-- =========================================
+     SCROLL BUTTONS
+========================================= -->
 
 <div class="scroll-controls">
 
   <button
     class="scroll-btn"
     onclick="scrollTopPage()"
+    title="Go to top"
   >
     ↑
   </button>
 
+
   <button
     class="scroll-btn"
     onclick="scrollBottomPage()"
+    title="Go to bottom"
   >
     ↓
   </button>
@@ -616,18 +1113,21 @@ textarea {
 </div>
 
 
-<!-- =========================
+
+<!-- =========================================
      COMPOSER
-========================= -->
+========================================= -->
 
 <div class="composer-wrap">
 
   <div class="composer">
 
+
     <div
       class="upload-list"
       id="uploadList"
     ></div>
+
 
     <textarea
       id="messageInput"
@@ -637,16 +1137,18 @@ textarea {
     ></textarea>
 
 
+
     <div class="composer-actions">
+
 
       <div class="left-actions">
 
-        <!-- IMAGE UPLOAD -->
+
+        <!-- IMAGE -->
 
         <button
           class="action-btn"
           onclick="document.getElementById('imageInput').click()"
-          title="Upload images"
         >
           Image
         </button>
@@ -661,12 +1163,12 @@ textarea {
         >
 
 
-        <!-- FILE UPLOAD -->
+
+        <!-- FILE -->
 
         <button
           class="action-btn"
           onclick="document.getElementById('fileInput').click()"
-          title="Upload files"
         >
           File
         </button>
@@ -681,12 +1183,12 @@ textarea {
         >
 
 
+
         <!-- FOLDER -->
 
         <button
           class="action-btn"
           onclick="document.getElementById('folderInput').click()"
-          title="Upload a folder"
         >
           Folder
         </button>
@@ -702,15 +1204,16 @@ textarea {
         >
 
 
+
         <!-- VOICE -->
 
         <button
           class="action-btn"
           onclick="startVoice()"
-          title="Voice input"
         >
           Voice
         </button>
+
 
 
         <!-- IMAGE GENERATION -->
@@ -718,10 +1221,10 @@ textarea {
         <button
           class="action-btn"
           onclick="generateImage()"
-          title="Generate image"
         >
           Create image
         </button>
+
 
 
         <!-- PDF -->
@@ -729,7 +1232,6 @@ textarea {
         <button
           class="action-btn"
           onclick="makePDF()"
-          title="Create PDF"
         >
           PDF
         </button>
@@ -737,15 +1239,22 @@ textarea {
       </div>
 
 
+
       <div class="right-actions">
+
+
+        <!-- READ -->
 
         <button
           class="action-btn"
           onclick="readLastAnswer()"
-          title="Read last answer"
         >
           Read
         </button>
+
+
+
+        <!-- SEND -->
 
         <button
           class="action-btn send-btn"
@@ -763,19 +1272,20 @@ textarea {
 </div>
 
 
+
 <script>
 
-/* =========================================
+/* =====================================================
    CONFIG
-========================================= */
+===================================================== */
 
 const API_URL =
   "https://studybuddy-backend-kappa.vercel.app/api/chat";
 
 
-/* =========================================
+/* =====================================================
    STATE
-========================================= */
+===================================================== */
 
 let currentChat = null;
 
@@ -783,35 +1293,46 @@ let selectedFiles = [];
 
 let lastAssistantText = "";
 
+let isSending = false;
 
-/* =========================================
-   CREATE CHAT
-========================================= */
+
+/* =====================================================
+   CHAT
+===================================================== */
 
 function createEmptyChat() {
 
   return {
-    id: Date.now().toString(),
 
-    title: "New chat",
+    id:
+      Date.now().toString(),
 
-    messages: [],
+    title:
+      "New chat",
 
-    createdAt: Date.now()
+    messages:
+      [],
+
+    createdAt:
+      Date.now()
+
   };
+
 }
 
 
-/* =========================================
-   LOAD SAVED CHATS
-========================================= */
+/* =====================================================
+   STORAGE
+===================================================== */
 
 function getChats() {
 
   try {
 
     return JSON.parse(
-      localStorage.getItem("pochojii_chats") || "[]"
+      localStorage.getItem(
+        "pochojii_chats"
+      ) || "[]"
     );
 
   } catch {
@@ -819,12 +1340,9 @@ function getChats() {
     return [];
 
   }
+
 }
 
-
-/* =========================================
-   SAVE CHATS
-========================================= */
 
 function saveChats(chats) {
 
@@ -832,67 +1350,106 @@ function saveChats(chats) {
     "pochojii_chats",
     JSON.stringify(chats)
   );
+
 }
 
-
-/* =========================================
-   SAVE CURRENT CHAT
-========================================= */
 
 function saveCurrentChat() {
 
   if (!currentChat) return;
 
-  const chats = getChats();
+
+  const chats =
+    getChats();
+
 
   const index =
     chats.findIndex(
-      chat => chat.id === currentChat.id
+      chat =>
+        chat.id ===
+        currentChat.id
     );
+
 
   if (index >= 0) {
 
-    chats[index] = currentChat;
+    chats[index] =
+      currentChat;
 
   } else {
 
-    chats.unshift(currentChat);
+    chats.unshift(
+      currentChat
+    );
 
   }
 
+
   saveChats(chats);
+
 
   localStorage.setItem(
     "pochojii_active_chat",
     currentChat.id
   );
 
+
   renderHistory();
+
 }
 
 
-/* =========================================
-   START
-========================================= */
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
 function init() {
 
-  const chats = getChats();
+  const chats =
+    getChats();
+
 
   const activeId =
     localStorage.getItem(
       "pochojii_active_chat"
     );
 
+
   const active =
     chats.find(
-      chat => chat.id === activeId
+      chat =>
+        chat.id ===
+        activeId
     );
+
 
   if (active) {
 
     currentChat =
-      JSON.parse(JSON.stringify(active));
+      JSON.parse(
+        JSON.stringify(active)
+      );
+
+
+    const assistantMessages =
+      currentChat.messages.filter(
+        message =>
+          message.role ===
+          "assistant"
+      );
+
+
+    if (
+      assistantMessages.length
+    ) {
+
+      lastAssistantText =
+        assistantMessages[
+          assistantMessages.length - 1
+        ].content;
+
+    }
+
 
     renderChat();
 
@@ -903,64 +1460,111 @@ function init() {
 
   }
 
+
   renderHistory();
+
+  renderUploads();
+
 }
 
 
 init();
 
 
-/* =========================================
+/* =====================================================
    NEW CHAT
-========================================= */
+===================================================== */
 
 function newChat() {
 
   currentChat =
     createEmptyChat();
 
-  selectedFiles = [];
+
+  selectedFiles =
+    [];
+
+
+  lastAssistantText =
+    "";
+
 
   renderChat();
 
   renderUploads();
+
 
   localStorage.setItem(
     "pochojii_active_chat",
     currentChat.id
   );
 
-  document
-    .getElementById("messageInput")
-    .focus();
+
+  renderHistory();
+
+
+  const input =
+    document.getElementById(
+      "messageInput"
+    );
+
+
+  if (input) {
+
+    input.value =
+      "";
+
+    input.focus();
+
+  }
 
 }
 
 
-/* =========================================
+/* =====================================================
    RENDER CHAT
-========================================= */
+===================================================== */
 
 function renderChat() {
 
   const chat =
-    document.getElementById("chat");
+    document.getElementById(
+      "chat"
+    );
 
-  chat.innerHTML = "";
+
+  if (!chat) return;
+
+
+  chat.innerHTML =
+    "";
+
 
   if (
     !currentChat ||
+    !currentChat.messages ||
     !currentChat.messages.length
   ) {
 
     chat.innerHTML = `
-      <div class="welcome" id="welcome">
-        <h1>What are you studying today?</h1>
+
+      <div
+        class="welcome"
+        id="welcome"
+      >
+
+        <h1>
+          What are you studying today?
+        </h1>
+
         <p>
           Ask questions, upload files,
-          create images, or study with PochoJii AI.
+          create images, make PDFs,
+          or continue an old conversation.
         </p>
+
       </div>
+
     `;
 
     return;
@@ -970,6 +1574,16 @@ function renderChat() {
 
   currentChat.messages.forEach(
     message => {
+
+      if (
+        !message ||
+        !message.content
+      ) {
+
+        return;
+
+      }
+
 
       addMessageToUI(
         message.role,
@@ -982,9 +1596,9 @@ function renderChat() {
 }
 
 
-/* =========================================
+/* =====================================================
    ADD MESSAGE
-========================================= */
+===================================================== */
 
 function addMessageToUI(
   role,
@@ -992,71 +1606,127 @@ function addMessageToUI(
 ) {
 
   const chat =
-    document.getElementById("chat");
+    document.getElementById(
+      "chat"
+    );
+
+
+  if (!chat) return;
+
 
   const wrapper =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   wrapper.className =
     `message ${role}`;
 
-  const bubble =
-    document.createElement("div");
 
-  bubble.className = "bubble";
+  const bubble =
+    document.createElement(
+      "div"
+    );
+
+
+  bubble.className =
+    "bubble";
+
 
   bubble.textContent =
     content;
+
 
   wrapper.appendChild(
     bubble
   );
 
+
   chat.appendChild(
     wrapper
   );
 
+
   window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      "smooth"
+
   });
+
 }
 
 
-/* =========================================
+/* =====================================================
    LOADING
-========================================= */
+===================================================== */
 
 function addLoading() {
 
   const chat =
-    document.getElementById("chat");
+    document.getElementById(
+      "chat"
+    );
+
+
+  if (!chat) return;
+
+
+  removeLoading();
+
 
   const wrapper =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   wrapper.className =
     "message assistant";
 
+
   wrapper.id =
     "loadingMessage";
 
+
   wrapper.innerHTML = `
+
     <div class="bubble">
+
       <div class="loading">
+
         <span class="dot"></span>
+
         <span class="dot"></span>
+
         <span class="dot"></span>
+
       </div>
+
     </div>
+
   `;
 
-  chat.appendChild(wrapper);
+
+  chat.appendChild(
+    wrapper
+  );
+
 
   window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      "smooth"
+
   });
+
 }
 
 
@@ -1067,32 +1737,50 @@ function removeLoading() {
       "loadingMessage"
     );
 
+
   if (loading) {
+
     loading.remove();
+
   }
+
 }
 
 
-/* =========================================
+/* =====================================================
    SEND MESSAGE
-========================================= */
+===================================================== */
 
 async function sendMessage() {
+
+  if (isSending) return;
+
 
   const input =
     document.getElementById(
       "messageInput"
     );
 
+
+  if (!input) return;
+
+
   const question =
     input.value.trim();
+
 
   if (
     !question &&
     !selectedFiles.length
   ) {
+
     return;
+
   }
+
+
+  isSending =
+    true;
 
 
   if (!currentChat) {
@@ -1106,18 +1794,34 @@ async function sendMessage() {
   if (question) {
 
     currentChat.messages.push({
-      role: "user",
-      content: question
+
+      role:
+        "user",
+
+      content:
+        question
+
     });
 
+
     if (
-      currentChat.title === "New chat"
+      currentChat.title ===
+      "New chat"
     ) {
 
       currentChat.title =
-        question.substring(0, 45);
+        question
+          .replace(
+            /\s+/g,
+            " "
+          )
+          .substring(
+            0,
+            45
+          );
 
     }
+
 
     addMessageToUI(
       "user",
@@ -1127,7 +1831,9 @@ async function sendMessage() {
   }
 
 
-  input.value = "";
+  input.value =
+    "";
+
 
   saveCurrentChat();
 
@@ -1136,31 +1842,46 @@ async function sendMessage() {
 
   try {
 
+    const files =
+      await prepareFilesForAPI();
+
+
     const response =
       await fetch(
+
         API_URL,
+
         {
-          method: "POST",
+
+          method:
+            "POST",
 
           headers: {
+
             "Content-Type":
               "application/json"
+
           },
 
-          body: JSON.stringify({
+          body:
+            JSON.stringify({
 
-            action: "chat",
+              action:
+                "chat",
 
-            question,
+              question:
+                question,
 
-            messages:
-              currentChat.messages,
+              messages:
+                currentChat.messages,
 
-            files:
-              await prepareFilesForAPI()
+              files:
+                files
 
-          })
+            })
+
         }
+
       );
 
 
@@ -1174,8 +1895,10 @@ async function sendMessage() {
     if (!response.ok) {
 
       throw new Error(
+
         data.error ||
         "Server error"
+
       );
 
     }
@@ -1188,9 +1911,11 @@ async function sendMessage() {
 
     currentChat.messages.push({
 
-      role: "assistant",
+      role:
+        "assistant",
 
-      content: answer
+      content:
+        answer
 
     });
 
@@ -1208,38 +1933,54 @@ async function sendMessage() {
     saveCurrentChat();
 
 
-    selectedFiles = [];
+    selectedFiles =
+      [];
+
 
     renderUploads();
+
 
   } catch (error) {
 
     removeLoading();
 
-    const errorText =
-      "Sorry, something went wrong.\n\n" +
-      error.message;
 
     addMessageToUI(
+
       "assistant",
-      errorText
+
+      "Sorry, something went wrong.\n\n" +
+      error.message
+
     );
+
+  } finally {
+
+    isSending =
+      false;
 
   }
 
 }
 
 
-/* =========================================
+/* =====================================================
    IMAGE GENERATION
-========================================= */
+===================================================== */
 
 async function generateImage() {
+
+  if (isSending) return;
+
 
   const input =
     document.getElementById(
       "messageInput"
     );
+
+
+  if (!input) return;
+
 
   const prompt =
     input.value.trim();
@@ -1266,53 +2007,87 @@ async function generateImage() {
   }
 
 
+  const request =
+    "Create an image: " +
+    prompt;
+
+
   currentChat.messages.push({
 
-    role: "user",
+    role:
+      "user",
 
     content:
-      "Create an image: " +
-      prompt
+      request
 
   });
 
 
   addMessageToUI(
     "user",
-    "Create an image: " +
-    prompt
+    request
   );
 
 
-  input.value = "";
+  if (
+    currentChat.title ===
+    "New chat"
+  ) {
+
+    currentChat.title =
+      prompt.substring(
+        0,
+        45
+      );
+
+  }
+
+
+  input.value =
+    "";
+
 
   saveCurrentChat();
 
   addLoading();
 
 
+  isSending =
+    true;
+
+
   try {
 
     const response =
       await fetch(
+
         API_URL,
+
         {
-          method: "POST",
+
+          method:
+            "POST",
 
           headers: {
+
             "Content-Type":
               "application/json"
+
           },
 
-          body: JSON.stringify({
+          body:
+            JSON.stringify({
 
-            action: "image",
+              action:
+                "image",
 
-            question: prompt
+              question:
+                prompt
 
-          })
+            })
 
         }
+
       );
 
 
@@ -1326,8 +2101,10 @@ async function generateImage() {
     if (!response.ok) {
 
       throw new Error(
+
         data.error ||
         "Image generation failed."
+
       );
 
     }
@@ -1336,7 +2113,7 @@ async function generateImage() {
     if (!data.image) {
 
       throw new Error(
-        "The server did not return an image."
+        "No image was returned by the server."
       );
 
     }
@@ -1349,7 +2126,8 @@ async function generateImage() {
 
     currentChat.messages.push({
 
-      role: "assistant",
+      role:
+        "assistant",
 
       content:
         "[Image generated successfully]"
@@ -1364,82 +2142,120 @@ async function generateImage() {
 
     removeLoading();
 
+
     addMessageToUI(
+
       "assistant",
+
       "Image generation failed:\n\n" +
       error.message
+
     );
+
+  } finally {
+
+    isSending =
+      false;
 
   }
 
 }
 
 
-/* =========================================
+/* =====================================================
    SHOW GENERATED IMAGE
-========================================= */
+===================================================== */
 
 function showGeneratedImage(
   imageData
 ) {
 
   const chat =
-    document.getElementById("chat");
+    document.getElementById(
+      "chat"
+    );
+
+
+  if (!chat) return;
 
 
   const wrapper =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   wrapper.className =
     "message assistant";
 
 
   const bubble =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   bubble.className =
     "bubble";
 
 
   const image =
-    document.createElement("img");
+    document.createElement(
+      "img"
+    );
+
 
   image.src =
     imageData;
+
 
   image.className =
     "generated-image";
 
 
   const download =
-    document.createElement("a");
+    document.createElement(
+      "a"
+    );
+
 
   download.href =
     imageData;
 
+
   download.download =
     "pochojii-generated.png";
 
+
   download.className =
     "image-download";
+
 
   download.textContent =
     "Download image";
 
 
-  bubble.appendChild(image);
+  bubble.appendChild(
+    image
+  );
+
 
   bubble.appendChild(
-    document.createElement("br")
+    document.createElement(
+      "br"
+    )
   );
+
 
   bubble.appendChild(
     download
   );
 
+
   wrapper.appendChild(
     bubble
   );
+
 
   chat.appendChild(
     wrapper
@@ -1447,49 +2263,115 @@ function showGeneratedImage(
 
 
   window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
+
+    top:
+      document.body.scrollHeight,
+
+    behavior:
+      "smooth"
+
   });
 
 }
 
 
-/* =========================================
-   FILE HANDLING
-========================================= */
+/* =====================================================
+   FILE LIMITS
+===================================================== */
 
-function handleFiles(fileList) {
+const MAX_FILE_SIZE =
+  2 * 1024 * 1024;
+
+const MAX_TOTAL_SIZE =
+  3 * 1024 * 1024;
+
+const MAX_FILES =
+  8;
+
+
+function getSelectedFilesSize() {
+
+  return selectedFiles.reduce(
+
+    (
+      total,
+      file
+    ) =>
+      total +
+      file.size,
+
+    0
+
+  );
+
+}
+
+
+/* =====================================================
+   HANDLE FILES
+===================================================== */
+
+function handleFiles(
+  fileList
+) {
 
   const incoming =
-    Array.from(fileList || []);
+    Array.from(
+      fileList || []
+    );
 
 
-  for (const file of incoming) {
-
-    if (
-      selectedFiles.some(
-        f =>
-          f.name === file.name &&
-          f.size === file.size
-      )
-    ) {
-      continue;
-    }
-
-
-    /*
-     * Keep requests reasonably small
-     * for a serverless deployment.
-     */
+  for (
+    const file of incoming
+  ) {
 
     if (
-      file.size >
-      2 * 1024 * 1024
+      selectedFiles.length >=
+      MAX_FILES
     ) {
 
       alert(
-        `${file.name} is larger than 2 MB. ` +
-        "Please choose a smaller file."
+        "Maximum 8 files per message."
+      );
+
+      break;
+
+    }
+
+
+    const duplicate =
+      selectedFiles.some(
+
+        existing =>
+
+          existing.name ===
+            file.name &&
+
+          existing.size ===
+            file.size &&
+
+          existing.lastModified ===
+            file.lastModified
+
+      );
+
+
+    if (duplicate) {
+
+      continue;
+
+    }
+
+
+    if (
+      file.size >
+      MAX_FILE_SIZE
+    ) {
+
+      alert(
+
+        `${file.name} is larger than 2 MB.`
+
       );
 
       continue;
@@ -1497,24 +2379,27 @@ function handleFiles(fileList) {
     }
 
 
-    selectedFiles.push(file);
+    const newTotal =
+      getSelectedFilesSize() +
+      file.size;
 
-  }
+
+    if (
+      newTotal >
+      MAX_TOTAL_SIZE
+    ) {
+
+      alert(
+        "The total upload size cannot be more than 3 MB."
+      );
+
+      continue;
+
+    }
 
 
-  /*
-   * Maximum 8 files per message.
-   */
-
-  if (
-    selectedFiles.length > 8
-  ) {
-
-    selectedFiles =
-      selectedFiles.slice(0, 8);
-
-    alert(
-      "Maximum 8 files per message."
+    selectedFiles.push(
+      file
     );
 
   }
@@ -1525,9 +2410,9 @@ function handleFiles(fileList) {
 }
 
 
-/* =========================================
+/* =====================================================
    RENDER UPLOADS
-========================================= */
+===================================================== */
 
 function renderUploads() {
 
@@ -1536,16 +2421,27 @@ function renderUploads() {
       "uploadList"
     );
 
-  container.innerHTML = "";
+
+  if (!container) return;
+
+
+  container.innerHTML =
+    "";
 
 
   selectedFiles.forEach(
-    (file, index) => {
+
+    (
+      file,
+      index
+    ) => {
+
 
       const chip =
         document.createElement(
           "div"
         );
+
 
       chip.className =
         "file-chip";
@@ -1556,11 +2452,28 @@ function renderUploads() {
           "div"
         );
 
-      info.textContent =
+
+      const name =
+        document.createElement(
+          "div"
+        );
+
+
+      name.className =
+        "file-name";
+
+
+      name.textContent =
         file.name;
 
 
+      info.appendChild(
+        name
+      );
+
+
       if (
+        file.type &&
         file.type.startsWith(
           "image/"
         )
@@ -1571,13 +2484,16 @@ function renderUploads() {
             "img"
           );
 
+
         preview.className =
           "preview";
+
 
         preview.src =
           URL.createObjectURL(
             file
           );
+
 
         info.appendChild(
           preview
@@ -1591,8 +2507,10 @@ function renderUploads() {
           "button"
         );
 
+
       remove.textContent =
-        "×";
+        "Remove";
+
 
       remove.onclick =
         () => {
@@ -1611,6 +2529,7 @@ function renderUploads() {
         info
       );
 
+
       chip.appendChild(
         remove
       );
@@ -1621,55 +2540,84 @@ function renderUploads() {
       );
 
     }
+
   );
 
 }
 
 
-/* =========================================
-   FILE → BASE64
-========================================= */
+/* =====================================================
+   FILE TO BASE64
+===================================================== */
 
-function fileToBase64(file) {
+function fileToBase64(
+  file
+) {
 
   return new Promise(
-    (resolve, reject) => {
+
+    (
+      resolve,
+      reject
+    ) => {
 
       const reader =
         new FileReader();
 
+
       reader.onload =
-        () => resolve(
-          reader.result
-        );
+        () => {
+
+          resolve(
+            reader.result
+          );
+
+        };
+
 
       reader.onerror =
-        reject;
+        () => {
+
+          reject(
+
+            new Error(
+              `Could not read ${file.name}`
+            )
+
+          );
+
+        };
+
 
       reader.readAsDataURL(
         file
       );
 
     }
+
   );
 
 }
 
 
-/* =========================================
+/* =====================================================
    PREPARE FILES
-========================================= */
+===================================================== */
 
 async function prepareFilesForAPI() {
 
-  const result = [];
+  const result =
+    [];
+
 
   for (
     const file of selectedFiles
   ) {
 
     const data =
-      await fileToBase64(file);
+      await fileToBase64(
+        file
+      );
 
 
     result.push({
@@ -1681,20 +2629,22 @@ async function prepareFilesForAPI() {
         file.type ||
         "application/octet-stream",
 
-      data
+      data:
+        data
 
     });
 
   }
+
 
   return result;
 
 }
 
 
-/* =========================================
-   HISTORY
-========================================= */
+/* =====================================================
+   CHAT HISTORY
+===================================================== */
 
 function renderHistory() {
 
@@ -1703,25 +2653,62 @@ function renderHistory() {
       "history"
     );
 
+
+  if (!container) return;
+
+
+  const searchInput =
+    document.getElementById(
+      "historySearch"
+    );
+
+
   const search =
-    document
-      .getElementById(
-        "historySearch"
-      )
-      .value
-      .toLowerCase();
+    searchInput
+      ? searchInput.value
+          .toLowerCase()
+      : "";
 
 
-  container.innerHTML = "";
+  container.innerHTML =
+    "";
 
 
   const chats =
     getChats()
+
       .filter(
+
         chat =>
-          chat.title
-            .toLowerCase()
-            .includes(search)
+
+          (
+            chat.title ||
+            "New chat"
+          )
+          .toLowerCase()
+          .includes(
+            search
+          )
+
+      )
+
+      .sort(
+
+        (
+          a,
+          b
+        ) =>
+
+          (
+            b.createdAt ||
+            0
+          ) -
+
+          (
+            a.createdAt ||
+            0
+          )
+
       );
 
 
@@ -1733,13 +2720,15 @@ function renderHistory() {
           "div"
         );
 
+
       item.className =
         "history-item";
 
 
       if (
         currentChat &&
-        currentChat.id === chat.id
+        currentChat.id ===
+          chat.id
       ) {
 
         item.classList.add(
@@ -1755,7 +2744,13 @@ function renderHistory() {
 
 
       item.onclick =
-        () => loadChat(chat.id);
+        () => {
+
+          loadChat(
+            chat.id
+          );
+
+        };
 
 
       container.appendChild(
@@ -1768,11 +2763,13 @@ function renderHistory() {
 }
 
 
-/* =========================================
+/* =====================================================
    LOAD CHAT
-========================================= */
+===================================================== */
 
-function loadChat(id) {
+function loadChat(
+  id
+) {
 
   const chats =
     getChats();
@@ -1780,7 +2777,9 @@ function loadChat(id) {
 
   const chat =
     chats.find(
-      c => c.id === id
+      item =>
+        item.id ===
+        id
     );
 
 
@@ -1793,13 +2792,35 @@ function loadChat(id) {
     );
 
 
+  selectedFiles =
+    [];
+
+
   localStorage.setItem(
     "pochojii_active_chat",
     id
   );
 
 
-  selectedFiles = [];
+  const assistantMessages =
+    currentChat.messages.filter(
+
+      message =>
+        message.role ===
+        "assistant"
+
+    );
+
+
+  lastAssistantText =
+    assistantMessages.length
+
+      ? assistantMessages[
+          assistantMessages.length - 1
+        ].content
+
+      : "";
+
 
   renderUploads();
 
@@ -1810,14 +2831,17 @@ function loadChat(id) {
 }
 
 
-/* =========================================
+/* =====================================================
    ENTER
-========================================= */
+===================================================== */
 
-function handleEnter(event) {
+function handleEnter(
+  event
+) {
 
   if (
-    event.key === "Enter" &&
+    event.key ===
+      "Enter" &&
     !event.shiftKey
   ) {
 
@@ -1830,9 +2854,9 @@ function handleEnter(event) {
 }
 
 
-/* =========================================
-   VOICE
-========================================= */
+/* =====================================================
+   VOICE INPUT
+===================================================== */
 
 function startVoice() {
 
@@ -1859,8 +2883,10 @@ function startVoice() {
   recognition.lang =
     "en-US";
 
+
   recognition.interimResults =
     false;
+
 
   recognition.continuous =
     false;
@@ -1870,14 +2896,34 @@ function startVoice() {
     event => {
 
       const text =
-        event.results[0][0].transcript;
+        event
+          .results[0][0]
+          .transcript;
 
-      document
-        .getElementById(
+
+      const input =
+        document.getElementById(
           "messageInput"
-        )
-        .value +=
-        text;
+        );
+
+
+      if (!input) return;
+
+
+      if (input.value) {
+
+        input.value +=
+          " " + text;
+
+      } else {
+
+        input.value =
+          text;
+
+      }
+
+
+      input.focus();
 
     };
 
@@ -1897,21 +2943,28 @@ function startVoice() {
 }
 
 
-/* =========================================
-   READ ALOUD
-========================================= */
+/* =====================================================
+   READ LAST ANSWER
+===================================================== */
 
 function readLastAnswer() {
 
   if (!lastAssistantText) {
 
     const messages =
-      currentChat?.messages || [];
+      currentChat?.messages ||
+      [];
+
 
     const assistantMessages =
       messages.filter(
-        m => m.role === "assistant"
+
+        message =>
+          message.role ===
+          "assistant"
+
       );
+
 
     if (
       assistantMessages.length
@@ -1938,23 +2991,31 @@ function readLastAnswer() {
   }
 
 
-  speechSynthesis.cancel();
+  if (
+    "speechSynthesis" in window
+  ) {
 
-  const speech =
-    new SpeechSynthesisUtterance(
-      lastAssistantText
+    speechSynthesis.cancel();
+
+
+    const speech =
+      new SpeechSynthesisUtterance(
+        lastAssistantText
+      );
+
+
+    speechSynthesis.speak(
+      speech
     );
 
-  speechSynthesis.speak(
-    speech
-  );
+  }
 
 }
 
 
-/* =========================================
+/* =====================================================
    PDF
-========================================= */
+===================================================== */
 
 async function makePDF() {
 
@@ -1971,38 +3032,50 @@ async function makePDF() {
 
     const response =
       await fetch(
+
         API_URL,
+
         {
-          method: "POST",
+
+          method:
+            "POST",
 
           headers: {
+
             "Content-Type":
               "application/json"
+
           },
 
-          body: JSON.stringify({
+          body:
+            JSON.stringify({
 
-            action: "chat",
+              action:
+                "chat",
 
-            question:
-              `Create detailed study notes about ${topic}. ` +
-              "Use headings, definitions, examples, " +
-              "important points and a short summary.",
+              question:
+                `Create detailed study notes about ${topic}. ` +
+                "Use headings, definitions, examples, " +
+                "important points and a short summary.",
 
-            messages: [
+              messages: [
 
-              {
-                role: "user",
+                {
 
-                content:
-                  `Create detailed study notes about ${topic}.`
-              }
+                  role:
+                    "user",
 
-            ]
+                  content:
+                    `Create detailed study notes about ${topic}.`
 
-          })
+                }
+
+              ]
+
+            })
 
         }
+
       );
 
 
@@ -2013,8 +3086,10 @@ async function makePDF() {
     if (!response.ok) {
 
       throw new Error(
+
         data.error ||
         "Could not create PDF."
+
       );
 
     }
@@ -2038,25 +3113,43 @@ async function makePDF() {
 }
 
 
-/* =========================================
+/* =====================================================
    DOWNLOAD PDF
-========================================= */
+===================================================== */
 
 function downloadPDF(
   title,
   text
 ) {
 
+  if (
+    !window.jspdf ||
+    !window.jspdf.jsPDF
+  ) {
+
+    alert(
+      "PDF library could not be loaded."
+    );
+
+    return;
+
+  }
+
+
   const {
     jsPDF
-  } = window.jspdf;
+  } =
+    window.jspdf;
 
 
   const pdf =
     new jsPDF();
 
 
-  pdf.setFontSize(20);
+  pdf.setFontSize(
+    20
+  );
+
 
   pdf.text(
     title,
@@ -2065,7 +3158,9 @@ function downloadPDF(
   );
 
 
-  pdf.setFontSize(11);
+  pdf.setFontSize(
+    11
+  );
 
 
   const lines =
@@ -2075,18 +3170,22 @@ function downloadPDF(
     );
 
 
-  let y = 35;
+  let y =
+    35;
 
 
   for (
     const line of lines
   ) {
 
-    if (y > 280) {
+    if (
+      y > 280
+    ) {
 
       pdf.addPage();
 
-      y = 20;
+      y =
+        20;
 
     }
 
@@ -2097,73 +3196,74 @@ function downloadPDF(
       y
     );
 
-    y += 7;
+
+    y +=
+      7;
 
   }
 
 
   pdf.save(
+
     title
       .replace(
         /[^a-z0-9]/gi,
         "_"
       )
+
       + ".pdf"
+
   );
 
 }
 
 
-/* =========================================
+/* =====================================================
    THEME
-========================================= */
+===================================================== */
 
 function toggleTheme() {
 
-  const current =
-    document.body.dataset.theme;
+  document.body.classList.toggle(
+    "dark"
+  );
+
+
+  const isDark =
+    document.body.classList.contains(
+      "dark"
+    );
+
+
+  localStorage.setItem(
+    "pochojii_theme",
+    isDark
+      ? "dark"
+      : "light"
+  );
+
+}
+
+
+/* =====================================================
+   LOAD THEME
+===================================================== */
+
+function loadTheme() {
+
+  const theme =
+    localStorage.getItem(
+      "pochojii_theme"
+    );
 
 
   if (
-    current === "dark"
+    theme ===
+    "dark"
   ) {
 
-    document.body.dataset.theme =
-      "light";
-
-    document.documentElement.style.setProperty(
-      "--cream",
-      "#f8f2e7"
-    );
-
-    document.documentElement.style.setProperty(
-      "--cream2",
-      "#fffaf0"
-    );
-
-    document.documentElement.style.setProperty(
-      "--text",
-      "#374035"
-    );
-
-  } else {
-
-    document.body.dataset.theme =
-      "dark";
-
-    document.documentElement.style.setProperty(
-      "--cream",
-      "#1e251e"
-    );
-
-    document.documentElement.style.setProperty(
-      "--cream2",
-      "#293129"
-    );
-
-    document.documentElement.style.setProperty(
-      "--text",
-      "#edf3e7"
+    document.body.classList.add(
+      "dark"
     );
 
   }
@@ -2171,32 +3271,45 @@ function toggleTheme() {
 }
 
 
-/* =========================================
+loadTheme();
+
+
+/* =====================================================
    SIDEBAR
-========================================= */
+===================================================== */
 
 function toggleSidebar() {
 
-  document
-    .getElementById(
+  const sidebar =
+    document.getElementById(
       "sidebar"
-    )
-    .classList.toggle(
-      "open"
     );
+
+
+  if (!sidebar) return;
+
+
+  sidebar.classList.toggle(
+    "open"
+  );
 
 }
 
 
-/* =========================================
+/* =====================================================
    SCROLL
-========================================= */
+===================================================== */
 
 function scrollTopPage() {
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
   });
 
 }
@@ -2205,9 +3318,13 @@ function scrollTopPage() {
 function scrollBottomPage() {
 
   window.scrollTo({
+
     top:
       document.body.scrollHeight,
-    behavior: "smooth"
+
+    behavior:
+      "smooth"
+
   });
 
 }
