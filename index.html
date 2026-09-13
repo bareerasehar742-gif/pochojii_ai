@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
 <title>PochoJii AI</title>
 
@@ -10,805 +15,479 @@
 
 <style>
 
-:root{
-    --pista:#b8c9a3;
-    --pista-dark:#71815f;
-    --cream:#f8f4e8;
-    --nude:#eadfca;
-    --yellow:#f4e7a1;
-    --yellow-dark:#d7c66f;
-    --text:#293128;
-    --muted:#697264;
-    --white:#fffdf7;
-    --border:#d9d6c7;
-    --shadow:0 10px 35px rgba(70,75,55,.10);
-    --user:#dce8ca;
+:root {
+  --cream: #f8f2e7;
+  --cream2: #fffaf0;
+  --pistachio: #b9cfa9;
+  --pistachio-dark: #78966b;
+  --yellow: #f5e7a9;
+  --text: #374035;
+  --muted: #788077;
+  --white: #ffffff;
+  --border: #d9decf;
+  --shadow: 0 10px 30px rgba(80,90,65,.10);
 }
 
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+* {
+  box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-body{
-    font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+body {
+  margin: 0;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
-    background:var(--cream);
-    color:var(--text);
+  background:
+    linear-gradient(
+      135deg,
+      var(--cream),
+      #eef3e5,
+      #fff8d9
+    );
 
-    min-height:100vh;
-}
-
-button,
-input,
-textarea{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
+  color: var(--text);
+  min-height: 100vh;
 }
 
 /* =========================
    APP
 ========================= */
 
-.app{
-    display:flex;
-    min-height:100vh;
+.app {
+  min-height: 100vh;
+  display: flex;
 }
 
 /* =========================
    SIDEBAR
 ========================= */
 
-.sidebar{
-    width:270px;
-    background:#eef1df;
-    border-right:1px solid var(--border);
-
-    display:flex;
-    flex-direction:column;
-
-    position:fixed;
-    left:0;
-    top:0;
-    bottom:0;
-
-    z-index:50;
-
-    transition:.3s ease;
+.sidebar {
+  width: 270px;
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(15px);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 20;
 }
 
-.logo-area{
-    padding:24px 20px 18px;
-    display:flex;
-    align-items:center;
-    gap:12px;
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
 }
 
-.logo{
-    width:46px;
-    height:46px;
-
-    border-radius:15px;
-
-    background:var(--pista-dark);
-    color:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:22px;
-    font-weight:800;
-
-    box-shadow:0 6px 18px rgba(90,105,75,.2);
+.new-chat {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 14px;
+  background: var(--pistachio);
+  color: #263326;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 14px;
 }
 
-.logo-text h1{
-    font-size:19px;
-    letter-spacing:-.4px;
+.new-chat:hover {
+  filter: brightness(.97);
 }
 
-.logo-text p{
-    color:var(--muted);
-    font-size:11px;
-    margin-top:2px;
+.search {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  outline: none;
+  background: var(--cream2);
+  margin-bottom: 15px;
 }
 
-.new-chat{
-    margin:5px 15px 15px;
-
-    border:none;
-    background:var(--pista-dark);
-    color:white;
-
-    padding:13px 15px;
-    border-radius:13px;
-
-    font-weight:700;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:9px;
-
-    transition:.2s;
+.history-title {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
 }
 
-.new-chat:hover{
-    transform:translateY(-1px);
-    filter:brightness(.96);
+.history-item {
+  padding: 11px;
+  border-radius: 11px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
-.search-box{
-    margin:0 15px 12px;
-    position:relative;
+.history-item:hover {
+  background: #eef3e8;
 }
 
-.search-box svg{
-    position:absolute;
-    left:12px;
-    top:50%;
-    transform:translateY(-50%);
-    color:var(--muted);
-}
-
-.search-box input{
-    width:100%;
-    border:1px solid var(--border);
-    background:#f8f8ed;
-
-    padding:10px 12px 10px 38px;
-
-    border-radius:12px;
-    outline:none;
-}
-
-.history{
-    flex:1;
-    overflow-y:auto;
-    padding:4px 10px 15px;
-}
-
-.history-title{
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    color:var(--muted);
-    padding:8px 8px;
-}
-
-.history-item{
-    width:100%;
-    border:none;
-    background:transparent;
-
-    text-align:left;
-
-    padding:11px 10px;
-    border-radius:11px;
-
-    color:var(--text);
-
-    margin-bottom:3px;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.history-item:hover{
-    background:#e1e7cf;
-}
-
-.sidebar-bottom{
-    padding:12px;
-    border-top:1px solid var(--border);
-}
-
-.theme-btn{
-    width:100%;
-    border:none;
-    background:transparent;
-
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    padding:11px;
-    border-radius:11px;
-
-    color:var(--text);
-}
-
-.theme-btn:hover{
-    background:#e1e7cf;
+.history-item.active {
+  background: var(--yellow);
 }
 
 /* =========================
    MAIN
 ========================= */
 
-.main{
-    margin-left:270px;
-    width:calc(100% - 270px);
-    min-height:100vh;
-
-    display:flex;
-    flex-direction:column;
+.main {
+  margin-left: 270px;
+  width: calc(100% - 270px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.topbar{
-    height:70px;
+/* =========================
+   TOPBAR
+========================= */
 
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+.topbar {
+  height: 70px;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
-    padding:0 25px;
+  background: rgba(248,242,231,.82);
+  backdrop-filter: blur(15px);
 
-    border-bottom:1px solid var(--border);
-
-    background:rgba(248,244,232,.88);
-
-    backdrop-filter:blur(15px);
-
-    position:sticky;
-    top:0;
-    z-index:20;
+  border-bottom: 1px solid var(--border);
 }
 
-.topbar-title{
-    font-size:14px;
-    font-weight:700;
+.mobile-menu {
+  display: none;
 }
 
-.menu-btn{
-    display:none;
-    border:none;
-    background:transparent;
+.top-actions {
+  display: flex;
+  gap: 8px;
 }
 
-.top-actions{
-    display:flex;
-    gap:7px;
-}
-
-.icon-btn{
-    width:38px;
-    height:38px;
-
-    border:1px solid var(--border);
-    background:var(--white);
-
-    border-radius:11px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--text);
-
-    transition:.2s;
-}
-
-.icon-btn:hover{
-    background:var(--yellow);
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  font-size: 17px;
 }
 
 /* =========================
    CHAT
 ========================= */
 
-.chat{
-    flex:1;
-
-    width:100%;
-    max-width:980px;
-
-    margin:0 auto;
-
-    padding:45px 25px 150px;
+.chat {
+  width: min(950px, 94%);
+  margin: auto;
+  padding: 35px 0 160px;
 }
 
-.welcome{
-    max-width:720px;
-    margin:65px auto 40px;
-
-    text-align:center;
+.welcome {
+  text-align: center;
+  padding: 50px 10px 30px;
 }
 
-.welcome-logo{
-    width:72px;
-    height:72px;
-
-    border-radius:24px;
-
-    background:var(--pista-dark);
-    color:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:32px;
-    font-weight:800;
-
-    margin:0 auto 20px;
-
-    box-shadow:0 15px 35px rgba(90,105,75,.18);
+.welcome h1 {
+  font-size: clamp(30px, 5vw, 48px);
+  margin-bottom: 10px;
 }
 
-.welcome h2{
-    font-size:36px;
-    letter-spacing:-1.4px;
-    margin-bottom:8px;
-}
-
-.welcome p{
-    color:var(--muted);
-    font-size:15px;
-}
-
-.tool-grid{
-    margin-top:32px;
-
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-
-    gap:12px;
-}
-
-.tool-card{
-    border:1px solid var(--border);
-
-    background:var(--white);
-
-    border-radius:17px;
-
-    padding:18px;
-
-    text-align:left;
-
-    transition:.2s;
-
-    box-shadow:0 5px 20px rgba(60,65,45,.04);
-}
-
-.tool-card:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow);
-    border-color:#bfc8a8;
-}
-
-.tool-card-title{
-    font-weight:750;
-    margin-bottom:5px;
-}
-
-.tool-card-description{
-    font-size:12px;
-    color:var(--muted);
+.welcome p {
+  color: var(--muted);
 }
 
 /* =========================
-   MESSAGES
+   MESSAGE
 ========================= */
 
-.message{
-    display:flex;
-    margin:25px 0;
+.message {
+  display: flex;
+  margin: 18px 0;
 }
 
-.message.user{
-    justify-content:flex-end;
+.message.user {
+  justify-content: flex-end;
 }
 
-.message-inner{
-    max-width:82%;
+.message.assistant {
+  justify-content: flex-start;
 }
 
-.message.user .message-inner{
-    max-width:75%;
+.bubble {
+  max-width: 82%;
+  padding: 15px 17px;
+  border-radius: 18px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  box-shadow: var(--shadow);
 }
 
-.bubble{
-    padding:15px 17px;
-
-    border-radius:18px;
-
-    line-height:1.65;
-
-    font-size:15px;
-
-    white-space:pre-wrap;
+.user .bubble {
+  background: var(--pistachio);
+  border-bottom-right-radius: 5px;
 }
 
-.user .bubble{
-    background:var(--user);
-    border-bottom-right-radius:5px;
-}
-
-.assistant .bubble{
-    background:var(--white);
-    border:1px solid var(--border);
-    border-bottom-left-radius:5px;
-}
-
-.message-actions{
-    display:flex;
-    gap:5px;
-    margin-top:7px;
-}
-
-.small-action{
-    border:1px solid var(--border);
-    background:transparent;
-
-    border-radius:8px;
-
-    padding:6px 9px;
-
-    font-size:11px;
-    color:var(--muted);
-}
-
-.small-action:hover{
-    background:var(--yellow);
-    color:var(--text);
-}
-
-/* =========================
-   CODE
-========================= */
-
-pre{
-    margin:14px 0;
-
-    background:#252b25;
-    color:#edf3e8;
-
-    padding:15px;
-
-    border-radius:12px;
-
-    overflow-x:auto;
-
-    font-size:13px;
-}
-
-code{
-    font-family:
-        "JetBrains Mono",
-        "SFMono-Regular",
-        Consolas,
-        monospace;
+.assistant .bubble {
+  background: rgba(255,255,255,.92);
+  border-bottom-left-radius: 5px;
 }
 
 /* =========================
    IMAGE
 ========================= */
 
-.generated-image{
-    width:100%;
-    max-width:650px;
-
-    border-radius:18px;
-
-    border:1px solid var(--border);
-
-    display:block;
-
-    margin-bottom:10px;
+.generated-image {
+  max-width: 100%;
+  border-radius: 18px;
+  margin-top: 10px;
+  box-shadow: var(--shadow);
 }
 
-.download-image{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-
-    text-decoration:none;
-
-    background:var(--pista-dark);
-    color:white;
-
-    padding:9px 13px;
-
-    border-radius:10px;
-
-    font-size:12px;
-    font-weight:700;
+.image-download {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 9px 13px;
+  border-radius: 10px;
+  background: var(--pistachio);
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 700;
 }
 
 /* =========================
-   TYPING
+   UPLOAD PREVIEW
 ========================= */
 
-.typing{
-    display:flex;
-    gap:5px;
-    padding:5px 2px;
+.upload-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
-.dot{
-    width:7px;
-    height:7px;
-
-    background:var(--pista-dark);
-
-    border-radius:50%;
-
-    animation:bounce 1.2s infinite;
+.file-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #edf3e7;
+  border: 1px solid var(--border);
+  padding: 7px 10px;
+  border-radius: 11px;
+  font-size: 13px;
 }
 
-.dot:nth-child(2){
-    animation-delay:.15s;
+.file-chip button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  color: #65705f;
 }
 
-.dot:nth-child(3){
-    animation-delay:.3s;
-}
-
-@keyframes bounce{
-    0%,80%,100%{
-        transform:translateY(0);
-        opacity:.4;
-    }
-    40%{
-        transform:translateY(-5px);
-        opacity:1;
-    }
+.preview {
+  max-width: 120px;
+  max-height: 100px;
+  border-radius: 10px;
+  display: block;
+  margin-top: 6px;
 }
 
 /* =========================
-   INPUT
+   COMPOSER
 ========================= */
 
-.input-area{
-    position:fixed;
+.composer-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 270px;
+  right: 0;
+  padding: 15px 20px 20px;
 
-    left:270px;
-    right:0;
-    bottom:0;
-
-    padding:15px 20px 18px;
-
-    background:linear-gradient(
-        transparent,
-        rgba(248,244,232,.98) 28%
+  background:
+    linear-gradient(
+      transparent,
+      rgba(248,242,231,.97) 35%
     );
-
-    z-index:30;
 }
 
-.input-wrapper{
-    max-width:850px;
-    margin:auto;
+.composer {
+  max-width: 950px;
+  margin: auto;
 
-    background:var(--white);
+  background: var(--white);
+  border: 1px solid var(--border);
 
-    border:1px solid var(--border);
+  border-radius: 20px;
 
-    border-radius:20px;
+  box-shadow: var(--shadow);
 
-    box-shadow:0 12px 40px rgba(60,65,45,.13);
-
-    padding:10px;
-
-    display:flex;
-    align-items:flex-end;
-    gap:7px;
+  padding: 10px;
 }
 
-#messageInput{
-    flex:1;
-
-    border:none;
-    outline:none;
-
-    background:transparent;
-
-    resize:none;
-
-    min-height:42px;
-    max-height:150px;
-
-    padding:10px 8px;
-
-    color:var(--text);
+textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  min-height: 52px;
+  max-height: 180px;
+  padding: 12px;
+  font: inherit;
+  background: transparent;
+  color: var(--text);
 }
 
-.send-btn{
-    width:44px;
-    height:44px;
-
-    border:none;
-
-    background:var(--pista-dark);
-    color:white;
-
-    border-radius:13px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.composer-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
 }
 
-.send-btn:hover{
-    filter:brightness(.94);
+.left-actions,
+.right-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
 }
 
-.voice-btn.listening{
-    background:#d2a15f;
-    color:white;
+.action-btn {
+  border: none;
+  background: #eef2e9;
+  color: var(--text);
+  border-radius: 11px;
+  padding: 9px 11px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.action-btn:hover {
+  background: var(--yellow);
+}
+
+.send-btn {
+  background: var(--pistachio-dark);
+  color: white;
+}
+
+/* Hidden file inputs */
+
+.hidden-file {
+  display: none;
 }
 
 /* =========================
    SCROLL BUTTONS
 ========================= */
 
-.scroll-controls{
-    position:fixed;
+.scroll-controls {
+  position: fixed;
+  right: 20px;
+  bottom: 115px;
 
-    right:22px;
-    bottom:105px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 
-    display:flex;
-    flex-direction:column;
-
-    gap:7px;
-
-    z-index:25;
+  z-index: 15;
 }
 
-.scroll-controls button{
-    width:38px;
-    height:38px;
-
-    border:1px solid var(--border);
-
-    background:var(--white);
-
-    border-radius:11px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:0 5px 18px rgba(60,65,45,.1);
+.scroll-btn {
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  box-shadow: var(--shadow);
+  cursor: pointer;
 }
 
-.scroll-controls button:hover{
-    background:var(--yellow);
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+  display: inline-flex;
+  gap: 5px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--pistachio-dark);
+  border-radius: 50%;
+  animation: bounce 1s infinite;
+}
+
+.dot:nth-child(2) {
+  animation-delay: .15s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: .3s;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 /* =========================
    MOBILE
 ========================= */
 
-@media(max-width:800px){
+@media(max-width: 750px) {
 
-    .sidebar{
-        transform:translateX(-100%);
-        width:280px;
-        box-shadow:10px 0 35px rgba(0,0,0,.12);
-    }
+  .sidebar {
+    transform: translateX(-100%);
+    transition: .25s;
+  }
 
-    .sidebar.open{
-        transform:translateX(0);
-    }
+  .sidebar.open {
+    transform: translateX(0);
+  }
 
-    .main{
-        margin-left:0;
-        width:100%;
-    }
+  .main {
+    margin-left: 0;
+    width: 100%;
+  }
 
-    .input-area{
-        left:0;
-        padding:10px 10px 12px;
-    }
+  .mobile-menu {
+    display: block;
+  }
 
-    .menu-btn{
-        display:flex;
-    }
+  .composer-wrap {
+    left: 0;
+  }
 
-    .topbar{
-        padding:0 13px;
-    }
+  .bubble {
+    max-width: 90%;
+  }
 
-    .chat{
-        padding:25px 13px 130px;
-    }
-
-    .welcome{
-        margin:45px auto 30px;
-    }
-
-    .welcome h2{
-        font-size:29px;
-    }
-
-    .tool-grid{
-        grid-template-columns:1fr;
-    }
-
-    .message-inner{
-        max-width:94%;
-    }
-
-    .message.user .message-inner{
-        max-width:90%;
-    }
-
-    .bubble{
-        font-size:14px;
-    }
-
-    .scroll-controls{
-        right:10px;
-        bottom:95px;
-    }
-}
-
-/* =========================
-   DARK MODE
-========================= */
-
-body.dark{
-    --cream:#20251f;
-    --white:#292e28;
-    --text:#edf0e7;
-    --muted:#aeb6a8;
-    --border:#41483d;
-    --user:#394735;
-    --pista:#667457;
-    --pista-dark:#879b72;
-    --yellow:#5b5633;
-}
-
-body.dark .sidebar{
-    background:#252b24;
-}
-
-body.dark .search-box input{
-    background:#30362f;
-    color:white;
-}
-
-body.dark .topbar{
-    background:rgba(32,37,31,.9);
-}
-
-body.dark .tool-card:hover,
-body.dark .history-item:hover,
-body.dark .theme-btn:hover{
-    background:#343b32;
-}
-
-body.dark .input-area{
-    background:linear-gradient(
-        transparent,
-        rgba(32,37,31,.98) 28%
-    );
-}
-
-body.dark .icon-btn,
-body.dark .scroll-controls button{
-    background:#292e28;
-    color:white;
+  .chat {
+    padding-top: 15px;
+  }
 }
 
 </style>
@@ -818,1723 +497,1718 @@ body.dark .scroll-controls button{
 
 <div class="app">
 
-<!-- SIDEBAR -->
+<!-- =========================
+     SIDEBAR
+========================= -->
 
 <aside class="sidebar" id="sidebar">
 
-    <div class="logo-area">
+  <div class="logo">
+    PochoJii AI
+  </div>
 
-        <div class="logo">P</div>
+  <button
+    class="new-chat"
+    onclick="newChat()"
+  >
+    New chat
+  </button>
 
-        <div class="logo-text">
-            <h1>PochoJii AI</h1>
-            <p>Poch jo poochna hai.</p>
-        </div>
+  <input
+    class="search"
+    id="historySearch"
+    placeholder="Search chats..."
+    oninput="renderHistory()"
+  >
 
-    </div>
+  <div class="history-title">
+    CHAT HISTORY
+  </div>
 
-    <button class="new-chat" onclick="newChat()">
-
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2">
-            <path d="M12 5v14M5 12h14"/>
-        </svg>
-
-        New chat
-
-    </button>
-
-    <div class="search-box">
-
-        <svg width="17" height="17" viewBox="0 0 24 24"
-        fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="7"/>
-            <path d="m20 20-3.5-3.5"/>
-        </svg>
-
-        <input
-            id="searchInput"
-            placeholder="Search chats..."
-            oninput="searchChats()"
-        >
-
-    </div>
-
-    <div class="history">
-
-        <div class="history-title">
-            Recent chats
-        </div>
-
-        <div id="historyList"></div>
-
-    </div>
-
-    <div class="sidebar-bottom">
-
-        <button class="theme-btn" onclick="toggleTheme()">
-
-            <svg width="18" height="18" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2">
-
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M12 2v2"/>
-                <path d="M12 20v2"/>
-                <path d="m4.93 4.93 1.42 1.42"/>
-                <path d="m17.65 17.65 1.42 1.42"/>
-                <path d="M2 12h2"/>
-                <path d="M20 12h2"/>
-                <path d="m4.93 19.07 1.42-1.42"/>
-                <path d="m17.65 6.35 1.42-1.42"/>
-
-            </svg>
-
-            Toggle appearance
-
-        </button>
-
-    </div>
+  <div id="history"></div>
 
 </aside>
 
 
-<!-- MAIN -->
+<!-- =========================
+     MAIN
+========================= -->
 
 <main class="main">
 
-    <header class="topbar">
+  <header class="topbar">
 
-        <button
-            class="menu-btn"
-            onclick="toggleSidebar()"
-            aria-label="Open menu"
-        >
+    <button
+      class="icon-btn mobile-menu"
+      onclick="toggleSidebar()"
+    >
+      ☰
+    </button>
 
-            <svg width="22" height="22" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2">
+    <strong id="pageTitle">
+      PochoJii AI
+    </strong>
 
-                <path d="M4 6h16"/>
-                <path d="M4 12h16"/>
-                <path d="M4 18h16"/>
+    <div class="top-actions">
 
-            </svg>
-
-        </button>
-
-        <div class="topbar-title">
-            PochoJii AI
-        </div>
-
-        <div class="top-actions">
-
-            <button class="icon-btn"
-            onclick="makePDF()"
-            title="Create PDF">
-
-                <svg width="18" height="18" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2">
-
-                    <path d="M6 2h9l5 5v15H6z"/>
-                    <path d="M14 2v6h6"/>
-                    <path d="M9 13h6"/>
-                    <path d="M9 17h5"/>
-
-                </svg>
-
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <!-- CHAT -->
-
-    <section class="chat" id="chat">
-
-        <div class="welcome" id="welcome">
-
-            <div class="welcome-logo">
-                P
-            </div>
-
-            <h2>What can I help you with?</h2>
-
-            <p>
-                Ask anything. Learn, create, solve and explore.
-            </p>
-
-            <div class="tool-grid">
-
-                <button
-                    class="tool-card"
-                    onclick="createImage()"
-                >
-
-                    <div class="tool-card-title">
-                        Create an image
-                    </div>
-
-                    <div class="tool-card-description">
-                        Generate an image from your idea.
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="tool-card"
-                    onclick="makePDF()"
-                >
-
-                    <div class="tool-card-title">
-                        Make a PDF
-                    </div>
-
-                    <div class="tool-card-description">
-                        Create and download a formatted PDF.
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="tool-card"
-                    onclick="quickPrompt('Teach me something interesting in a simple way.')"
-                >
-
-                    <div class="tool-card-title">
-                        Teach me something
-                    </div>
-
-                    <div class="tool-card-description">
-                        Learn something new.
-                    </div>
-
-                </button>
-
-
-                <button
-                    class="tool-card"
-                    onclick="quickPrompt('Help me with a programming problem.')"
-                >
-
-                    <div class="tool-card-title">
-                        Help me code
-                    </div>
-
-                    <div class="tool-card-description">
-                        Learn programming and solve problems.
-                    </div>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div id="messages"></div>
-
-    </section>
-
-
-    <!-- SCROLL BUTTONS -->
-
-    <div class="scroll-controls">
-
-        <button onclick="scrollTopPage()" title="Go to top">
-
-            <svg width="18" height="18" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2">
-
-                <path d="m18 15-6-6-6 6"/>
-
-            </svg>
-
-        </button>
-
-
-        <button onclick="scrollBottomPage()" title="Go to bottom">
-
-            <svg width="18" height="18" viewBox="0 0 24 24"
-            fill="none" stroke="currentColor" stroke-width="2">
-
-                <path d="m6 9 6 6 6-6"/>
-
-            </svg>
-
-        </button>
+      <button
+        class="icon-btn"
+        onclick="toggleTheme()"
+        title="Theme"
+      >
+        ◐
+      </button>
 
     </div>
 
-
-    <!-- INPUT -->
-
-    <div class="input-area">
-
-        <div class="input-wrapper">
-
-            <button
-                class="icon-btn"
-                id="voiceBtn"
-                onclick="startVoice()"
-                title="Voice input"
-            >
-
-                <svg width="19" height="19" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2">
-
-                    <rect x="9" y="2" width="6" height="12" rx="3"/>
-                    <path d="M5 10a7 7 0 0 0 14 0"/>
-                    <path d="M12 19v3"/>
-                    <path d="M8 22h8"/>
-
-                </svg>
-
-            </button>
+  </header>
 
 
-            <textarea
-                id="messageInput"
-                placeholder="Message PochoJii..."
-                rows="1"
-                onkeydown="handleKey(event)"
-                oninput="resizeInput(this)"
-            ></textarea>
+  <section
+    class="chat"
+    id="chat"
+  >
 
+    <div
+      class="welcome"
+      id="welcome"
+    >
 
-            <button
-                class="send-btn"
-                onclick="sendMessage()"
-                title="Send"
-            >
+      <h1>
+        What are you studying today?
+      </h1>
 
-                <svg width="19" height="19" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2">
-
-                    <path d="m22 2-7 20-4-9-9-4Z"/>
-                    <path d="M22 2 11 13"/>
-
-                </svg>
-
-            </button>
-
-        </div>
+      <p>
+        Ask questions, upload files, create images,
+        or study with PochoJii AI.
+      </p>
 
     </div>
+
+  </section>
+
 
 </main>
 
 </div>
 
 
+<!-- =========================
+     SCROLL
+========================= -->
+
+<div class="scroll-controls">
+
+  <button
+    class="scroll-btn"
+    onclick="scrollTopPage()"
+  >
+    ↑
+  </button>
+
+  <button
+    class="scroll-btn"
+    onclick="scrollBottomPage()"
+  >
+    ↓
+  </button>
+
+</div>
+
+
+<!-- =========================
+     COMPOSER
+========================= -->
+
+<div class="composer-wrap">
+
+  <div class="composer">
+
+    <div
+      class="upload-list"
+      id="uploadList"
+    ></div>
+
+    <textarea
+      id="messageInput"
+      placeholder="Ask PochoJii anything..."
+      rows="1"
+      onkeydown="handleEnter(event)"
+    ></textarea>
+
+
+    <div class="composer-actions">
+
+      <div class="left-actions">
+
+        <!-- IMAGE UPLOAD -->
+
+        <button
+          class="action-btn"
+          onclick="document.getElementById('imageInput').click()"
+          title="Upload images"
+        >
+          Image
+        </button>
+
+        <input
+          id="imageInput"
+          class="hidden-file"
+          type="file"
+          accept="image/*"
+          multiple
+          onchange="handleFiles(this.files)"
+        >
+
+
+        <!-- FILE UPLOAD -->
+
+        <button
+          class="action-btn"
+          onclick="document.getElementById('fileInput').click()"
+          title="Upload files"
+        >
+          File
+        </button>
+
+        <input
+          id="fileInput"
+          class="hidden-file"
+          type="file"
+          multiple
+          accept=".pdf,.txt,.csv,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.json,.md,image/*"
+          onchange="handleFiles(this.files)"
+        >
+
+
+        <!-- FOLDER -->
+
+        <button
+          class="action-btn"
+          onclick="document.getElementById('folderInput').click()"
+          title="Upload a folder"
+        >
+          Folder
+        </button>
+
+        <input
+          id="folderInput"
+          class="hidden-file"
+          type="file"
+          webkitdirectory
+          directory
+          multiple
+          onchange="handleFiles(this.files)"
+        >
+
+
+        <!-- VOICE -->
+
+        <button
+          class="action-btn"
+          onclick="startVoice()"
+          title="Voice input"
+        >
+          Voice
+        </button>
+
+
+        <!-- IMAGE GENERATION -->
+
+        <button
+          class="action-btn"
+          onclick="generateImage()"
+          title="Generate image"
+        >
+          Create image
+        </button>
+
+
+        <!-- PDF -->
+
+        <button
+          class="action-btn"
+          onclick="makePDF()"
+          title="Create PDF"
+        >
+          PDF
+        </button>
+
+      </div>
+
+
+      <div class="right-actions">
+
+        <button
+          class="action-btn"
+          onclick="readLastAnswer()"
+          title="Read last answer"
+        >
+          Read
+        </button>
+
+        <button
+          class="action-btn send-btn"
+          onclick="sendMessage()"
+        >
+          Send
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
 
-/* =========================
+/* =========================================
    CONFIG
-========================= */
+========================================= */
 
 const API_URL =
-"https://studybuddy-backend-kappa.vercel.app/api/chat";
+  "https://studybuddy-backend-kappa.vercel.app/api/chat";
 
 
-/* =========================
+/* =========================================
    STATE
-========================= */
+========================================= */
 
-let currentChat = [];
-let chatHistory =
-    JSON.parse(localStorage.getItem("pochojii_history") || "[]");
+let currentChat = null;
 
-let isListening = false;
-let recognition = null;
+let selectedFiles = [];
+
+let lastAssistantText = "";
 
 
-/* =========================
+/* =========================================
+   CREATE CHAT
+========================================= */
+
+function createEmptyChat() {
+
+  return {
+    id: Date.now().toString(),
+
+    title: "New chat",
+
+    messages: [],
+
+    createdAt: Date.now()
+  };
+}
+
+
+/* =========================================
+   LOAD SAVED CHATS
+========================================= */
+
+function getChats() {
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem("pochojii_chats") || "[]"
+    );
+
+  } catch {
+
+    return [];
+
+  }
+}
+
+
+/* =========================================
+   SAVE CHATS
+========================================= */
+
+function saveChats(chats) {
+
+  localStorage.setItem(
+    "pochojii_chats",
+    JSON.stringify(chats)
+  );
+}
+
+
+/* =========================================
+   SAVE CURRENT CHAT
+========================================= */
+
+function saveCurrentChat() {
+
+  if (!currentChat) return;
+
+  const chats = getChats();
+
+  const index =
+    chats.findIndex(
+      chat => chat.id === currentChat.id
+    );
+
+  if (index >= 0) {
+
+    chats[index] = currentChat;
+
+  } else {
+
+    chats.unshift(currentChat);
+
+  }
+
+  saveChats(chats);
+
+  localStorage.setItem(
+    "pochojii_active_chat",
+    currentChat.id
+  );
+
+  renderHistory();
+}
+
+
+/* =========================================
    START
-========================= */
+========================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+function init() {
 
-    loadTheme();
-    renderHistory();
+  const chats = getChats();
 
-});
+  const activeId =
+    localStorage.getItem(
+      "pochojii_active_chat"
+    );
 
+  const active =
+    chats.find(
+      chat => chat.id === activeId
+    );
 
-/* =========================
-   CHAT
-========================= */
+  if (active) {
 
-async function sendMessage(){
+    currentChat =
+      JSON.parse(JSON.stringify(active));
 
-    const input =
-        document.getElementById("messageInput");
+    renderChat();
 
-    const question =
-        input.value.trim();
+  } else {
 
-    if(!question) return;
+    currentChat =
+      createEmptyChat();
 
-    input.value = "";
-    resizeInput(input);
+  }
 
-    hideWelcome();
-
-    addMessage("user", question);
-
-    currentChat.push({
-        role:"user",
-        content:question
-    });
-
-    saveCurrentChat(question);
-
-    const lower = question.toLowerCase();
-
-    if(
-        lower.startsWith("create image") ||
-        lower.startsWith("generate image") ||
-        lower.startsWith("make an image") ||
-        lower.startsWith("make image")
-    ){
-
-        const prompt =
-            question
-                .replace(/^create image/i,"")
-                .replace(/^generate image/i,"")
-                .replace(/^make an image/i,"")
-                .replace(/^make image/i,"")
-                .trim();
-
-        await generateImage(
-            prompt || "A beautiful modern illustration"
-        );
-
-        return;
-    }
-
-    const typingId =
-        addTyping();
-
-    try{
-
-        const response =
-            await fetch(API_URL, {
-
-                method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
-                body:JSON.stringify({
-                    question:question,
-                    action:"chat"
-                })
-
-            });
+  renderHistory();
+}
 
 
-        const data =
-            await response.json();
-
-        removeTyping(typingId);
+init();
 
 
-        if(!response.ok){
+/* =========================================
+   NEW CHAT
+========================================= */
 
-            throw new Error(
-                data.error ||
-                "Something went wrong."
-            );
+function newChat() {
 
-        }
+  currentChat =
+    createEmptyChat();
 
+  selectedFiles = [];
 
-        const answer =
-            data.answer ||
-            "I couldn't generate an answer.";
+  renderChat();
 
+  renderUploads();
 
-        addAssistantMessage(answer);
+  localStorage.setItem(
+    "pochojii_active_chat",
+    currentChat.id
+  );
 
-        currentChat.push({
-            role:"assistant",
-            content:answer
-        });
-
-        saveChat();
-
-    }catch(error){
-
-        removeTyping(typingId);
-
-        addAssistantMessage(
-            "Sorry, something went wrong.\n\n" +
-            error.message
-        );
-
-    }
+  document
+    .getElementById("messageInput")
+    .focus();
 
 }
 
 
-/* =========================
-   QUICK PROMPT
-========================= */
+/* =========================================
+   RENDER CHAT
+========================================= */
 
-function quickPrompt(text){
+function renderChat() {
 
+  const chat =
+    document.getElementById("chat");
+
+  chat.innerHTML = "";
+
+  if (
+    !currentChat ||
+    !currentChat.messages.length
+  ) {
+
+    chat.innerHTML = `
+      <div class="welcome" id="welcome">
+        <h1>What are you studying today?</h1>
+        <p>
+          Ask questions, upload files,
+          create images, or study with PochoJii AI.
+        </p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  currentChat.messages.forEach(
+    message => {
+
+      addMessageToUI(
+        message.role,
+        message.content
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   ADD MESSAGE
+========================================= */
+
+function addMessageToUI(
+  role,
+  content
+) {
+
+  const chat =
+    document.getElementById("chat");
+
+  const wrapper =
+    document.createElement("div");
+
+  wrapper.className =
+    `message ${role}`;
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className = "bubble";
+
+  bubble.textContent =
+    content;
+
+  wrapper.appendChild(
+    bubble
+  );
+
+  chat.appendChild(
+    wrapper
+  );
+
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+}
+
+
+/* =========================================
+   LOADING
+========================================= */
+
+function addLoading() {
+
+  const chat =
+    document.getElementById("chat");
+
+  const wrapper =
+    document.createElement("div");
+
+  wrapper.className =
+    "message assistant";
+
+  wrapper.id =
+    "loadingMessage";
+
+  wrapper.innerHTML = `
+    <div class="bubble">
+      <div class="loading">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+  `;
+
+  chat.appendChild(wrapper);
+
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+}
+
+
+function removeLoading() {
+
+  const loading =
     document.getElementById(
-        "messageInput"
-    ).value = text;
+      "loadingMessage"
+    );
+
+  if (loading) {
+    loading.remove();
+  }
+}
+
+
+/* =========================================
+   SEND MESSAGE
+========================================= */
+
+async function sendMessage() {
+
+  const input =
+    document.getElementById(
+      "messageInput"
+    );
+
+  const question =
+    input.value.trim();
+
+  if (
+    !question &&
+    !selectedFiles.length
+  ) {
+    return;
+  }
+
+
+  if (!currentChat) {
+
+    currentChat =
+      createEmptyChat();
+
+  }
+
+
+  if (question) {
+
+    currentChat.messages.push({
+      role: "user",
+      content: question
+    });
+
+    if (
+      currentChat.title === "New chat"
+    ) {
+
+      currentChat.title =
+        question.substring(0, 45);
+
+    }
+
+    addMessageToUI(
+      "user",
+      question
+    );
+
+  }
+
+
+  input.value = "";
+
+  saveCurrentChat();
+
+  addLoading();
+
+
+  try {
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            action: "chat",
+
+            question,
+
+            messages:
+              currentChat.messages,
+
+            files:
+              await prepareFilesForAPI()
+
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    removeLoading();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Server error"
+      );
+
+    }
+
+
+    const answer =
+      data.answer ||
+      "I couldn't generate an answer.";
+
+
+    currentChat.messages.push({
+
+      role: "assistant",
+
+      content: answer
+
+    });
+
+
+    lastAssistantText =
+      answer;
+
+
+    addMessageToUI(
+      "assistant",
+      answer
+    );
+
+
+    saveCurrentChat();
+
+
+    selectedFiles = [];
+
+    renderUploads();
+
+  } catch (error) {
+
+    removeLoading();
+
+    const errorText =
+      "Sorry, something went wrong.\n\n" +
+      error.message;
+
+    addMessageToUI(
+      "assistant",
+      errorText
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   IMAGE GENERATION
+========================================= */
+
+async function generateImage() {
+
+  const input =
+    document.getElementById(
+      "messageInput"
+    );
+
+  const prompt =
+    input.value.trim();
+
+
+  if (!prompt) {
+
+    alert(
+      "Type what you want the image to look like first."
+    );
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  if (!currentChat) {
+
+    currentChat =
+      createEmptyChat();
+
+  }
+
+
+  currentChat.messages.push({
+
+    role: "user",
+
+    content:
+      "Create an image: " +
+      prompt
+
+  });
+
+
+  addMessageToUI(
+    "user",
+    "Create an image: " +
+    prompt
+  );
+
+
+  input.value = "";
+
+  saveCurrentChat();
+
+  addLoading();
+
+
+  try {
+
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            action: "image",
+
+            question: prompt
+
+          })
+
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    removeLoading();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        "Image generation failed."
+      );
+
+    }
+
+
+    if (!data.image) {
+
+      throw new Error(
+        "The server did not return an image."
+      );
+
+    }
+
+
+    showGeneratedImage(
+      data.image
+    );
+
+
+    currentChat.messages.push({
+
+      role: "assistant",
+
+      content:
+        "[Image generated successfully]"
+
+    });
+
+
+    saveCurrentChat();
+
+
+  } catch (error) {
+
+    removeLoading();
+
+    addMessageToUI(
+      "assistant",
+      "Image generation failed:\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   SHOW GENERATED IMAGE
+========================================= */
+
+function showGeneratedImage(
+  imageData
+) {
+
+  const chat =
+    document.getElementById("chat");
+
+
+  const wrapper =
+    document.createElement("div");
+
+  wrapper.className =
+    "message assistant";
+
+
+  const bubble =
+    document.createElement("div");
+
+  bubble.className =
+    "bubble";
+
+
+  const image =
+    document.createElement("img");
+
+  image.src =
+    imageData;
+
+  image.className =
+    "generated-image";
+
+
+  const download =
+    document.createElement("a");
+
+  download.href =
+    imageData;
+
+  download.download =
+    "pochojii-generated.png";
+
+  download.className =
+    "image-download";
+
+  download.textContent =
+    "Download image";
+
+
+  bubble.appendChild(image);
+
+  bubble.appendChild(
+    document.createElement("br")
+  );
+
+  bubble.appendChild(
+    download
+  );
+
+  wrapper.appendChild(
+    bubble
+  );
+
+  chat.appendChild(
+    wrapper
+  );
+
+
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================
+   FILE HANDLING
+========================================= */
+
+function handleFiles(fileList) {
+
+  const incoming =
+    Array.from(fileList || []);
+
+
+  for (const file of incoming) {
+
+    if (
+      selectedFiles.some(
+        f =>
+          f.name === file.name &&
+          f.size === file.size
+      )
+    ) {
+      continue;
+    }
+
+
+    /*
+     * Keep requests reasonably small
+     * for a serverless deployment.
+     */
+
+    if (
+      file.size >
+      2 * 1024 * 1024
+    ) {
+
+      alert(
+        `${file.name} is larger than 2 MB. ` +
+        "Please choose a smaller file."
+      );
+
+      continue;
+
+    }
+
+
+    selectedFiles.push(file);
+
+  }
+
+
+  /*
+   * Maximum 8 files per message.
+   */
+
+  if (
+    selectedFiles.length > 8
+  ) {
+
+    selectedFiles =
+      selectedFiles.slice(0, 8);
+
+    alert(
+      "Maximum 8 files per message."
+    );
+
+  }
+
+
+  renderUploads();
+
+}
+
+
+/* =========================================
+   RENDER UPLOADS
+========================================= */
+
+function renderUploads() {
+
+  const container =
+    document.getElementById(
+      "uploadList"
+    );
+
+  container.innerHTML = "";
+
+
+  selectedFiles.forEach(
+    (file, index) => {
+
+      const chip =
+        document.createElement(
+          "div"
+        );
+
+      chip.className =
+        "file-chip";
+
+
+      const info =
+        document.createElement(
+          "div"
+        );
+
+      info.textContent =
+        file.name;
+
+
+      if (
+        file.type.startsWith(
+          "image/"
+        )
+      ) {
+
+        const preview =
+          document.createElement(
+            "img"
+          );
+
+        preview.className =
+          "preview";
+
+        preview.src =
+          URL.createObjectURL(
+            file
+          );
+
+        info.appendChild(
+          preview
+        );
+
+      }
+
+
+      const remove =
+        document.createElement(
+          "button"
+        );
+
+      remove.textContent =
+        "×";
+
+      remove.onclick =
+        () => {
+
+          selectedFiles.splice(
+            index,
+            1
+          );
+
+          renderUploads();
+
+        };
+
+
+      chip.appendChild(
+        info
+      );
+
+      chip.appendChild(
+        remove
+      );
+
+
+      container.appendChild(
+        chip
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   FILE → BASE64
+========================================= */
+
+function fileToBase64(file) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        () => resolve(
+          reader.result
+        );
+
+      reader.onerror =
+        reject;
+
+      reader.readAsDataURL(
+        file
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   PREPARE FILES
+========================================= */
+
+async function prepareFilesForAPI() {
+
+  const result = [];
+
+  for (
+    const file of selectedFiles
+  ) {
+
+    const data =
+      await fileToBase64(file);
+
+
+    result.push({
+
+      name:
+        file.name,
+
+      type:
+        file.type ||
+        "application/octet-stream",
+
+      data
+
+    });
+
+  }
+
+  return result;
+
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+function renderHistory() {
+
+  const container =
+    document.getElementById(
+      "history"
+    );
+
+  const search =
+    document
+      .getElementById(
+        "historySearch"
+      )
+      .value
+      .toLowerCase();
+
+
+  container.innerHTML = "";
+
+
+  const chats =
+    getChats()
+      .filter(
+        chat =>
+          chat.title
+            .toLowerCase()
+            .includes(search)
+      );
+
+
+  chats.forEach(
+    chat => {
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+      item.className =
+        "history-item";
+
+
+      if (
+        currentChat &&
+        currentChat.id === chat.id
+      ) {
+
+        item.classList.add(
+          "active"
+        );
+
+      }
+
+
+      item.textContent =
+        chat.title ||
+        "New chat";
+
+
+      item.onclick =
+        () => loadChat(chat.id);
+
+
+      container.appendChild(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   LOAD CHAT
+========================================= */
+
+function loadChat(id) {
+
+  const chats =
+    getChats();
+
+
+  const chat =
+    chats.find(
+      c => c.id === id
+    );
+
+
+  if (!chat) return;
+
+
+  currentChat =
+    JSON.parse(
+      JSON.stringify(chat)
+    );
+
+
+  localStorage.setItem(
+    "pochojii_active_chat",
+    id
+  );
+
+
+  selectedFiles = [];
+
+  renderUploads();
+
+  renderChat();
+
+  renderHistory();
+
+}
+
+
+/* =========================================
+   ENTER
+========================================= */
+
+function handleEnter(event) {
+
+  if (
+    event.key === "Enter" &&
+    !event.shiftKey
+  ) {
+
+    event.preventDefault();
 
     sendMessage();
 
-}
-
-
-/* =========================
-   IMAGE GENERATION
-========================= */
-
-async function createImage(){
-
-    const prompt =
-        window.prompt(
-            "What image should PochoJii create?"
-        );
-
-    if(!prompt || !prompt.trim()) return;
-
-    hideWelcome();
-
-    addMessage(
-        "user",
-        "Create an image: " + prompt
-    );
-
-    currentChat.push({
-        role:"user",
-        content:"Create an image: " + prompt
-    });
-
-    await generateImage(prompt);
+  }
 
 }
 
 
-async function generateImage(prompt){
+/* =========================================
+   VOICE
+========================================= */
 
-    const typingId =
-        addTyping();
+function startVoice() {
 
-    try{
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
 
-        const response =
-            await fetch(API_URL, {
 
-                method:"POST",
+  if (!SpeechRecognition) {
 
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
-                body:JSON.stringify({
-
-                    question:prompt,
-
-                    action:"image"
-
-                })
-
-            });
-
-
-        const data =
-            await response.json();
-
-        removeTyping(typingId);
-
-
-        if(!response.ok){
-
-            throw new Error(
-                data.error ||
-                "Image generation failed."
-            );
-
-        }
-
-
-        if(!data.image){
-
-            throw new Error(
-                "No image was returned."
-            );
-
-        }
-
-
-        const wrapper =
-            document.createElement("div");
-
-        wrapper.className =
-            "message assistant";
-
-
-        const inner =
-            document.createElement("div");
-
-        inner.className =
-            "message-inner";
-
-
-        const bubble =
-            document.createElement("div");
-
-        bubble.className =
-            "bubble";
-
-
-        const image =
-            document.createElement("img");
-
-        image.className =
-            "generated-image";
-
-        image.src =
-            data.image;
-
-        image.alt =
-            "Generated image";
-
-
-        const download =
-            document.createElement("a");
-
-        download.className =
-            "download-image";
-
-        download.href =
-            data.image;
-
-        download.download =
-            "pochojii-image.png";
-
-        download.innerHTML = `
-
-            <svg width="15" height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2">
-
-                <path d="M12 3v12"/>
-                <path d="m7 10 5 5 5-5"/>
-                <path d="M5 21h14"/>
-
-            </svg>
-
-            Download image
-
-        `;
-
-
-        bubble.appendChild(image);
-        bubble.appendChild(download);
-
-        inner.appendChild(bubble);
-
-        wrapper.appendChild(inner);
-
-        document.getElementById(
-            "messages"
-        ).appendChild(wrapper);
-
-
-        currentChat.push({
-            role:"assistant",
-            type:"image",
-            content:"Generated image"
-        });
-
-        saveChat();
-
-        scrollBottomPage();
-
-
-    }catch(error){
-
-        removeTyping(typingId);
-
-        addAssistantMessage(
-            "I couldn't create the image.\n\n" +
-            error.message
-        );
-
-    }
-
-}
-
-
-/* =========================
-   PDF
-========================= */
-
-async function makePDF(){
-
-    const topic =
-        window.prompt(
-            "What should the PDF be about?"
-        );
-
-    if(!topic || !topic.trim()) return;
-
-    hideWelcome();
-
-    addMessage(
-        "user",
-        "Make a PDF about: " + topic
+    alert(
+      "Voice input is not supported by this browser."
     );
 
+    return;
 
-    const typingId =
-        addTyping();
+  }
 
 
-    try{
+  const recognition =
+    new SpeechRecognition();
 
-        const response =
-            await fetch(API_URL, {
 
-                method:"POST",
+  recognition.lang =
+    "en-US";
 
-                headers:{
-                    "Content-Type":"application/json"
-                },
+  recognition.interimResults =
+    false;
 
-                body:JSON.stringify({
+  recognition.continuous =
+    false;
 
-                    question:
-                        "Create a well-organized PDF document about: " +
-                        topic +
-                        "\n\nUse clear headings, sections, bullet points where useful, and useful explanations.",
 
-                    action:"chat"
+  recognition.onresult =
+    event => {
 
-                })
+      const text =
+        event.results[0][0].transcript;
 
-            });
-
-
-        const data =
-            await response.json();
-
-
-        removeTyping(typingId);
-
-
-        if(!response.ok){
-
-            throw new Error(
-                data.error ||
-                "Could not create PDF content."
-            );
-
-        }
-
-
-        const content =
-            data.answer ||
-            "No content generated.";
-
-
-        downloadPDF(
-            topic,
-            content
-        );
-
-
-        addAssistantMessage(
-            "Your PDF has been created and downloaded."
-        );
-
-
-    }catch(error){
-
-        removeTyping(typingId);
-
-        addAssistantMessage(
-            "I couldn't create the PDF.\n\n" +
-            error.message
-        );
-
-    }
-
-}
-
-
-function downloadPDF(title, text){
-
-    if(!window.jspdf){
-
-        alert(
-            "PDF library is still loading. Please try again."
-        );
-
-        return;
-    }
-
-
-    const {
-        jsPDF
-    } = window.jspdf;
-
-
-    const doc =
-        new jsPDF({
-
-            unit:"mm",
-            format:"a4"
-
-        });
-
-
-    const margin = 18;
-
-    const pageWidth =
-        doc.internal.pageSize.getWidth();
-
-    const pageHeight =
-        doc.internal.pageSize.getHeight();
-
-    const usableWidth =
-        pageWidth - margin * 2;
-
-
-    doc.setFont(
-        "helvetica",
-        "bold"
-    );
-
-    doc.setFontSize(22);
-
-    doc.setTextColor(
-        80,
-        100,
-        68
-    );
-
-
-    const titleLines =
-        doc.splitTextToSize(
-            title,
-            usableWidth
-        );
-
-
-    doc.text(
-        titleLines,
-        margin,
-        25
-    );
-
-
-    doc.setFont(
-        "helvetica",
-        "normal"
-    );
-
-    doc.setFontSize(10);
-
-    doc.setTextColor(
-        110,
-        110,
-        100
-    );
-
-
-    doc.text(
-        "Created with PochoJii AI",
-        margin,
-        35
-    );
-
-
-    doc.setDrawColor(
-        200,
-        200,
-        185
-    );
-
-    doc.line(
-        margin,
-        40,
-        pageWidth - margin,
-        40
-    );
-
-
-    doc.setFontSize(11);
-
-    doc.setTextColor(
-        45,
-        50,
-        43
-    );
-
-
-    const lines =
-        doc.splitTextToSize(
-            cleanPDFText(text),
-            usableWidth
-        );
-
-
-    let y = 50;
-
-
-    for(const line of lines){
-
-        if(y > pageHeight - 18){
-
-            doc.addPage();
-
-            y = 20;
-
-        }
-
-
-        doc.text(
-            line,
-            margin,
-            y
-        );
-
-        y += 6;
-
-    }
-
-
-    const safeName =
-        title
-            .replace(/[^a-z0-9]/gi,"_")
-            .substring(0,60);
-
-
-    doc.save(
-        "PochoJii_" +
-        safeName +
-        ".pdf"
-    );
-
-}
-
-
-function cleanPDFText(text){
-
-    return text
-        .replace(/```/g,"")
-        .replace(/\*\*/g,"")
-        .replace(/###/g,"")
-        .replace(/##/g,"")
-        .replace(/#/g,"");
-
-}
-
-
-/* =========================
-   MESSAGES
-========================= */
-
-function addMessage(role,text){
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.className =
-        "message " + role;
-
-
-    const inner =
-        document.createElement("div");
-
-    inner.className =
-        "message-inner";
-
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className =
-        "bubble";
-
-    bubble.textContent =
+      document
+        .getElementById(
+          "messageInput"
+        )
+        .value +=
         text;
 
-
-    inner.appendChild(bubble);
-
-    wrapper.appendChild(inner);
+    };
 
 
-    document.getElementById(
-        "messages"
-    ).appendChild(wrapper);
+  recognition.onerror =
+    () => {
+
+      alert(
+        "Voice input could not be started."
+      );
+
+    };
 
 
-    scrollBottomPage();
-
-}
-
-
-function addAssistantMessage(text){
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.className =
-        "message assistant";
-
-
-    const inner =
-        document.createElement("div");
-
-    inner.className =
-        "message-inner";
-
-
-    const bubble =
-        document.createElement("div");
-
-    bubble.className =
-        "bubble";
-
-
-    bubble.innerHTML =
-        formatAnswer(text);
-
-
-    const actions =
-        document.createElement("div");
-
-    actions.className =
-        "message-actions";
-
-
-    const copy =
-        document.createElement("button");
-
-    copy.className =
-        "small-action";
-
-    copy.textContent =
-        "Copy";
-
-    copy.onclick =
-        () => copyText(text);
-
-
-    const speak =
-        document.createElement("button");
-
-    speak.className =
-        "small-action";
-
-    speak.textContent =
-        "Read aloud";
-
-    speak.onclick =
-        () => speakText(text);
-
-
-    actions.appendChild(copy);
-    actions.appendChild(speak);
-
-
-    inner.appendChild(bubble);
-    inner.appendChild(actions);
-
-    wrapper.appendChild(inner);
-
-
-    document.getElementById(
-        "messages"
-    ).appendChild(wrapper);
-
-
-    scrollBottomPage();
+  recognition.start();
 
 }
 
 
-function formatAnswer(text){
-
-    let safe =
-        escapeHTML(text);
-
-
-    safe =
-        safe.replace(
-            /```([\s\S]*?)```/g,
-            "<pre><code>$1</code></pre>"
-        );
-
-
-    safe =
-        safe.replace(
-            /\*\*(.*?)\*\*/g,
-            "<strong>$1</strong>"
-        );
-
-
-    safe =
-        safe.replace(
-            /\n/g,
-            "<br>"
-        );
-
-
-    return safe;
-
-}
-
-
-function escapeHTML(text){
-
-    return text
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================
-   TYPING
-========================= */
-
-let typingCounter = 0;
-
-
-function addTyping(){
-
-    typingCounter++;
-
-    const id =
-        "typing-" + typingCounter;
-
-
-    const wrapper =
-        document.createElement("div");
-
-    wrapper.className =
-        "message assistant";
-
-    wrapper.id =
-        id;
-
-
-    wrapper.innerHTML = `
-
-        <div class="message-inner">
-
-            <div class="bubble">
-
-                <div class="typing">
-
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    document.getElementById(
-        "messages"
-    ).appendChild(wrapper);
-
-
-    scrollBottomPage();
-
-
-    return id;
-
-}
-
-
-function removeTyping(id){
-
-    const element =
-        document.getElementById(id);
-
-    if(element){
-        element.remove();
-    }
-
-}
-
-
-/* =========================
-   COPY
-========================= */
-
-async function copyText(text){
-
-    try{
-
-        await navigator.clipboard.writeText(text);
-
-    }catch{
-
-        const area =
-            document.createElement("textarea");
-
-        area.value =
-            text;
-
-        document.body.appendChild(area);
-
-        area.select();
-
-        document.execCommand("copy");
-
-        area.remove();
-
-    }
-
-}
-
-
-/* =========================
-   VOICE INPUT
-========================= */
-
-function startVoice(){
-
-    const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-
-    if(!SpeechRecognition){
-
-        alert(
-            "Voice input is not supported in this browser."
-        );
-
-        return;
-    }
-
-
-    if(isListening){
-
-        recognition.stop();
-
-        return;
-
-    }
-
-
-    recognition =
-        new SpeechRecognition();
-
-
-    recognition.lang =
-        "en-US";
-
-    recognition.interimResults =
-        false;
-
-    recognition.continuous =
-        false;
-
-
-    recognition.onstart =
-        () => {
-
-            isListening = true;
-
-            document
-                .getElementById("voiceBtn")
-                .classList
-                .add("listening");
-
-        };
-
-
-    recognition.onresult =
-        event => {
-
-            const transcript =
-                event.results[0][0].transcript;
-
-
-            document.getElementById(
-                "messageInput"
-            ).value =
-                transcript;
-
-
-            resizeInput(
-                document.getElementById(
-                    "messageInput"
-                )
-            );
-
-
-            sendMessage();
-
-        };
-
-
-    recognition.onerror =
-        () => {
-
-            stopListening();
-
-        };
-
-
-    recognition.onend =
-        () => {
-
-            stopListening();
-
-        };
-
-
-    recognition.start();
-
-}
-
-
-function stopListening(){
-
-    isListening = false;
-
-    document
-        .getElementById("voiceBtn")
-        .classList
-        .remove("listening");
-
-}
-
-
-/* =========================
+/* =========================================
    READ ALOUD
-========================= */
+========================================= */
 
-function speakText(text){
+function readLastAnswer() {
 
-    if(!("speechSynthesis" in window)){
+  if (!lastAssistantText) {
 
-        alert(
-            "Read aloud is not supported in this browser."
-        );
+    const messages =
+      currentChat?.messages || [];
 
-        return;
+    const assistantMessages =
+      messages.filter(
+        m => m.role === "assistant"
+      );
+
+    if (
+      assistantMessages.length
+    ) {
+
+      lastAssistantText =
+        assistantMessages[
+          assistantMessages.length - 1
+        ].content;
 
     }
 
-
-    speechSynthesis.cancel();
-
-
-    const utterance =
-        new SpeechSynthesisUtterance(text);
+  }
 
 
-    utterance.rate =
-        .95;
+  if (!lastAssistantText) {
 
-    utterance.pitch =
-        1;
-
-
-    speechSynthesis.speak(
-        utterance
+    alert(
+      "There is no answer to read yet."
     );
 
-}
+    return;
+
+  }
 
 
-/* =========================
-   INPUT
-========================= */
+  speechSynthesis.cancel();
 
-function handleKey(event){
+  const speech =
+    new SpeechSynthesisUtterance(
+      lastAssistantText
+    );
 
-    if(
-        event.key === "Enter" &&
-        !event.shiftKey
-    ){
-
-        event.preventDefault();
-
-        sendMessage();
-
-    }
+  speechSynthesis.speak(
+    speech
+  );
 
 }
 
 
-function resizeInput(element){
+/* =========================================
+   PDF
+========================================= */
 
-    element.style.height =
-        "auto";
+async function makePDF() {
 
-    element.style.height =
-        Math.min(
-            element.scrollHeight,
-            150
-        ) + "px";
-
-}
-
-
-/* =========================
-   WELCOME
-========================= */
-
-function hideWelcome(){
-
-    const welcome =
-        document.getElementById(
-            "welcome"
-        );
-
-    if(welcome){
-
-        welcome.style.display =
-            "none";
-
-    }
-
-}
-
-
-/* =========================
-   NEW CHAT
-========================= */
-
-function newChat(){
-
-    currentChat = [];
-
-    document.getElementById(
-        "messages"
-    ).innerHTML = "";
-
-
-    const welcome =
-        document.getElementById(
-            "welcome"
-        );
-
-    welcome.style.display =
-        "block";
-
-
-    document.getElementById(
-        "messageInput"
-    ).focus();
-
-}
-
-
-/* =========================
-   HISTORY
-========================= */
-
-function saveCurrentChat(firstMessage){
-
-    if(!currentChat.length)
-        return;
-
-
-    const existing =
-        chatHistory.find(
-            x => x.id === currentChat.id
-        );
-
-
-    if(!currentChat.id){
-
-        currentChat.id =
-            Date.now();
-
-        chatHistory.unshift({
-
-            id:currentChat.id,
-
-            title:
-                firstMessage.substring(
-                    0,
-                    45
-                ),
-
-            messages:currentChat
-
-        });
-
-    }
-
-
-    saveChat();
-
-}
-
-
-function saveChat(){
-
-    if(!currentChat.id)
-        return;
-
-
-    const index =
-        chatHistory.findIndex(
-            x => x.id === currentChat.id
-        );
-
-
-    if(index !== -1){
-
-        chatHistory[index].messages =
-            currentChat;
-
-    }
-
-
-    localStorage.setItem(
-        "pochojii_history",
-        JSON.stringify(chatHistory)
+  const topic =
+    prompt(
+      "What topic should the PDF be about?"
     );
 
 
-    renderHistory();
-
-}
+  if (!topic) return;
 
 
-function renderHistory(){
+  try {
 
-    const list =
-        document.getElementById(
-            "historyList"
-        );
+    const response =
+      await fetch(
+        API_URL,
+        {
+          method: "POST",
 
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
 
-    if(!list)
-        return;
+          body: JSON.stringify({
 
+            action: "chat",
 
-    list.innerHTML = "";
+            question:
+              `Create detailed study notes about ${topic}. ` +
+              "Use headings, definitions, examples, " +
+              "important points and a short summary.",
 
+            messages: [
 
-    chatHistory
-        .slice(0,30)
-        .forEach(chat => {
+              {
+                role: "user",
 
-            const button =
-                document.createElement(
-                    "button"
-                );
+                content:
+                  `Create detailed study notes about ${topic}.`
+              }
 
-            button.className =
-                "history-item";
+            ]
 
-            button.textContent =
-                chat.title ||
-                "Untitled chat";
-
-
-            button.onclick =
-                () => loadChat(chat.id);
-
-
-            list.appendChild(button);
-
-        });
-
-}
-
-
-function loadChat(id){
-
-    const chat =
-        chatHistory.find(
-            x => x.id === id
-        );
-
-
-    if(!chat)
-        return;
-
-
-    currentChat =
-        JSON.parse(
-            JSON.stringify(chat.messages)
-        );
-
-    currentChat.id =
-        id;
-
-
-    document.getElementById(
-        "messages"
-    ).innerHTML = "";
-
-
-    hideWelcome();
-
-
-    currentChat.forEach(message => {
-
-        if(message.type === "image"){
-
-            return;
+          })
 
         }
+      );
 
 
-        if(message.role === "user"){
-
-            addMessage(
-                "user",
-                message.content
-            );
-
-        }else{
-
-            addAssistantMessage(
-                message.content
-            );
-
-        }
-
-    });
-
-}
+    const data =
+      await response.json();
 
 
-/* =========================
-   SEARCH
-========================= */
+    if (!response.ok) {
 
-function searchChats(){
+      throw new Error(
+        data.error ||
+        "Could not create PDF."
+      );
 
-    const query =
-        document.getElementById(
-            "searchInput"
-        ).value
-        .toLowerCase()
-        .trim();
+    }
 
 
-    const items =
-        document.querySelectorAll(
-            ".history-item"
-        );
+    downloadPDF(
+      topic,
+      data.answer
+    );
 
 
-    items.forEach(item => {
+  } catch (error) {
 
-        item.style.display =
-            item.textContent
-                .toLowerCase()
-                .includes(query)
-                ? "block"
-                : "none";
+    alert(
+      "PDF creation failed:\n" +
+      error.message
+    );
 
-    });
+  }
 
 }
 
 
-/* =========================
+/* =========================================
+   DOWNLOAD PDF
+========================================= */
+
+function downloadPDF(
+  title,
+  text
+) {
+
+  const {
+    jsPDF
+  } = window.jspdf;
+
+
+  const pdf =
+    new jsPDF();
+
+
+  pdf.setFontSize(20);
+
+  pdf.text(
+    title,
+    20,
+    20
+  );
+
+
+  pdf.setFontSize(11);
+
+
+  const lines =
+    pdf.splitTextToSize(
+      text,
+      170
+    );
+
+
+  let y = 35;
+
+
+  for (
+    const line of lines
+  ) {
+
+    if (y > 280) {
+
+      pdf.addPage();
+
+      y = 20;
+
+    }
+
+
+    pdf.text(
+      line,
+      20,
+      y
+    );
+
+    y += 7;
+
+  }
+
+
+  pdf.save(
+    title
+      .replace(
+        /[^a-z0-9]/gi,
+        "_"
+      )
+      + ".pdf"
+  );
+
+}
+
+
+/* =========================================
    THEME
-========================= */
+========================================= */
 
-function toggleTheme(){
+function toggleTheme() {
 
-    document.body.classList.toggle(
-        "dark"
+  const current =
+    document.body.dataset.theme;
+
+
+  if (
+    current === "dark"
+  ) {
+
+    document.body.dataset.theme =
+      "light";
+
+    document.documentElement.style.setProperty(
+      "--cream",
+      "#f8f2e7"
     );
 
-
-    localStorage.setItem(
-        "pochojii_theme",
-        document.body.classList.contains("dark")
-            ? "dark"
-            : "light"
+    document.documentElement.style.setProperty(
+      "--cream2",
+      "#fffaf0"
     );
 
-}
+    document.documentElement.style.setProperty(
+      "--text",
+      "#374035"
+    );
 
+  } else {
 
-function loadTheme(){
+    document.body.dataset.theme =
+      "dark";
 
-    if(
-        localStorage.getItem(
-            "pochojii_theme"
-        ) === "dark"
-    ){
+    document.documentElement.style.setProperty(
+      "--cream",
+      "#1e251e"
+    );
 
-        document.body.classList.add(
-            "dark"
-        );
+    document.documentElement.style.setProperty(
+      "--cream2",
+      "#293129"
+    );
 
-    }
+    document.documentElement.style.setProperty(
+      "--text",
+      "#edf3e7"
+    );
 
-}
-
-
-/* =========================
-   SCROLL
-========================= */
-
-function scrollTopPage(){
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+  }
 
 }
 
 
-function scrollBottomPage(){
-
-    window.scrollTo({
-        top:document.body.scrollHeight,
-        behavior:"smooth"
-    });
-
-}
-
-
-/* =========================
+/* =========================================
    SIDEBAR
-========================= */
+========================================= */
 
-function toggleSidebar(){
+function toggleSidebar() {
 
-    document
-        .getElementById("sidebar")
-        .classList
-        .toggle("open");
+  document
+    .getElementById(
+      "sidebar"
+    )
+    .classList.toggle(
+      "open"
+    );
+
+}
+
+
+/* =========================================
+   SCROLL
+========================================= */
+
+function scrollTopPage() {
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+function scrollBottomPage() {
+
+  window.scrollTo({
+    top:
+      document.body.scrollHeight,
+    behavior: "smooth"
+  });
 
 }
 
